@@ -16,7 +16,7 @@ public class CafeServiceImpl implements CafeService{
 	
 	
 	@Autowired
-	CafeMapper mapper;
+	private CafeMapper mapper;
 	
 	
 	@Override
