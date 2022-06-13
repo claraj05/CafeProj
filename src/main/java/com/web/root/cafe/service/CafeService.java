@@ -13,4 +13,5 @@ public interface CafeService {
 			@RequestParam("star")String star,Model model);
 	
 	public void cafeAllList(Model model);
+	
 }
