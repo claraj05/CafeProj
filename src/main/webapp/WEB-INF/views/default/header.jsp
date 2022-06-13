@@ -105,14 +105,15 @@
 					<li><a href="${contextPath }/member/myInfo">마이페이지(정보 수정용)</a></li>
 					<c:if test="${loginUser == null }">
 						<li><a href="${contextPath }/member/login">로그인</a></li>
-						<li><a href="${contextPath }/member/joinForm">회원가입</a></li>
+						<li><a href="${contextPath }/member/register">회원가입</a></li>
 					</c:if>	
-					<c:if test="${loginUser != null }">
+		 			<c:if test="${loginUser != null }">
 						<li><a href="${contextPath }/member/logout">로그아웃</a></li>
-					</c:if>	
-					<!--<c:if test=""> 관리자 계정 로그인 시 보이는 메뉴
 						<li><a href="${contextPath }/cafe/cafemanager">카페 관리</a></li>
-					</c:if>	-->
+					</c:if>	 
+				<%-- 	<c:if test=""> 관리자 계정 로그인 시 보이는 메뉴
+						<li><a href="${contextPath }/cafe/cafemanager">카페 관리</a></li>
+					</c:if> --%>
 				</ul>			
 			</div>
 		</div>

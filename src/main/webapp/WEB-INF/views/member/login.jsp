@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%> 
+<c:set var="contextPath" value="${pageContext.request.contextPath }"/>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,7 +134,7 @@ body::before {
 <body>
 	<section class="login_form">
 		<h1>로그인</h1>
-		<form action="">
+		<form action="${contextPath }/member/user_check" method="post">
 			<div class="int-area">
 				<input type="text" name="id" id="id" autocomplete="off" required>
 				<label for="id">USER_NAME</label>

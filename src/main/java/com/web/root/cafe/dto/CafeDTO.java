@@ -132,12 +132,4 @@ public class CafeDTO {
 
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
 }

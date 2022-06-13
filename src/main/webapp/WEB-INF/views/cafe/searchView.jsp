@@ -26,38 +26,7 @@
 					<ul>
 						<li class="search_li">세부 지역2(서울시 25구) :</li>
 					</ul>
-				<!-- 	<ul>
-						<li><input type="radio" id="r0" name="location1" value="0" />
-							<label for="l0">전체지역</label></li>
-<script type="text/javascript" src="/Web-home/js/jquery-1.4.2.js">
-$('#r0').change(function(){
-	var st=this.checked;
-	if(st){
-		$('input#r1').attr("disabled",true);
-		$('input#r1').css("background","#ccc");
-	}else{
-		$('input#r1').attr("disabled",false);
-		$('input#r1').css("background","none");
-	}
-}); -->
-</script>
-							<!-- $(function () {
-	$("#checkme").change (function () {
-	var  st = this.checked;
-		if (st) {
-			$("input#1_date").prop("disabled", true);
-			$("input#1_date").css("background","#ccc");
-			$("select#2_date").prop("disabled",  true);
-			$("select#2_date").css("background","#ccc");
-		  } else {
-			$("input#1_date").prop("disabled",  false);
-			$("input#1_date").css("background","none");
-			$("select#2_date").prop("disabled",  false);
-			$("select#2_date").css("background","none");
-		}
-	});
-}); -->
-					</ul>
+					
 					<ul>
 						<li><input type="checkbox" id="r1" name="location1" value="1" />
 							<label for="l1">강남구</label></li>
