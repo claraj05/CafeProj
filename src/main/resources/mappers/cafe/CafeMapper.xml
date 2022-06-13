@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.root.mybatis.cafe.CafeMapper">
+	<resultMap type="com.web.root.cafe.dto.CafeDTO" id="cafe">
+		<id property="cafe_no" column="cafe_no"/>
+		<result property="cafe_name" column="cafe_name"/>
+		<result property="location1" column="location1"/>
+		<result property="location2" column="location2"/>
+		<result property="cafe_tel" column="cafe_tel"/>
+		<result property="menu" column="menu"/>
+		<result property="kidszone" column="kidszone"/>
+		<result property="petzone" column="petzone"/>
+		<result property="use_time" column="use_time"/>
+		<result property="imageFileName" column="imageFileName"/>
+		<result property="avg_star" column="avg_star"/>
+		<result property="logtime" column="logtime"/>
+	</resultMap>
+	
+	<select id="getlocationList" resultMap="cafe">
+		select * from cafe 
+			<!-- select * from cafe where location1 in (1,2,...); -->
+			<where>
+			 <if test="locationList != null">
+					location1 in <foreach item="location1" collection="locationList" open="(" close=")" separator="," >
+						#{location1}
+					</foreach>
+			</if>
+			<if test="kidszone !=0">
+					and kidszone = #{kidszone}
+			</if>
+			<if test="petzone !=0">
+					and petzone = #{petzone}
+			</if>
+			<if test="star!=null">
+				order by avg_star desc
+	 	
+			</if>
+			</where>
+	</select>
+	
+	<select id="cafeAllList" resultMap="cafe">
+		select * from cafe
+	</select>
+</mapper>
