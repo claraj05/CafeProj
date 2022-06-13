@@ -48,7 +48,7 @@ logtime date default sysdate --등록일 -->
 			</tr>
 			<tr>		
 				<td>${loc.cafe_no}</td>
-				<td>${loc.cafe_name}</td>
+				<td><a href="">${loc.cafe_name}</a></td>
 				<td>${loc.location1}</td>
 				<td>${loc.location2}</td>
 				<td>${loc.cafe_tel}</td>

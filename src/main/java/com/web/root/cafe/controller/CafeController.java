@@ -39,7 +39,7 @@ public class CafeController {
 	
 	@GetMapping("searchResult")
 	public String searchResult(HttpServletRequest request, 
-			@RequestParam("location1") String location1, 
+			@RequestParam("location1") String[] location1, 
 			@RequestParam("kidszone") String kidszone, 
 			@RequestParam("petzone") String petzone,
 			@RequestParam("star")String star,Model model) throws ServletException, IOException {

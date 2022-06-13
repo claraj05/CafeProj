@@ -27,7 +27,7 @@ public class CafeServiceImpl implements CafeService{
 			String star,
 			Model model) {
 		//check
-		locationList = request.getParameterValues("location1");
+		String [] locationList1 = locationList;
 		kidszone = request.getParameter("kidszone");
 		petzone = request.getParameter("petzone");
 		List<CafeDTO> list = mapper.getlocationList(locationList,kidszone,petzone,star);
