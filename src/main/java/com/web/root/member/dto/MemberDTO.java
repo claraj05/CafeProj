@@ -16,43 +16,36 @@ savedate date sysdate
 );*/
 public class MemberDTO {
 
-	private int code;
+	//private int code;
 	private String id;
+	private int code;
 	private String pw; 
 	private String name;
-	private int gender;
-	private String addr1;
-	private String addr2;
+	private String gender;
+	private String addr;
 	private String phone;
 	private String email;
-	private String domain;
 	private String birth;
+	private String domain;
 	private String savedate;
-	
+
 	public MemberDTO() {}
 
-	public MemberDTO(int code, String id, String pw, String name, int gender, String addr1, String addr2, String phone,
-			String email, String domain, String birth, String savedate) {
-		this.code = code;
+
+	public MemberDTO(String id, int code, String pw, String name, String gender, String addr, String phone,
+			String email, String birth, String domain, String savedate) {
+		super();
 		this.id = id;
+		this.code = code;
 		this.pw = pw;
 		this.name = name;
 		this.gender = gender;
-		this.addr1 = addr1;
-		this.addr2 = addr2;
+		this.addr = addr;
 		this.phone = phone;
 		this.email = email;
-		this.domain = domain;
 		this.birth = birth;
+		this.domain = domain;
 		this.savedate = savedate;
-	}
-
-	public int getCode() {
-		return code;
-	}
-
-	public void setCode(int code) {
-		this.code = code;
 	}
 
 	public String getId() {
@@ -61,6 +54,14 @@ public class MemberDTO {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
 	}
 
 	public String getPw() {
@@ -79,28 +80,20 @@ public class MemberDTO {
 		this.name = name;
 	}
 
-	public int getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(int gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
-	public String getAddr1() {
-		return addr1;
+	public String getAddr() {
+		return addr;
 	}
 
-	public void setAddr1(String addr1) {
-		this.addr1 = addr1;
-	}
-
-	public String getAddr2() {
-		return addr2;
-	}
-
-	public void setAddr2(String addr2) {
-		this.addr2 = addr2;
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
 
 	public String getPhone() {
@@ -119,14 +112,6 @@ public class MemberDTO {
 		this.email = email;
 	}
 
-	public String getDomain() {
-		return domain;
-	}
-
-	public void setDomain(String domain) {
-		this.domain = domain;
-	}
-
 	public String getBirth() {
 		return birth;
 	}
@@ -135,13 +120,23 @@ public class MemberDTO {
 		this.birth = birth;
 	}
 
+	public String getDomain() {
+		return domain;
+	}
+
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
+
 	public String getSavedate() {
 		return savedate;
 	}
 
 	public void setSavedate(String savedate) {
 		this.savedate = savedate;
+
+
 	}
-	
+		
 	
 }
