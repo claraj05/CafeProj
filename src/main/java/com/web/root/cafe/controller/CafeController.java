@@ -48,6 +48,10 @@ public class CafeController {
 		kidszone = request.getParameter("kidszone");
 		petzone = request.getParameter("petzone");
 		star = request.getParameter("star");
+		if(locationList[0]=="0") {
+			int all = 0;
+			cf.getlocationListA(request, all, kidszone, petzone, star, model);
+		}
 		cf.getlocationList(request,locationList, kidszone, petzone, star, model);
 		return "cafe/searchResult";
 	}

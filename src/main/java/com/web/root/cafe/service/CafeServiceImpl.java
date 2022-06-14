@@ -18,9 +18,14 @@ public class CafeServiceImpl implements CafeService{
 	@Autowired
 	private CafeMapper mapper;
 	
+	@Override
+	public void cafeAllList(Model model) {
+		model.addAttribute("list",mapper.cafeAllList());
+		System.out.println(mapper.cafeAllList());
+	}
 	
 	@Override
-	public void getlocationList(HttpServletRequest request, 
+	public void getlocationList(HttpServletRequest request,  
 			String [] locationList, 
 			String kidszone,
 			String petzone, 
@@ -35,12 +40,18 @@ public class CafeServiceImpl implements CafeService{
 		model.addAttribute("list",list);
 	}
 
-
 	@Override
-	public void cafeAllList(Model model) {
-		model.addAttribute("list",mapper.cafeAllList());
-		System.out.println(mapper.cafeAllList());
+	public void getlocationListA(HttpServletRequest request, int all, String kidszone, String petzone, String star,
+			Model model) {
+		all = 0;
+		List<CafeDTO> list = mapper.getlocationListA(all,kidszone,petzone,star);
+		
+		model.addAttribute("list",list);
+		
+		
 	}
+
+	
 
 
 	

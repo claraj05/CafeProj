@@ -17,6 +17,10 @@
 		<result property="logtime" column="logtime"/>
 	</resultMap>
 	
+	<select id="cafeAllList" resultMap="cafe">
+		select * from cafe
+	</select>
+
 	<select id="getlocationList" resultMap="cafe">
 		select * from cafe 
 			<!-- select * from cafe where location1 in (1,2,...); -->
@@ -34,12 +38,22 @@
 			</if>
 			<if test="star!=null">
 				order by avg_star desc
-	 	
 			</if>
 			</where>
 	</select>
-	
-	<select id="cafeAllList" resultMap="cafe">
-		select * from cafe
-	</select>
+
+	<select id="getlocationListA" resultMap="cafe">
+		select * from cafe 
+		<where>
+			<if test="kidszone !=0">
+				kidszone = #{kidszone}
+			</if>
+			<if test="petzone !=0">
+				and petzone = #{petzone}
+			</if>
+			<if test="star!=null">
+				order by avg_star desc
+			</if>
+		</where>
+	</select>	
 </mapper>

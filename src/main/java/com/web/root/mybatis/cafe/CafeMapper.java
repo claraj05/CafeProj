@@ -9,10 +9,16 @@ import com.web.root.cafe.dto.CafeDTO;
 
 public interface CafeMapper {
 
+	public List<CafeDTO> cafeAllList();
+	 
 	public List<CafeDTO> getlocationList(@Param("locationList") String [] locationList,
 			@Param("kidszone")String kidszone,
 			@Param("petzone") String petzone,
 			@Param("star")String star);
-	 
-	public List<CafeDTO> cafeAllList();
+
+	public List<CafeDTO> getlocationListA(int all,			
+			@Param("kidszone")String kidszone,
+			@Param("petzone") String petzone,
+			@Param("star")String star);
+
 }

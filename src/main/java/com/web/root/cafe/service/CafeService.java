@@ -12,6 +12,11 @@ public interface CafeService {
 			@RequestParam("petzone")String petzone,
 			@RequestParam("star")String star,Model model);
 	
+	public void getlocationListA(HttpServletRequest request, 
+			@RequestParam("all") int all,@RequestParam("kidszone")String kidszone,
+			@RequestParam("petzone")String petzone,
+			@RequestParam("star")String star,Model model);
+	
 	public void cafeAllList(Model model);
 	
 }
