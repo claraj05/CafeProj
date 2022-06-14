@@ -15,21 +15,14 @@ public interface CafeMapper {
 			@Param("kidszone")String kidszone,
 			@Param("petzone") String petzone,
 			@Param("star")String star);
-<<<<<<< HEAD
 
 	public List<CafeDTO> getlocationListA(int all,			
 			@Param("kidszone")String kidszone,
 			@Param("petzone") String petzone,
 			@Param("star")String star);
 
-=======
-	 
-	public List<CafeDTO> cafeAllList();
+
 	
-<<<<<<< HEAD
 	public CafeDTO cafeInfo(int cafe_no);
-=======
 	public int writeSave(CafeDTO dto);
->>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
->>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
 }
