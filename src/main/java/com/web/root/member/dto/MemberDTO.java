@@ -1,4 +1,5 @@
 package com.web.root.member.dto;
+
 /*계정코드/아이디/이름/비밀번호/생년월일/성별/이메일/전화번호
 create table member(
 code number(10) not null, -- 0:관리자 계정 / 1:사용자계정
@@ -16,10 +17,10 @@ savedate date sysdate
 );*/
 public class MemberDTO {
 
-	//private int code;
+	// private int code;
 	private String id;
 	private int code;
-	private String pw; 
+	private String pw;
 	private String name;
 	private String gender;
 	private String addr;
@@ -29,8 +30,8 @@ public class MemberDTO {
 	private String domain;
 	private String savedate;
 
-	public MemberDTO() {}
-
+	public MemberDTO() {
+	}
 
 	public MemberDTO(String id, int code, String pw, String name, String gender, String addr, String phone,
 			String email, String birth, String domain, String savedate) {
@@ -46,6 +47,13 @@ public class MemberDTO {
 		this.birth = birth;
 		this.domain = domain;
 		this.savedate = savedate;
+	}
+
+	@Override
+	public String toString() {
+		return "MemberDTO [id=" + id + ", code=" + code + ", pw=" + pw + ", name=" + name + ", gender=" + gender
+				+ ", addr=" + addr + ", phone=" + phone + ", email=" + email + ", birth=" + birth + ", domain=" + domain
+				+ ", savedate=" + savedate + "]";
 	}
 
 	public String getId() {
@@ -135,8 +143,6 @@ public class MemberDTO {
 	public void setSavedate(String savedate) {
 		this.savedate = savedate;
 
-
 	}
-		
-	
+
 }

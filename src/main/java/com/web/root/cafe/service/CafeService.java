@@ -4,6 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.web.root.cafe.dto.CafeDTO;
 
 public interface CafeService {
 
@@ -18,5 +21,7 @@ public interface CafeService {
 			@RequestParam("star")String star,Model model);
 	
 	public void cafeAllList(Model model);
+	
+	public String writeSave(MultipartHttpServletRequest mul, HttpServletRequest request, CafeDTO dto);
 	
 }

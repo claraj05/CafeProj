@@ -80,10 +80,15 @@ $(document).ready(function(){
 					<ul>
 						<li class="search_title">&lt;세부 지역2(서울시 25구)&gt;</li>
 					</ul>
+<<<<<<< HEAD
+					
+					<ul>
+=======
 					<ul class="search_total">
 						<li><input type="checkbox" id="tot" name="location1" value="0">전체 선택</li>
 					</ul>
 					<ul class="search_l1">
+>>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
 						<li><input type="checkbox" id="r1" name="location1" value="1" />
 							<label for="l1">강남구</label></li>
 						<li><input type="checkbox" id="r2" name="location1" value="2" />

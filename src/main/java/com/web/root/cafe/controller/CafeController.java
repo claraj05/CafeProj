@@ -1,17 +1,26 @@
 package com.web.root.cafe.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.web.root.cafe.dto.CafeDTO;
+import com.web.root.cafe.file.service.BoardFileService;
 import com.web.root.cafe.service.CafeService;
 
 @Controller
@@ -20,6 +29,7 @@ public class CafeController {
 	
 	@Autowired
 	CafeService cf;
+	
 	
 	
 	@GetMapping("searchView")
@@ -36,6 +46,7 @@ public class CafeController {
 	public String mycafe() {
 		return "cafe/mycafe";
 	}
+	
 	
 	@GetMapping("searchResult")
 	public String searchResult(HttpServletRequest request, 
@@ -61,6 +72,23 @@ public class CafeController {
 		cf.cafeAllList(model);
 		return "cafe/cafeAllList";
 	}
+	
+	
+	  @PostMapping("writeSave") 
+	  public void writeSave(MultipartHttpServletRequest
+			  				mul, HttpServletResponse response,
+			  				HttpServletRequest request, CafeDTO dto) throws IOException {
+	  
+	  String message = cf.writeSave(mul, request, dto);
+	  
+	  PrintWriter out = response.getWriter();
+	  response.setContentType("text/html; charset=utf-8");
+	  out.print(message);
+	  }
+	 
+	 
+
+
 	
 }
 

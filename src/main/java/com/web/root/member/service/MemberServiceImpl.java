@@ -18,9 +18,11 @@ public class MemberServiceImpl implements MemberService {
 	
 	
 	@Override
-	public int register(MemberDTO member) {
+	public int register(MemberDTO member){
 		try {
-			return mapper.register(member);
+			MemberDTO dto = member;
+			System.out.println(dto.getAddr());
+			return mapper.register(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
