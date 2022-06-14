@@ -3,7 +3,7 @@ package com.web.root.mybatis.cafe;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.web.root.cafe.dto.CafeDTO;
 
@@ -15,4 +15,6 @@ public interface CafeMapper {
 			@Param("star")String star);
 	 
 	public List<CafeDTO> cafeAllList();
+	
+	public int writeSave(CafeDTO dto);
 }

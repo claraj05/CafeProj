@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.root.mybatis.review.ReviewMapper">
+	
+<!-- 	<resultMap type="com.web.root.review.dto.ReviewCafeDTO" id="review">
+		<id property="cafe_no" column="cafe_no"/>
+		<result property="review_no" column="review_no"/>
+		<result property="review_content" column="review_content"/>
+		<result property="id" column="id"/>
+		<result property="review_savedate" column="review_savedate"/>
+		<result property="imageFileName" column="imageFileName"/>
+		<result property="grade" column="grade"/>
+	</resultMap>
+	
+	
+	<select id="reviewLists" resultMap="review">
+		
+	</select> -->
+	
+</mapper>

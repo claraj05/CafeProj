@@ -3,7 +3,6 @@ package com.web.root.cafe.file.service;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface BoardFileService {
 

@@ -4,19 +4,20 @@ package com.web.root.cafe.dto;
 카페번호/이름/위치1(지역)/위치2(지역세부)/전화번호/이미지파일명/키즈(제한시설)/애완동물(제한시설)/이용시간/평균별점
 
 create table cafe(
-cafe_no number(100) primary key,
+cafe_no number(30) primary key,
 cafe_name varchar2(100) not null, 
-location1 varchar2(20) not null, --@@동
-location2 varchar2(20) not null, --상세주소
+location1 number(20) not null, --서울시 25개 구(0-전체/1-강남구,2-강동구~25까지) 
+location2 varchar2(100) not null, --상세주소
 cafe_tel varchar2(20), 
 menu varchar2(1000), --메뉴
 kidszone number(10), --0: 정보없음/ 1 : 키즈존(전문) /2: 노키즈존 / 3:캐어키즈존 
 petzone number(10), --0:정보없음/ 1: 펫존(애견카페o) / 2:노펫존 / 3:펫허용(애견카페x)
 use_time varchar2(30), --오전 ~~:~~ ~ 오후 ~~:~~ 까지 포맷으로
-imageFileName varchar2(1000) not null,
 avg_star number(10,2), --평균 별점
 logtime date default sysdate --등록일
-);*/
+);
+*/
+
 
 public class CafeDTO {
 	private int cafe_no;
@@ -28,7 +29,6 @@ public class CafeDTO {
 	private int kidszone;
 	private int petzone;
 	private String use_time;
-	private String imageFileName;
 	private double avg_star;
 	private String logtime;
 	
@@ -106,14 +106,6 @@ public class CafeDTO {
 		this.use_time = use_time;
 	}
 
-	public String getImageFileName() {
-		return imageFileName;
-	}
-
-	public void setImageFileName(String imageFileName) {
-		this.imageFileName = imageFileName;
-	}
-
 	public double getAvg_star() {
 		return avg_star;
 	}
@@ -129,6 +121,7 @@ public class CafeDTO {
 	public void setLogtime(String logtime) {
 		this.logtime = logtime;
 	}
+
 
 
 	

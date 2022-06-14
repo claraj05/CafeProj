@@ -24,7 +24,7 @@
 <body>
 	<h1 class="write_title">카페 추가하기 </h1>
 	<div class="write">
-		<div class="write_save">
+		<div class="write_save"> <!-- enctype ="application/x-www-form-urlencoded"  -->
 			<form action="${contextPath }/cafe/writeSave" enctype="multipart/form-data" method="post">
 				
 <!--create table cafe(
@@ -49,7 +49,7 @@ logtime date default sysdate --등록일 mybatis.cafe있어?패키지
 				<b>카페 상세주소 </b><br>
 				<input type="text" name="location2" size="100"><br>
 				<b>카페 연락처 </b><br>
-				<input type="text" name="location2" size="100"><br>
+				<input type="text" name="cafe_tel" size="100"><br>
 				<b>카페 메뉴</b>
 				<input type="text" name="menu" size="50"><br>
 				<b>키즈존</b>
@@ -63,33 +63,33 @@ logtime date default sysdate --등록일 mybatis.cafe있어?패키지
 				<input type="radio" name="petzone" value="2">노펫존
 				<input type="radio" name="petzone" value="3">펫허용(애견카페x)<br>
 				<b>영업시간</b>
-				<p>open<input type="time" name="starttime"></p>
-				<p>close<input type="time" name="endtime"></p>
+				<input type="text" name="use_time">
+				<!-- <p>open<input type="time" name="starttime"></p>
+				<p>close<input type="time" name="endtime"></p> -->
 				
 				<b>이미지 파일명</b>
-				<input type="text" name="imageFileName" value="nan">
-				
-				
-				<br>
+				<input type="text" name="imageFileName" value="nan"> 
+	 			<br>
 				<b>파일 첨부 </b>
-			<%-- 	<c:if test="${data.imageFileName == 'nan' }">
-					<b>이미지가 없습니다</b>
-				</c:if>
-				<c:if test="${data.imageFileName != 'nan' }">
-					<img src="${contextPath }/board/download?imageFileName=${data.imageFileName }"
-						width="200px" height="200px">
-				</c:if> --%>
 				<input type="file" name="nan" onchange="readURL(this)">
 				<img id="preview" src="#" width="100px" height="100px">
 				<br>
 				<input type="submit" value="업로드"> &nbsp;
-			</form>
-			<a href="${contextPath }/views">파일 보기</a>
+			
+			</form> 
+			<%-- <a href="${contextPath }/views">파일 보기</a> --%>
 		</div>
 	</div>
 
 </body>
 </html>
+<%-- 			 	<c:if test="${data.imageFileName == 'nan' }">
+					<b>이미지가 없습니다</b>
+				</c:if>
+				<c:if test="${data.imageFileName != 'nan' }">
+					<img src="${contextPath }/board/download?imageFileName=${data.imageFileName }"
+						width="200px" height="200px">
+				</c:if>  --%>
 
 
 

@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.web.root.cafe.dto.CafeDTO;
 import com.web.root.cafe.file.service.BoardFileService;
-import com.web.root.cafe.file.service.BoardService;
 import com.web.root.cafe.service.CafeService;
 
 @Controller
@@ -30,8 +30,6 @@ public class CafeController {
 	@Autowired
 	CafeService cf;
 	
-	@Autowired
-	BoardService bs;
 	
 	
 	@GetMapping("searchView")
@@ -49,9 +47,10 @@ public class CafeController {
 		return "cafe/mycafe";
 	}
 	
+	
 	@GetMapping("searchResult")
 	public String searchResult(HttpServletRequest request, 
-			@RequestParam("location1") String location1, 
+			@RequestParam("location1") String[] location1, 
 			@RequestParam("kidszone") String kidszone, 
 			@RequestParam("petzone") String petzone,
 			@RequestParam("star")String star,Model model) throws ServletException, IOException {
@@ -74,28 +73,18 @@ public class CafeController {
 	  @PostMapping("writeSave") 
 	  public void writeSave(MultipartHttpServletRequest
 			  				mul, HttpServletResponse response,
-			  				HttpServletRequest request) throws IOException {
+			  				HttpServletRequest request, CafeDTO dto) throws IOException {
 	  
-	  String message = bs.writeSave(mul, request);
+	  String message = cf.writeSave(mul, request, dto);
 	  
 	  PrintWriter out = response.getWriter();
 	  response.setContentType("text/html; charset=utf-8");
 	  out.print(message);
-	  
 	  }
 	 
 	 
 
-	@GetMapping("download")
-	public void download(@RequestParam String imageFileName, HttpServletResponse response) throws Exception {
-		
-		response.addHeader("Context-disposition", "attachment;fileName="+imageFileName);
-		
-		File file = new File(BoardFileService.IMAGE_REPO + "/" + imageFileName);
-		FileInputStream in = new FileInputStream(file);
-		FileCopyUtils.copy(in, response.getOutputStream());
-		in.close();
-	}
+
 	
 }
 
