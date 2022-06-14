@@ -8,31 +8,65 @@
 <meta charset="UTF-8">
 <title>searchView</title>
 <link rel ="stylesheet" type ="text/css" href = "../resources/css/cafeSearch.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#tot").click(function(){
 		if(this.checked){
-			$(".search_l1").prop("disabled",true);
+			$("input#r1").prop("disabled",true);
+			$("input#r2").prop("disabled",true);
+			$("input#r3").prop("disabled",true);
+			$("input#r4").prop("disabled",true);
+			$("input#r5").prop("disabled",true);
+			$("input#r6").prop("disabled",true);
+			$("input#r7").prop("disabled",true);
+			$("input#r8").prop("disabled",true);
+			$("input#r9").prop("disabled",true);
+			$("input#r10").prop("disabled",true);
+			$("input#r11").prop("disabled",true);
+			$("input#r12").prop("disabled",true);
+			$("input#r13").prop("disabled",true);
+			$("input#r14").prop("disabled",true);
+			$("input#r15").prop("disabled",true);
+			$("input#r16").prop("disabled",true);
+			$("input#r17").prop("disabled",true);
+			$("input#r18").prop("disabled",true);
+			$("input#r19").prop("disabled",true);
+			$("input#r20").prop("disabled",true);
+			$("input#r21").prop("disabled",true);
+			$("input#r22").prop("disabled",true);
+			$("input#r23").prop("disabled",true);
+			$("input#r24").prop("disabled",true);
+			$("input#r25").prop("disabled",true);
 		}else{
-			$(".search_l1").prop("disabled",false);
+			$("input#r1").prop("disabled",false);
+			$("input#r2").prop("disabled",false);
+			$("input#r3").prop("disabled",false);
+			$("input#r4").prop("disabled",false);
+			$("input#r5").prop("disabled",false);
+			$("input#r6").prop("disabled",false);
+			$("input#r7").prop("disabled",false);
+			$("input#r8").prop("disabled",false);
+			$("input#r9").prop("disabled",false);
+			$("input#r10").prop("disabled",false);
+			$("input#r11").prop("disabled",false);
+			$("input#r12").prop("disabled",false);
+			$("input#r13").prop("disabled",false);
+			$("input#r14").prop("disabled",false);
+			$("input#r15").prop("disabled",false);
+			$("input#r16").prop("disabled",false);
+			$("input#r17").prop("disabled",false);
+			$("input#r18").prop("disabled",false);
+			$("input#r19").prop("disabled",false);
+			$("input#r20").prop("disabled",false);
+			$("input#r21").prop("disabled",false);
+			$("input#r22").prop("disabled",false);
+			$("input#r23").prop("disabled",false);
+			$("input#r24").prop("disabled",false);
+			$("input#r25").prop("disabled",false);
 		}
 	});
 });
-/* $(document).ready(function(){
- 
-  
-  $("#totall3").click(function(){
-		
-		if(this.checked){
-			$(".moblieRest").prop("disabled",true);
-		}
-		else{
-			$(".moblieRest").prop("disabled",false);
-		}
-	});
-    
-   });
-*/
 </script>
 </head>
 <body>
@@ -46,10 +80,15 @@ $(document).ready(function(){
 					<ul>
 						<li class="search_title">&lt;세부 지역2(서울시 25구)&gt;</li>
 					</ul>
+<<<<<<< HEAD
+					
+					<ul>
+=======
 					<ul class="search_total">
 						<li><input type="checkbox" id="tot" name="location1" value="0">전체 선택</li>
 					</ul>
 					<ul class="search_l1">
+>>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
 						<li><input type="checkbox" id="r1" name="location1" value="1" />
 							<label for="l1">강남구</label></li>
 						<li><input type="checkbox" id="r2" name="location1" value="2" />

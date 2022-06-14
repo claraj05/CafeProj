@@ -51,7 +51,12 @@ public class MemberController implements MemberSession {
 	 
 	 
 	@RequestMapping("joinForm")
-	public String joinform(MemberDTO member) {
+	public String joinform(MemberDTO member, HttpServletRequest request, 
+			@RequestParam("addr1") String addr1,
+			@RequestParam("addr2") String addr2,
+			@RequestParam("addr3") String addr3) {
+		member.setAddr(request.getParameter("addr1")+request.getParameter("addr2")+request.getParameter("addr3"));
+		System.out.println(member.toString());
 		int result = ms.register(member);
 		if(result == 1) 
 			return "redirect:/index";
