@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="review.css" rel="stylesheet" type="text/css">
+<link href="resource/review.css" rel="stylesheet" type="text/css">
     <!-- icon -->
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
@@ -24,21 +24,28 @@
                         헤더 영역
                     </div>
                 </div>
+                <!-- picture area -->
                 <div class="picture-area">
-                    <div class="col-md-12">
-                        사진 영역
-                        <ul>
+                    <div class="picture-lists">
+                        <div class="btn-area">
+                            <button id="prev">앞으로</button>
+                            <button id="next">뒤로</button>
+                        </div>
+
+                        <ul class="picture-title" id="picture-container">
                             <li></li>
+                         
                         </ul>
                     </div>
                 </div>
+                <!-- review area -->
                 <div class="review-area">
                     <div class="section-restaurant">
                         <div class="inner">
                             <div class="restaurant-header">
                                 <div class="restaurant-title-wrap">
                                     <div class="section-tilte">
-                                        <h2 class="restaurant-title"></h2>
+                                        <h2 class="restaurant-title">hihi~</h2>
                                         <div class="btn-area">
                                             <button>write-review</button>
                                         </div>
@@ -53,10 +60,10 @@
 
                                 <div class="section-restaurant-detail">
                                     <table border="1">
-                                        <tr>
+                                       <%--  <tr>
                                             <td class="detail-col-size" >주소</td>
                                             <td>${cafeDetail.addr}</td>
-                                        </tr>
+                                        </tr> --%>
                                         <tr>
                                             <td class="detail-col-size">전화번호</td>
                                             <td>${cafeDetail.cafe_tel}</td>

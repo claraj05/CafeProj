@@ -42,4 +42,8 @@
 	<select id="cafeAllList" resultMap="cafe">
 		select * from cafe
 	</select>
+	
+	<select id="cafeInfo" resultMap="cafe">
+		select * from cafe where cafe_no=#{cafe_no}
+	</select>
 </mapper>

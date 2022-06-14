@@ -1,0 +1,157 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+}
+.container-fluid {
+    width: 100%;
+    height: 100%;
+}
+.row {
+    width: 100%;
+    height: 100%;
+}
+
+.picture-area {
+    width: 100%;
+    height: 410px;
+    background-color: aquamarine;
+}
+
+.review-area {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.section-restaurant {
+    background-color: #FAFAFA;
+    width: 100%;
+}
+.restaurant-header {
+    padding-top: 20px;
+    margin-left: 34%;
+    margin-right: 20%;
+    width: 800px;
+}
+.inner {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+/* header-area  */
+.section-restaurant .restaurant-header,
+                    .section-restaurant-detail,
+                    .section-restaurant-reviews  {
+    background-color: blanchedalmond;    
+}
+
+.restaurant-title-wrap {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #4f4f4f;
+}
+.restaurant-title-wrap .section-tilte {
+    display: flex;
+}
+.section-tilte {
+    width: 100%;
+}
+.restaurant-header .restaurant-status {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+/* picture area */
+.picture-lists {
+    /* position: absolute; */
+}
+.picture-lists .btn-area{
+    position: absolute;
+    z-index: 1;
+}
+.picture-lists ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.picture-lists ul li {
+    /* position: absolute; */
+}
+.picture-lists ul li img{
+    display:  block;
+    margin: 5px;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/* restaurant-detail-area */
+.section-restaurant-detail {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.section-tilte .btn-area {
+    margin-left: 70%;
+}
+.section-restaurant-detail table {
+    width: 100%;
+}
+
+.detail-col-size {
+    width: 100px;
+}
+
+/* restaurant-review-area */
+.section-restaurant-reviews {
+    background-color: rebeccapurple;
+    margin-top: 30px;
+    margin-left: 34%;
+    margin-right: 20%;
+    width: 800px;
+}
+.map {
+    background-color: aqua;
+    width: 15%;
+}
+.review-header {
+    width: 100%;
+    height: 50px;
+}
+.review-container ul{
+    margin: 0;
+    padding: 0;
+}
+
+.review-info {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.review-info .review-title {
+    margin-left: 10px;
+    margin-right: 35px;
+}
+
+.review-content {
+    width: 800px;
+}
+
+.review-grade {
+
+    width: 100px;
+    margin-left: 18px;
+}
+
+.review-image {
+    margin-top: 20px;
+}
+.review-image ul li{
+    display: inline;
+    list-style: none;
+}
+
+.image li img{
+    width: 120px;
+    height: 120px;
+}

@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.web.root.cafe.dto.CafeDTO;
+
 public interface CafeService {
 
 	public void getlocationList(HttpServletRequest request, 
@@ -14,4 +16,6 @@ public interface CafeService {
 	
 	public void cafeAllList(Model model);
 	
+	
+	public CafeDTO cafeInfo(int cafe_no);
 }

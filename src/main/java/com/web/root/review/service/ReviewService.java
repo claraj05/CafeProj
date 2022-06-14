@@ -1,10 +1,13 @@
 package com.web.root.review.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.web.root.mybatis.cafe.CafeMapper;
 import com.web.root.mybatis.review.ReviewMapper;
+import com.web.root.review.dto.CafeReviewDTO;
 import com.web.root.review.dto.ReviewDTO;
 
 @Service
@@ -22,19 +25,16 @@ public class ReviewService {
 	 * @return target info
 	 */
 
-	public ReviewDTO targetReviewDetail(String target) {
+	public List<ReviewDTO> targetReviewDetail(int target) {
 
-		return testData();
+		
+		return reviewMapper.targetReviewLists(target);
+	}
+	
+	public CafeReviewDTO ormTest(int target) {
+
+		return reviewMapper.ormTest(target);
 	}
 
-	public void targetReviews() {
 
-	}
-
-	private ReviewDTO testData() {
-
-		ReviewDTO reviewDTO = new ReviewDTO(1, 1, "hi", "2", "hi", "hi", 1);
-
-		return reviewDTO;
-	}
 }

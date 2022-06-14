@@ -15,4 +15,6 @@ public interface CafeMapper {
 			@Param("star")String star);
 	 
 	public List<CafeDTO> cafeAllList();
+	
+	public CafeDTO cafeInfo(int cafe_no);
 }

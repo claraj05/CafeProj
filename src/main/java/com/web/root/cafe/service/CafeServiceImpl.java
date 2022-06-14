@@ -11,40 +11,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.root.cafe.dto.CafeDTO;
 import com.web.root.mybatis.cafe.CafeMapper;
+
 @Service
-public class CafeServiceImpl implements CafeService{
-	
-	
+public class CafeServiceImpl implements CafeService {
+
 	@Autowired
 	private CafeMapper mapper;
-	
-	
+
 	@Override
-	public void getlocationList(HttpServletRequest request, 
-			String [] locationList, 
-			String kidszone,
-			String petzone, 
-			String star,
-			Model model) {
-		//check
-		String [] locationList1 = locationList;
+	public void getlocationList(HttpServletRequest request, String[] locationList, String kidszone, String petzone,
+			String star, Model model) {
+		// check
+		String[] locationList1 = locationList;
 		kidszone = request.getParameter("kidszone");
 		petzone = request.getParameter("petzone");
-		List<CafeDTO> list = mapper.getlocationList(locationList,kidszone,petzone,star);
-		
-		model.addAttribute("list",list);
-	}
+		List<CafeDTO> list = mapper.getlocationList(locationList, kidszone, petzone, star);
 
+		model.addAttribute("list", list);
+	}
 
 	@Override
 	public void cafeAllList(Model model) {
-		model.addAttribute("list",mapper.cafeAllList());
+		model.addAttribute("list", mapper.cafeAllList());
 		System.out.println(mapper.cafeAllList());
 	}
 
+	@Override
+	public CafeDTO cafeInfo(int cafe_no) {
+		// TODO Auto-generated method stub
+		return mapper.cafeInfo(cafe_no);
+	}
 
-	
-	
-	
-	
 }

@@ -1,4 +1,7 @@
 package com.web.root.review.dto;
+
+import java.sql.Date;
+
 /*리뷰 테이블
 
 카페번호/리뷰번호/제목/내용/작성자/작성일/별점
@@ -23,15 +26,17 @@ public class ReviewDTO {
 	private int cafe_no;
 	private int review_no;
 	private String review_content;
-	private String id; 
+	private String id;
 	private String review_savedate;
 	private String imageFileName;
 	private int grade;
-	
-	public ReviewDTO() {}
-	
+
+	public ReviewDTO() {
+	}
+
 	public ReviewDTO(int cafe_no, int review_no, String review_content, String id, String review_savedate,
 			String imageFileName, int grade) {
+		super();
 		this.cafe_no = cafe_no;
 		this.review_no = review_no;
 		this.review_content = review_content;
@@ -96,7 +101,5 @@ public class ReviewDTO {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
-	
-	
-	
+
 }
