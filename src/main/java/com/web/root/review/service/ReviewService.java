@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.web.root.mybatis.cafe.CafeMapper;
 import com.web.root.mybatis.review.ReviewMapper;
@@ -27,14 +29,23 @@ public class ReviewService {
 
 	public List<ReviewDTO> targetReviewDetail(int target) {
 
-		
 		return reviewMapper.targetReviewLists(target);
 	}
-	
-	public CafeReviewDTO ormTest(int target) {
 
-		return reviewMapper.ormTest(target);
+	@Transactional
+	public boolean reviewWrite(int cafe_no, String content, MultipartFile[] file) {
+		int result = reviewMapper.reivewWrite(cafe_no, content);
+
+		if (result < 1)
+			return false;
+
+		return true;
 	}
 
-
+	/*
+	 * public CafeReviewDTO ormTest(int target) {
+	 * 
+	 * return reviewMapper.ormTest(target); }
+	 * 
+	 */
 }
