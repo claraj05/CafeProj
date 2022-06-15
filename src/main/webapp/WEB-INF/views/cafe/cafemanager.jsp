@@ -50,16 +50,14 @@
 				<input type="text" name="use_time">
 				<!-- <p>open<input type="time" name="starttime"></p>
 				<p>close<input type="time" name="endtime"></p> -->
-				<input type="submit" value="업로드"> &nbsp;
-				
-			<!--<b>이미지 파일명</b>
-				<input type="text" name="imageFileName" value="nan"> 
 	 			<br>
 				<b>파일 첨부 </b>
-				<input type="file" name="nan" onchange="readURL(this)">
+				파일 : <input type="file" name="multiFile" onchange="readURL(this)" multiple > <br>
+				파일 설명 : <input type="text" name="fileContent"><br>
 				<img id="preview" src="#" width="100px" height="100px">
 				<br>
-			 -->
+				<input type="submit" value="업로드"> &nbsp;
+		
 			
 			</form> 
 			<%-- <a href="${contextPath }/views">파일 보기</a> --%>

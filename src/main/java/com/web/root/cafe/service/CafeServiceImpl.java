@@ -3,10 +3,13 @@ package com.web.root.cafe.service;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.web.root.cafe.dto.CafeDTO;
@@ -41,14 +44,15 @@ public class CafeServiceImpl implements CafeService {
 	}
 
 	@Override
-	public String writeSave(MultipartHttpServletRequest mul, HttpServletRequest request, CafeDTO dto) {
+	public String writeSave(HttpServletRequest request, CafeDTO dto, List<MultipartFile> multiFileList,
+							String fileContent) {
 
 
-		System.out.println(mul);
+		/* System.out.println(mul); */
 		// request.getParameter("cafe_no");
 		// 여기 문제 cafe_name
 
-
+ 
 		int result = 0;
 		try {
 			result = mapper.writeSave(dto);
