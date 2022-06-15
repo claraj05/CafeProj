@@ -48,30 +48,28 @@ public class CafeController {
 	}
 	
 	
-	@GetMapping("searchResult")
-	public String searchResult(HttpServletRequest request, 
-			@RequestParam("location1") String[] location1, 
-			@RequestParam("kidszone") String kidszone, 
-			@RequestParam("petzone") String petzone,
-			@RequestParam("star")String star,Model model) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String [] locationList =  request.getParameterValues("location1");
-		kidszone = request.getParameter("kidszone");
-		petzone = request.getParameter("petzone");
-		star = request.getParameter("star");
-		if(locationList[0]=="0") {
-			int all = 0;
-			cf.getlocationListA(request, all, kidszone, petzone, star, model);
-		}
-		cf.getlocationList(request,locationList, kidszone, petzone, star, model);
-		return "cafe/searchResult";
-	}
-	
-	@GetMapping("cafeAllList")
-	public String test(HttpServletRequest request, Model model) {
-		cf.cafeAllList(model);
-		return "cafe/cafeAllList";
-	}
+	/*
+	 * @GetMapping("searchResult") public String searchResult(HttpServletRequest
+	 * request,
+	 * 
+	 * @RequestParam("location1") String[] location1,
+	 * 
+	 * @RequestParam("kidszone") String kidszone,
+	 * 
+	 * @RequestParam("petzone") String petzone,
+	 * 
+	 * @RequestParam("star")String star,Model model) throws ServletException,
+	 * IOException { request.setCharacterEncoding("utf-8"); String [] locationList =
+	 * request.getParameterValues("location1"); kidszone =
+	 * request.getParameter("kidszone"); petzone = request.getParameter("petzone");
+	 * star = request.getParameter("star"); cf.getlocationList(request,locationList,
+	 * kidszone, petzone, star, model); return "cafe/searchResult"; }
+	 */
+	/*
+	 * @GetMapping("cafeAllList") public String test(HttpServletRequest request,
+	 * Model model) { cf.cafeAllList(model); return "cafe/cafeAllList"; }
+	 */
+
 	
 	
 	  @PostMapping("writeSave") 
@@ -84,6 +82,11 @@ public class CafeController {
 	  PrintWriter out = response.getWriter();
 	  response.setContentType("text/html; charset=utf-8");
 	  out.print(message);
+	  }
+	  
+	  @GetMapping("cafemanager")
+	  public String cafemanager() {
+		  return "cafe/cafemanager";
 	  }
 	 
 	 

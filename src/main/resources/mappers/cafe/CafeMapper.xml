@@ -20,31 +20,6 @@
 		<result property="logtime" column="logtime"/>
 	</resultMap>
 	
-<<<<<<< HEAD
-	<select id="cafeAllList" resultMap="cafe">
-		select * from cafe
-	</select>
-
-	<select id="getlocationList" resultMap="cafe">
-		select * from cafe 
-			<!-- select * from cafe where location1 in (1,2,...); -->
-			<where>
-			 <if test="locationList != null">
-					location1 in <foreach item="location1" collection="locationList" open="(" close=")" separator="," >
-						#{location1}
-					</foreach>
-			</if>
-			<if test="kidszone !=0">
-					and kidszone = #{kidszone}
-			</if>
-			<if test="petzone !=0">
-					and petzone = #{petzone}
-			</if>
-			<if test="star!=null">
-				order by avg_star desc
-			</if>
-			</where>
-=======
 	<!--  
 	<select id="boardAllList" resultMap="board">
 		select * from mvc_board
@@ -64,31 +39,7 @@
 <!-- 	
 	<select id="contentView" resultMap="board">
 		select * from mvc_board where write_no=#{writeNo}
->>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
 	</select>
-<<<<<<< HEAD
-	
-	<select id="cafeInfo" resultMap="cafe">
-		select * from cafe where cafe_no=#{cafe_no}
-	</select>
-=======
-<<<<<<< HEAD
-
-	<select id="getlocationListA" resultMap="cafe">
-		select * from cafe 
-		<where>
-			<if test="kidszone !=0">
-				kidszone = #{kidszone}
-			</if>
-			<if test="petzone !=0">
-				and petzone = #{petzone}
-			</if>
-			<if test="star!=null">
-				order by avg_star desc
-			</if>
-		</where>
-	</select>	
-=======
 	
 	<update id="upHit">
 		update mvc_board set hit=hit+1
@@ -110,8 +61,6 @@
 		select count(*) from mvc_board
 	</select> -->
 	
->>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
->>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
 </mapper>
 
 
