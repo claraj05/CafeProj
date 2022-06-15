@@ -33,8 +33,8 @@ public class ReviewService {
 	}
 
 	@Transactional
-	public boolean reviewWrite(int cafe_no, String content, MultipartFile[] file) {
-		int result = reviewMapper.reivewWrite(cafe_no, content);
+	public boolean reviewWrite(String cafe_no, String content, List<MultipartFile> file) {
+		int result = reviewMapper.reivewWrite(Integer.valueOf(cafe_no), content);
 
 		if (result < 1)
 			return false;

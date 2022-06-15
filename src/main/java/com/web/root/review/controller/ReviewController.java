@@ -113,9 +113,9 @@ public class ReviewController {
 		String cafeNo = httpServletRequest.getParameter("cafeNo");
 		String content = httpServletRequest.getParameter("content");
 		MultiValueMap<String, MultipartFile> files = httpServletRequest.getMultiFileMap();
-		System.out.println(files.get("files"));
+		
 		logger.info("date => content : {} cafe_no : {}, files : {}", content, cafeNo);
-		// reviewService.reviewWrite(cafe_no, content, multipartFile);
+		reviewService.reviewWrite(cafeNo, content, files.get("files"));
 
 	}
 
