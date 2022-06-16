@@ -17,7 +17,7 @@
 }
 
 .intro_bg {
-	background-image:url("");
+	/* background-image:url(""); */
 	width:100%;
 	height:200px;
 	border : 1px solid black;

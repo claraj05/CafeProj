@@ -34,7 +34,7 @@
 						<option value = "naver">naver.com</option>
 						<option value = "daum">kakao.com</option>
 						<option value = "gmail">gmail.com</option>
-		</select>
+					</select>
 				</td>
 			</tr>
 		</table>
