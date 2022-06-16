@@ -14,6 +14,11 @@ public interface ReviewMapper {
 
 	public List<ReviewDTO> targetReviewLists(int target);
 	
-	public CafeReviewDTO ormTest(int target);
-
+	public int reivewWrite(int cafe_no,String content);
+	
+	public int cafeReviewTotalCount(int target);
+	
+	/* public CafeReviewDTO ormTest(int target); */
+	
+	/* 카페 이미지 테이블 필요 */
 }

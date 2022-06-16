@@ -70,6 +70,7 @@ body {
     z-index: 1;
 }
 .picture-lists ul{
+    display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -78,7 +79,6 @@ body {
     /* position: absolute; */
 }
 .picture-lists ul li img{
-    display:  block;
     margin: 5px;
     height: 400px;
     background-repeat: no-repeat;
