@@ -4,17 +4,17 @@ package com.web.root.board.dto;
 
 게시번호/제목/내용/작성자/작성일/조회수/첨부파일
 create table board(
-Write_no number(10) primary key,
-Title varchar2(100) not null,
-Content varchar2(300) not null,
-Savedate date default sysdate,
-Hit number(10) default 0,
-ImageFileName varchar2(100),
-like_count number(100),
-id varchar2(20) not null,
-constraint fk_test foreign key(id) references member(id) on delete cascade
+write_no number(10) primary key,
+title varchar2(100) not null,
+content varchar2(300) not null,
+savedate date default sysdate,
+hit number(10) default 0,
+imageFileName varchar2(100),
+like_count number(30) default 0,
+id varchar2(20) not null
 );
-create sequence board_seq nocache nocycle; */
+create sequence board_seq nocache nocycle; 
+*/
 public class BoardDTO {
 	private int write_no;
 	private String title;

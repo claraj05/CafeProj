@@ -147,8 +147,8 @@
 													<div class="review-text">${reviewDetail.review_content }~</div>
 													<div class="review-image">
 														<ul class="image">
-															<c:if test="${reviewDetail}">
-																<li><img src="url()"></li>
+															<c:if test="${imgLink != null}">
+																<li><img src="resource/${imgLink.imgLocation}/${imgLink.imgName}"></li>
 															</c:if>
 														</ul>
 													</div>

@@ -84,6 +84,7 @@
 		insert into cafe values(cafe_seq.nextval, #{cafe_name}, #{location1}, #{location2}, #{cafe_tel}, #{menu},
 				#{kidszone}, #{petzone}, #{use_time}, #{avg_star}, sysdate)
 	</insert>
+<<<<<<< HEAD
 
 	<select id="selectNo">
 		select cafe_no from cafe where cafe_name = #{cafe_name}
@@ -92,6 +93,14 @@
 	<insert id="writeSave2">
 		insert into cafe_image values(#{imgName}, #{imgLocation}, #{imgContent}, #{cafe_no})
 	</insert>
+=======
+<!-- 	
+	<select id="contentView" resultMap="board">
+		select * from mvc_board where write_no=#{writeNo}
+
+	</select>
+
+>>>>>>> refs/remotes/origin/jimin_branch2
 	
 	<select id="cafeInfo" resultMap="cafe">
 		select * from cafe where cafe_no=#{cafe_no}

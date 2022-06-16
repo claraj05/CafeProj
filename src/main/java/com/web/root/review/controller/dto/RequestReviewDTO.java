@@ -1,4 +1,4 @@
-package com.web.root.review.controller;
+package com.web.root.review.controller.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 

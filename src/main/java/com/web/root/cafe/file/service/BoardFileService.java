@@ -14,6 +14,4 @@ public interface BoardFileService {
 	
 	public void deleteImage(String originFileName);
 	
-	public void getCafeImages(int cafe_no);
-	
 }

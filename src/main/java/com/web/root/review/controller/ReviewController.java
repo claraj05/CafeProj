@@ -27,8 +27,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.web.root.cafe.dto.CafeDTO;
 import com.web.root.cafe.service.CafeService;
+import com.web.root.cafe.upload.dto.UploadDTO;
 import com.web.root.mybatis.cafe.CafeMapper;
 import com.web.root.mybatis.review.ReviewMapper;
+import com.web.root.review.controller.dto.RequestReviewDTO;
 import com.web.root.review.dto.CafeReviewDTO;
 import com.web.root.review.dto.ReviewDTO;
 import com.web.root.review.service.ReviewService;
@@ -48,7 +50,6 @@ public class ReviewController {
 	@RequestMapping(value = "/writePage", method = RequestMethod.GET)
 	public String reviewPage(Model model) {
 
-		//model
 		return "cafe/writeReview";
 
 	}
@@ -56,16 +57,39 @@ public class ReviewController {
 	@RequestMapping(value = "/cafe", method = RequestMethod.GET)
 	public ModelAndView targetReviewDetails(@RequestParam(name = "no") String no) {
 		Map<String, Object> map = new HashMap<String, Object>();
-
 		CafeDTO cafeInfo = cafeService.cafeInfo(Integer.valueOf(no));
-		List<ReviewDTO> review = reviewService.targetReviewDetail(Integer.valueOf(no));
+		List<ReviewDTO> reviews = reviewService.targetReviewDetail(Integer.valueOf(no));
+		List<UploadDTO> imagesLink = null;
+
 		map.put("cafeDetail", cafeInfo);
-		map.put("reviewDetail", review);
-		map.put("imgLink", review);
+		map.put("reviewDetail", reviews);
+		map.put("cafeImageLink", imagesLink);
+		map.put("reviewImageLink", imagesLink);
 
 		return new ModelAndView("cafe/review", map, HttpStatus.OK);
 	}
-	
+
+	@RequestMapping(value = "/writeReview", method = RequestMethod.POST)
+	public void writeReview(MultipartHttpServletRequest httpServletRequest) {
+		String cafeNo = httpServletRequest.getParameter("cafeNo");
+		String content = httpServletRequest.getParameter("content");
+		MultiValueMap<String, MultipartFile> files = httpServletRequest.getMultiFileMap();
+
+		logger.info("date => content : {} cafe_no : {}, files : {}", content, cafeNo);
+		reviewService.reviewWrite(cafeNo, content, files.get("files"));
+
+	}
+
+// 끝나고 지워야함	===================================================================================================
+
+	@Autowired
+	private ReviewMapper mapper;
+
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public void test() {
+		System.out.println(mapper.targetReviewLists(1));
+	}
+
 	@RequestMapping(value = "/cafe1", method = RequestMethod.GET)
 	public ModelAndView targetReviewDetails1() {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -78,53 +102,22 @@ public class ReviewController {
 		cafeInfo.setKidszone(1);
 		cafeInfo.setLogtime("9:00 ~ 18:00");
 		cafeInfo.setMenu("hi");
-		
+
 		List<String> s = new ArrayList<String>();
 		s.add("hi1");
 		s.add("hi2");
 		s.add("hi3");
 		s.add("hi4");
 		s.add("hi5");
-		
+
 		List<ReviewDTO> reviewDTOs = new ArrayList<ReviewDTO>();
-		reviewDTOs.add(new ReviewDTO(1, 1,"reviewContent", "id", "review_savedate", "image", 4));
-		
+		reviewDTOs.add(new ReviewDTO(1, 1, "reviewContent", "id", "review_savedate", "image", 4));
+
 		map.put("cafeDetail", cafeInfo);
 		map.put("reviewDetail", review);
 		map.put("cafeImage", s);
 
 		return new ModelAndView("cafe/review", map, HttpStatus.OK);
-	}
-	/*
-	 * @RequestMapping(value = "/write", method = RequestMethod.POST, consumes =
-	 * MediaType.MULTIPART_FORM_DATA_VALUE) public void writeReview(@ModelAttribute
-	 * RequestReviewDTO reviewDTO, HttpServletRequest httpServletRequest) { String
-	 * cafeNo = httpServletRequest.getParameter("cafeNo");
-	 * System.out.println(cafeNo);
-	 * logger.info("date => content : {} cafe_no : {}, files : {}",
-	 * reviewDTO.getCafeNo(), reviewDTO.getContent()); //
-	 * reviewService.reviewWrite(cafe_no, content, multipartFile);
-	 * 
-	 * }
-	 */
-
-	@RequestMapping(value = "/writeRequest", method = RequestMethod.POST)
-	public void writeReview(MultipartHttpServletRequest httpServletRequest) {
-		String cafeNo = httpServletRequest.getParameter("cafeNo");
-		String content = httpServletRequest.getParameter("content");
-		MultiValueMap<String, MultipartFile> files = httpServletRequest.getMultiFileMap();
-		
-		logger.info("date => content : {} cafe_no : {}, files : {}", content, cafeNo);
-		reviewService.reviewWrite(cafeNo, content, files.get("files"));
-
-	}
-
-	@Autowired
-	private ReviewMapper mapper;
-
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public void test() {
-		System.out.println(mapper.targetReviewLists(1));
 	}
 
 	/*
@@ -133,6 +126,19 @@ public class ReviewController {
 	 * HashMap<String, Object>();
 	 * 
 	 * CafeReviewDTO dto = reviewService.ormTest(Integer.valueOf(no));
+	 * 
+	 * }
+	 */
+
+	/*
+	 * @RequestMapping(value = "/write", method = RequestMethod.POST, consumes =
+	 * MediaType.MULTIPART_FORM_DATA_VALUE) public void writeReview(@ModelAttribute
+	 * RequestReviewDTO reviewDTO, HttpServletRequest httpServletRequest) { String
+	 * cafeNo = httpServletRequest.getParameter("cafeNo");
+	 * System.out.println(cafeNo);
+	 * logger.info("date => content : {} cafe_no : {}, files : {}",
+	 * reviewDTO.getCafeNo(), reviewDTO.getContent()); //
+	 * //reviewService.reviewWrite(cafe_no, content, multipartFile);
 	 * 
 	 * }
 	 */

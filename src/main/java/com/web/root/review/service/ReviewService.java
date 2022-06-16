@@ -20,6 +20,9 @@ public class ReviewService {
 
 	@Autowired
 	private ReviewMapper reviewMapper;
+	
+	@Autowired
+	private ReviewFileService reviewFileService;
 
 	/**
 	 * @param target name
@@ -35,7 +38,8 @@ public class ReviewService {
 	@Transactional
 	public boolean reviewWrite(String cafe_no, String content, List<MultipartFile> file) {
 		int result = reviewMapper.reivewWrite(Integer.valueOf(cafe_no), content);
-
+		
+		
 		if (result < 1)
 			return false;
 

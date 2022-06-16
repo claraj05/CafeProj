@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.web.root.mybatis.img.CafeImageMapper">
+<mapper namespace="com.web.root.mybatis.img.ImageMapper">
 
-<!-- 	<resultMap type="com.web.root.review.dto.MemberDTO" id="imgs">
+<!-- 	<resultMap type="com.web.root.cafe.upload.dto.UploadDTO" id="imgs">
 		<result property="imgName" column="imgName"/> 
 		<result property="imgLocation" column="imgLocation"/> 
 		<result property="cafe_no" column="cafe_no"/>
@@ -12,7 +12,14 @@
 	
 	<select id="cafeImageLists" resultMap="imgs">
 		select * from cafe_Image
-	</select> -->
+	</select> 
+	
+	<select id="cafeImages" resultMap="imgs">
+		select * from cafe_Image where cafe_no=#{cafe_no}
+	</select>
+	
+	-->
+	
 </mapper>
 
 

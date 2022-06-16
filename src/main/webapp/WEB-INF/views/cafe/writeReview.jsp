@@ -10,14 +10,16 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="write-container">
-				<form action="">
+				<form action="/writeReview" method="POST">
 					<div>
 						<div class="text-editor-area">
 							<textarea name="" id="" cols="30" rows="10"></textarea>
 							<span></span> / <span></span>
 						</div>
 
-						<div class="fileImage-add-area"></div>
+						<div class="fileImage-add-area">
+							<input type="file" name="files">
+						</div>
 					</div>
 
 					<div class="btn-area">

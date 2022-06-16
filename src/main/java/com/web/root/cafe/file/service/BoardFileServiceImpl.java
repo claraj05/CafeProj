@@ -13,9 +13,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.web.root.board.dto.BoardDTO;
 import com.web.root.mybatis.cafe.CafeMapper;
+import com.web.root.mybatis.img.ImageMapper;
 
 @Service
 public class BoardFileServiceImpl implements BoardFileService {
+	
+	
+	@Autowired
+	private ImageMapper cafeImageMapper;
 
 	@Override
 	public String getMessage(HttpServletRequest request, String msg, String url) {
@@ -51,10 +56,4 @@ public class BoardFileServiceImpl implements BoardFileService {
 
 	}
 	
-	@Override
-	public void getCafeImages(int cafe_no) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.root.mybatis.board.BoardMapper">
+
+	<!-- 
+	create table board(
+	write_no number(10) primary key,
+	title varchar2(100) not null,
+	content varchar2(300) not null,
+	savedate date default sysdate,
+	hit number(10) default 0,
+	like_count number(30) default 0,
+	id varchar2(20) not null
+	);
+	create sequence board_seq nocache nocycle; 
+	
+	create table board_image(
+	write_no number(10) constraint board_image_fk references board(write_no),
+	imageFileName1 varchar2(100),
+	imageFileName2 varchar2(100),
+	imageFileName3 varchar2(100)
+	); 
+	
+	create table board_like(    
+	write_no number(10) constraint board_like_fk references board(write_no) on delete cascade,
+	id varchar2(20) not null
+	);
+	-->
+
+	<resultMap type="com.web.root.board.dto.BoardDTO" id="board">
+		<result property="write_no" column="write_no" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="savedate" column="savedate" />
+		<result property="hit" column="hit" />
+		<result property="like_count" column="like_count" />
+		<result property="id" column="id" />
+	</resultMap>
+	
+	<resultMap type="com.web.root.board.dto.BoardImageDTO" id="boardImage">
+		<result property="write_no" column="write_no" />
+		<result property="imageFileName1" column="imageFileName1" />
+		<result property="imageFileName2" column="imageFileName2" />
+		<result property="imageFileName3" column="imageFileName3" />
+	</resultMap>
+	
+	<resultMap type="com.web.root.board.dto.BoardLikeDTO" id="boardLike">
+		<result property="write_no" column="write_no" />
+		<result property="id" column="id" />
+	</resultMap>
+	
+	<insert id="boardWrite">
+		insert into board(write_no, title, content, id)
+		values(board_seq.nextval, #{title}, #{content}, #{id})
+	</insert>
+	
+	<insert id="boardWriteImage">
+		insert into board_image(write_no, imageFileName1, imageFileName2, imageFileName3)
+		values(board_seq.currval, #{imageFileName1}, #{imageFileName2}, #{imageFileName3})
+	</insert>
+	
+	<select id="boardList" resultMap="board">
+		select to_char(savedate, 'YYYY/MM/DD') savedate, write_no, title, id, hit, like_count from
+		(select rownum rn, A.* from 	
+		(select * from board order by write_no desc) A) B
+		where rn between #{s} and #{e}
+	</select>
+
+	<select id="boardView" resultMap="board">
+		select * from board where write_no=#{write_no}
+	</select>
+	
+	<select id="boardImageView" resultMap="boardImage">
+		select * from board_image where write_no=#{write_no}
+	</select>
+	
+	<update id="boardModify">
+		update board
+		set title=#{title}, content=#{content}
+		where write_no=#{write_no}
+	</update>
+	
+	<delete id="boardDelete">
+		delete from board
+		where write_no=#{write_no}
+	</delete>
+	
+	<update id="upHit">
+		update board
+		set hit=hit+1
+		where write_no=#{write_no}
+	</update>
+	
+	<update id="seqDelete">
+		drop sequence board_seq
+	</update>
+	
+	<update id="seqCreate"> <!-- 오류.. -->
+		create sequence board_seq
+		increment by 1
+		start with ${start}
+	</update>
+	
+	<select id="boardCount" resultType="Integer">
+		select count(*) from board
+	</select>
+	
+	<select id="boardCountByTitle" resultType="Integer">
+		select count(*) from board where title=#{title}
+	</select>
+	<select id="boardCountByContent" resultType="Integer">
+		select count(*) from board where content=#{content}
+	</select>
+	<select id="boardCountById" resultType="Integer">
+		select count(*) from board where id=#{id}
+	</select>
+	
+	<update id="boardNoDown">
+		update board
+		set write_no=write_no-1
+		where write_no>#{write_no}
+	</update>
+	
+	<update id="boardImageNoDown">
+		update board_image
+		set write_no=write_no-1
+		where write_no>#{write_no}
+	</update>
+	
+	<update id="boardLikeNoDown">
+		update board_like
+		set write_no=write_no-1
+		where write_no>#{write_no}
+	</update>
+	
+	<update id="boardImageFkDrop">
+		alter table board_image
+		drop constraint board_image_fk
+	</update>	
+	<update id="boardImageFkAdd">
+		alter table board_image
+		add constraint board_image_fk foreign key(write_no) references board(write_no) 
+		on delete cascade
+	</update>
+	
+	<update id="boardLikeFkDrop">
+		alter table board_like
+		drop constraint board_like_fk
+	</update>	
+	<update id="boardLikeFkAdd">
+		alter table board_like
+		add constraint board_like_fk foreign key(write_no) references board(write_no) 
+		on delete cascade
+	</update>
+	
+	<select id="boardSearchByTitle" resultMap="board">		
+		select to_char(savedate, 'YYYY/MM/DD') savedate, write_no, title, id, hit, like_count from
+		(select rownum rn, A.* from 	
+		(select * from board where title=#{title} order by write_no desc) A) B
+		where rn between #{s} and #{e}
+	</select>
+	<select id="boardSearchByContent" resultMap="board">		
+		select to_char(savedate, 'YYYY/MM/DD') savedate, write_no, title, id, hit, like_count from
+		(select rownum rn, A.* from 	
+		(select * from board where content=#{content} order by write_no desc) A) B
+		where rn between #{s} and #{e}
+	</select>
+	<select id="boardSearchById" resultMap="board">		
+		select to_char(savedate, 'YYYY/MM/DD') savedate, write_no, title, id, hit, like_count from
+		(select rownum rn, A.* from 	
+		(select * from board where id=#{id} order by write_no desc) A) B
+		where rn between #{s} and #{e}
+	</select>
+	
+	<select id="likeCheck" resultType="Integer">
+		select count(*) from board_like
+		where write_no=#{write_no} and id=#{id}
+	</select>
+	
+	<delete id="likeMinus">
+		delete from board_like
+		where write_no=#{write_no} and id=#{id}
+	</delete>
+	
+	<insert id="likePlus">
+		insert into board_like
+		values(#{write_no}, #{id})
+	</insert>
+	
+	<update id="likeCountMinus">
+		update board
+		set like_count=like_count-1
+		where write_no=#{write_no}
+	</update>
+	<update id="likeCountPlus">
+		update board
+		set like_count=like_count+1
+		where write_no=#{write_no}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

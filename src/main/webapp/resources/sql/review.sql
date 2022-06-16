@@ -9,3 +9,8 @@ review_savedate date default sysdate,
 imageFileName varchar2(100), --이미지 파일명
 grade number(10) --1~5까지 매기기
 );
+
+create table review_img(
+
+
+)
