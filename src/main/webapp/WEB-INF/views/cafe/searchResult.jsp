@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>SearchResult</title>
+<link rel ="stylesheet" type ="text/css" href = "../resources/css/cafeSearchResult.css">
 </head>
 <body>
 <!-- cafe_no number(30) primary key,
@@ -29,36 +30,57 @@ logtime date default sysdate --등록일 -->
 		<c:if test="${list.size()!=0}">
 			검색된 카페 있는데 안나옴..(test)
 		</c:if>
-		<table border="1">
-	
-			<c:forEach var="loc" items="${list}">
+		<table id="resultTable">
 			<tr>
-				<th width="200px">cafe_no</th>
-				<th width="200px">cafe_name</th>
-				<th width="100px">location1</th>
-				<th width="200px">location2</th>
-				<th width="200px">cafe_tel</th>
-				<th width="600px">menu</th>
+				<!-- <th width="100px">cafe_no</th> -->
+				<th width="250px">cafe_name</th>
+				<th width="200px">cafe_img</th>
+				<th width="100px">avg_star</th>
+				<th width="300x">location2</th>
 				<th width="200px">kidszone</th>
 				<th width="200px">petzone</th>
 				<th width="200px">use_time</th>
-				<th width="100px">imageFileName</th>
-				<th width="100px">avg_star</th>
-				<th width="200px">logtime</th>
+				<!-- <th width="100px">imageFileName</th>-->
 			</tr>
+			<c:if test="${list.size()==0}">
+			<td colspan="7" width="200" height="200">
+				검색된 카페가 없습니다.<br>
+				<a href="${contextPath}/cafe/cafeAllList">전체 카페 리스트</a>
+			</td>
+			</c:if>
+			<c:forEach var="loc" items="${list}">
 			<tr>		
-				<td>${loc.cafe_no}</td>
+				<%-- <td>${loc.cafe_no}</td> --%>
 				<td><a href="">${loc.cafe_name}</a></td>
-				<td>${loc.location1}</td>
-				<td>${loc.location2}</td>
-				<td>${loc.cafe_tel}</td>
-				<td>${loc.menu}</td>
-				<td>${loc.kidszone}</td>
-				<td>${loc.petzone}</td>
-				<td>${loc.use_time}</td>
-				<td>${loc.imageFileName}</td>
+				<td><img src="" width="200px" height="200px"></td>
 				<td>${loc.avg_star}</td>
-				<td>${loc.logtime}</td>
+				<td>${loc.location2}</td>
+				<c:if test="${loc.kidszone==0}">
+				<td>무관(정보없음)</td>
+				</c:if>
+				<c:if test="${loc.kidszone==1}">
+				<td>키즈카페</td>
+				</c:if>
+				<c:if test="${loc.kidszone==2}">
+				<td>노키즈존</td>
+				</c:if>
+				<c:if test="${loc.kidszone==3}">
+				<td>캐어키즈존</td>
+				</c:if>
+				<c:if test="${loc.petzone==0 }">
+				<td>무관(정보없음)</td>
+				</c:if>
+				<c:if test="${loc.petzone==1 }">
+				<td>펫카페</td>
+				</c:if>
+				<c:if test="${loc.petzone==2 }">
+				<td>노펫존</td>
+				</c:if>
+				<c:if test="${loc.petzone==3 }">
+				<td>펫허용존</td>
+				</c:if>
+				<td>${loc.use_time}</td>
+				<!--  <td>${imageFileName}</td>-->
 			</tr>
 			</c:forEach>
 		</table>

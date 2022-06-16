@@ -7,6 +7,7 @@
 	width : 90%;
 	height : 600px;
 	border : 1px solid red;
+	top: 20px;
 }
 .search_area a {
 	text-decoration: none;
