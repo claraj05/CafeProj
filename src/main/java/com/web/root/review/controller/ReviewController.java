@@ -72,11 +72,13 @@ public class ReviewController {
 	@RequestMapping(value = "/writeReview", method = RequestMethod.POST)
 	public void writeReview(MultipartHttpServletRequest httpServletRequest) {
 		String cafeNo = httpServletRequest.getParameter("cafeNo");
+		String id = httpServletRequest.getParameter("id");
 		String content = httpServletRequest.getParameter("content");
+		String grade = httpServletRequest.getParameter("grade");
 		MultiValueMap<String, MultipartFile> files = httpServletRequest.getMultiFileMap();
 
 		logger.info("date => content : {} cafe_no : {}, files : {}", content, cafeNo);
-		reviewService.reviewWrite(cafeNo, content, files.get("files"));
+		reviewService.reviewWrite(cafeNo, id, content, Integer.valueOf(grade), files.get("files"));
 
 	}
 
@@ -111,7 +113,8 @@ public class ReviewController {
 		s.add("hi5");
 
 		List<ReviewDTO> reviewDTOs = new ArrayList<ReviewDTO>();
-		reviewDTOs.add(new ReviewDTO(1, 1, "reviewContent", "id", "review_savedate", "image", 4));
+		// reviewDTOs.add(new ReviewDTO(1, 1, "reviewContent", "id", "review_savedate",
+		// "image", 4));
 
 		map.put("cafeDetail", cafeInfo);
 		map.put("reviewDetail", review);

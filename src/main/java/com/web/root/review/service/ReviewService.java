@@ -11,16 +11,14 @@ import com.web.root.mybatis.cafe.CafeMapper;
 import com.web.root.mybatis.review.ReviewMapper;
 import com.web.root.review.dto.CafeReviewDTO;
 import com.web.root.review.dto.ReviewDTO;
+import com.web.root.review.dto.ReviewImageDTO;
 
 @Service
 public class ReviewService {
 
 	@Autowired
-	private CafeMapper cafeMapper;
-
-	@Autowired
 	private ReviewMapper reviewMapper;
-	
+
 	@Autowired
 	private ReviewFileService reviewFileService;
 
@@ -30,26 +28,23 @@ public class ReviewService {
 	 * @return target info
 	 */
 
-	public List<ReviewDTO> targetReviewDetail(int target) {
+	public List<ReviewDTO> targetReviewDetail(int cafe_no) {
+		
+		List<ReviewDTO> reviewDTOs = reviewMapper.targetReviewLists(cafe_no);
+		//List<ReviewImageDTO> reviewImageDTOs = reviewFileService.memberReviewImage(cafe_no, reviewDTOs);
 
-		return reviewMapper.targetReviewLists(target);
+		return null;
 	}
 
 	@Transactional
-	public boolean reviewWrite(String cafe_no, String content, List<MultipartFile> file) {
-		int result = reviewMapper.reivewWrite(Integer.valueOf(cafe_no), content);
-		
-		
+	public boolean reviewWrite(String cafe_no, String id, String content, int grade, List<MultipartFile> file) {
+		int result = reviewMapper.reivewWrite(Integer.valueOf(cafe_no), id, content, grade);
+		reviewFileService.reviewImgSave(Integer.valueOf(cafe_no), id, file);
+
 		if (result < 1)
 			return false;
 
 		return true;
 	}
 
-	/*
-	 * public CafeReviewDTO ormTest(int target) {
-	 * 
-	 * return reviewMapper.ormTest(target); }
-	 * 
-	 */
 }

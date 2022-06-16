@@ -1,6 +1,7 @@
 package com.web.root.review.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 /*리뷰 테이블
 
@@ -28,22 +29,32 @@ public class ReviewDTO {
 	private String review_content;
 	private String id;
 	private String review_savedate;
-	private String imageFileName;
 	private int grade;
+	private List<ReviewImageDTO> reviewImageDTOs;
 
 	public ReviewDTO() {
 	}
 
-	public ReviewDTO(int cafe_no, int review_no, String review_content, String id, String review_savedate,
-			String imageFileName, int grade) {
+	public ReviewDTO(int cafe_no, int review_no, String review_content, String id, String review_savedate, int grade) {
 		super();
 		this.cafe_no = cafe_no;
 		this.review_no = review_no;
 		this.review_content = review_content;
 		this.id = id;
 		this.review_savedate = review_savedate;
-		this.imageFileName = imageFileName;
 		this.grade = grade;
+	}
+
+	public ReviewDTO(int cafe_no, int review_no, String review_content, String id, String review_savedate, int grade,
+			List<ReviewImageDTO> reviewImageDTOs) {
+		super();
+		this.cafe_no = cafe_no;
+		this.review_no = review_no;
+		this.review_content = review_content;
+		this.id = id;
+		this.review_savedate = review_savedate;
+		this.grade = grade;
+		this.reviewImageDTOs = reviewImageDTOs;
 	}
 
 	public int getCafe_no() {
@@ -86,20 +97,20 @@ public class ReviewDTO {
 		this.review_savedate = review_savedate;
 	}
 
-	public String getImageFileName() {
-		return imageFileName;
-	}
-
-	public void setImageFileName(String imageFileName) {
-		this.imageFileName = imageFileName;
-	}
-
 	public int getGrade() {
 		return grade;
 	}
 
 	public void setGrade(int grade) {
 		this.grade = grade;
+	}
+
+	public List<ReviewImageDTO> getReviewImageDTOs() {
+		return reviewImageDTOs;
+	}
+
+	public void setReviewImageDTOs(List<ReviewImageDTO> reviewImageDTOs) {
+		this.reviewImageDTOs = reviewImageDTOs;
 	}
 
 }

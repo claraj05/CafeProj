@@ -4,22 +4,41 @@
 
 <mapper namespace="com.web.root.mybatis.img.ImageMapper">
 
-<!-- 	<resultMap type="com.web.root.cafe.upload.dto.UploadDTO" id="imgs">
-		<result property="imgName" column="imgName"/> 
-		<result property="imgLocation" column="imgLocation"/> 
-		<result property="cafe_no" column="cafe_no"/>
+	<resultMap type="com.web.root.cafe.upload.dto.UploadDTO" id="imgs">
+		<result property="imgName" column="imgName" />
+		<result property="imgLocation" column="imgLocation" />
+		<result property="cafe_no" column="cafe_no" />
 	</resultMap>
-	
+
+	<resultMap id="review"
+		type="com.web.root.review.dto.ReviewImageDTO">
+		<result property="cafe_no" column="cafe_no" />
+		<result property="review_no" column="review_no" />
+		<result property="id" column="id" />
+		<result property="imageFileName" column="imageFileName" />
+		<result property="imageLocation" column="imageLocation" />
+	</resultMap>
+
 	<select id="cafeImageLists" resultMap="imgs">
 		select * from cafe_Image
-	</select> 
-	
-	<select id="cafeImages" resultMap="imgs">
-		select * from cafe_Image where cafe_no=#{cafe_no}
 	</select>
-	
-	-->
-	
+
+	<select id="cafeImages" resultMap="imgs">
+		select * from cafe_Image where
+		cafe_no=#{cafe_no}
+	</select>
+
+	<select id="findReviewImageByCafeNoAndMemberNo"
+		resultMap="reviewImgs">
+		select * from review_img where cafe_no=#{cafe_no} and
+		review_no=${review_no}
+	</select>
+
+	<select id="findCafeImgLocationByCafeNoAndId">
+		select * from cafe_Image where imageLocation=#{imageLocation}
+		and id=#{id}
+	</select>
+
 </mapper>
 
 

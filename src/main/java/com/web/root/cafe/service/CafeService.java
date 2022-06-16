@@ -12,19 +12,16 @@ import com.web.root.cafe.dto.CafeDTO;
 
 public interface CafeService {
 
-	public void getlocationList(HttpServletRequest request, 
-			@RequestParam("locationList") String [] locationList,@RequestParam("kidszone")String kidszone,
-			@RequestParam("petzone")String petzone,
-			@RequestParam("star")String star,Model model);
-	
+	public void getlocationList(HttpServletRequest request, @RequestParam("locationList") String[] locationList,
+			@RequestParam("kidszone") String kidszone, @RequestParam("petzone") String petzone,
+			@RequestParam("star") String star, Model model);
+
 	public void cafeAllList(Model model, int num);
-	
+
 	public void eventView(Model model);
-	
-	
+
 	public CafeDTO cafeInfo(int cafe_no);
-	
-	
+
 	public String writeSave(MultipartHttpServletRequest mul, HttpServletRequest request, CafeDTO dto);
 
 }

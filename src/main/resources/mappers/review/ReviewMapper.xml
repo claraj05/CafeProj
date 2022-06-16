@@ -3,8 +3,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.web.root.mybatis.review.ReviewMapper">
 
-
-
 	<resultMap id="review"
 		type="com.web.root.review.dto.ReviewDTO">
 		<id property="cafe_no" column="cafe_no" />
@@ -14,16 +12,8 @@
 		<result property="review_savedate" column="review_savedate" />
 		<result property="imageFileName" column="imageFileName" />
 		<result property="grade" column="grade" />
+		<collection property="reviewImageDTOs" select="reviewImageLists" />
 	</resultMap>
-
-	<resultMap id="findCafeReviewsByCafeNo"
-		type="com.web.root.review.dto.CafeReviewDTO">
-		<association property="cafeInfo" column="cafe_no">
-		</association>
-		<collection property="reviews" column="cafe_no"
-			resultMap="review"></collection>
-	</resultMap>
-
 
 	<select id="targetReviewLists" resultMap="review">
 		select * from review
@@ -39,7 +29,20 @@
 		count(review.cafe_no) from review where cafe_no=#{target};
 	</select>
 
+	<insert id="reviewSave">
+		insert into review
+		values(#{cafe_no},REVIEW_SEQ.NEXTVAL,#{reivew_content},#{id},sysdate,#{grade})
+	</insert>
+
 	<!-- orm test -->
+	<resultMap id="findCafeReviewsByCafeNo"
+		type="com.web.root.review.dto.CafeReviewDTO">
+		<association property="cafeInfo" column="cafe_no">
+		</association>
+		<collection property="reviews" column="cafe_no"
+			resultMap="review"></collection>
+	</resultMap>
+
 
 	<select id="ormTargetReviewLists"
 		resultMap="findCafeReviewsByCafeNo">
