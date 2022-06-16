@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+#resultTable {
+	margin : 100px; 
+	padding : 100px; 
+	border-collapse: separate;
+  	border-spacing: 1px;
+  	text-align: center;
+  	line-height: 1.5;
+  	border-top: 1px solid #ccc;
+  	margin : 20px 10px;
+}
+#resultTable th{
+	width: 150px;
+ 	padding: 10px;
+  	font-weight: bold;
+  	vertical-align: top;
+  	border-bottom: 1px solid #ccc;
+}
+#resultTable td{
+	width: 350px;
+  	padding: 10px;
+  	vertical-align: top;
+  	border-bottom: 1px solid #ccc;
+}
+
+#resultTable th, td{
+	text-align : center;
+}

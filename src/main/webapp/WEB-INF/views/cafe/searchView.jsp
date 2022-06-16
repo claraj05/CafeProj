@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>searchView</title>
-<link rel ="stylesheet" type ="text/css" href = "../resources/css/cafeSearch.css">
+<link rel ="stylesheet" type ="text/css" href = "../resources/css/cafe/cafeSearch.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -38,6 +38,8 @@ $(document).ready(function(){
 			$("input#r23").prop("disabled",true);
 			$("input#r24").prop("disabled",true);
 			$("input#r25").prop("disabled",true);
+			
+			
 		}else{
 			$("input#r1").prop("disabled",false);
 			$("input#r2").prop("disabled",false);
@@ -68,6 +70,7 @@ $(document).ready(function(){
 	});
 });
 </script>
+
 </head>
 <body>
 <c:import url="../default/header.jsp"/>
@@ -80,15 +83,11 @@ $(document).ready(function(){
 					<ul>
 						<li class="search_title">&lt;세부 지역2(서울시 25구)&gt;</li>
 					</ul>
-<<<<<<< HEAD
 					
-					<ul>
-=======
 					<ul class="search_total">
 						<li><input type="checkbox" id="tot" name="location1" value="0">전체 선택</li>
 					</ul>
 					<ul class="search_l1">
->>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
 						<li><input type="checkbox" id="r1" name="location1" value="1" />
 							<label for="l1">강남구</label></li>
 						<li><input type="checkbox" id="r2" name="location1" value="2" />
@@ -186,8 +185,8 @@ $(document).ready(function(){
 						<li class="search_title">&lt;별점 높은 순 정렬&gt;</li>
 					</ul>
 					<ul>
+						<li><input type="checkbox" id="s1" name="star" value="1"> On</li>
 						<li><input type="hidden" id="s0" name="star" value="0"></li>
-						<li><input type="radio" id="s1" name="star" value="1"> On</li>
 					</ul>
 				</div>
 			</div>

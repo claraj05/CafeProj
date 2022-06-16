@@ -20,10 +20,30 @@
 		<result property="logtime" column="logtime"/>
 	</resultMap>
 	
+	<resultMap type="com.web.root.cafe.dto.EventViewDTO" id="event">
+		<id property="cafe_no" column="cafe_no"/>
+		<result property="cafe_name" column="cafe_name"/>
+		<result property="event_no" column="event_no"/>
+		<result property="event_type" column="event_type"/>
+		<result property="event_content" column="event_content"/>
+		<result property="event_time" column="event_time"/>
+	</resultMap>
+	
 	<select id="cafeAllList" resultMap="cafe">
-		select * from cafe
+	 	select B.* from 
+	 	(select rownum rn, A.* from
+	 	(select * from cafe order by cafe_no asc)A )B
+	 	where rn between #{s} and #{e}
+	 </select>
+	 
+	<select id="selectcafeCount" resultType="Integer">
+		select count(*) from cafe
 	</select>
 
+	<select id="eventCafe" resultType="Integer">
+		select cafe_no from event_view
+	</select>
+	
 	<select id="getlocationList" resultMap="cafe">
 		select * from cafe 
 			<!-- select * from cafe where location1 in (1,2,...); -->
@@ -33,18 +53,24 @@
 						#{location1}
 					</foreach>
 			</if>
-			<if test="kidszone !=0">
-					and kidszone = #{kidszone}
-			</if>
-			<if test="petzone !=0">
-					and petzone = #{petzone}
-			</if>
-			<if test="star!=null">
-				order by avg_star desc
-			</if>
+			<if test="kidszone !=0">	and kidszone = #{kidszone}</if>
+			<if test="petzone !=0">	and petzone = #{petzone}</if>
+			<if test="star==0">order by cafe_no asc</if>
+			<if test="star==1">order by avg_star desc</if>
 			</where>
 	</select>
-
+	<select id="eventView1" resultMap="event">
+		select * from event_view where event_no=1
+	</select>
+	<select id="eventView2" resultMap="event">
+		select * from event_view where event_no=2
+	</select>
+	<select id="eventView3" resultMap="event">
+		select * from event_view where event_no=3
+	</select>
+	<select id="eventView4" resultMap="event">
+		select * from event_view where event_no=4
+	</select>
 	<!--  
 	<select id="boardAllList" resultMap="board">
 		select * from mvc_board
