@@ -38,7 +38,8 @@ public class CafeController {
 	}
 	
 	@GetMapping("eventView")
-	public String eventView() {
+	public String eventView(HttpServletRequest request, Model model) {
+		cf.eventView(model);
 		return "cafe/eventView";
 	}
 	
@@ -47,32 +48,32 @@ public class CafeController {
 		return "cafe/mycafe";
 	}
 	
-	
 	@GetMapping("searchResult")
 	public String searchResult(HttpServletRequest request, 
-			@RequestParam("location1") String[] location1, 
+			@RequestParam("location1") String location1, 
 			@RequestParam("kidszone") String kidszone, 
 			@RequestParam("petzone") String petzone,
 			@RequestParam("star")String star,Model model) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String [] locationList =  request.getParameterValues("location1");
+		String [] locationList = request.getParameterValues("location1");
 		kidszone = request.getParameter("kidszone");
 		petzone = request.getParameter("petzone");
 		star = request.getParameter("star");
-		if(locationList[0]=="0") {
-			int all = 0;
-			cf.getlocationListA(request, all, kidszone, petzone, star, model);
+		if(locationList[0].contentEquals("0")) {
+			String test[] = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25"};
+			cf.getlocationList(request,test, kidszone, petzone, star, model);
+		}else {
+			cf.getlocationList(request,locationList, kidszone, petzone, star, model);
 		}
-		cf.getlocationList(request,locationList, kidszone, petzone, star, model);
 		return "cafe/searchResult";
 	}
 	
 	@GetMapping("cafeAllList")
-	public String test(HttpServletRequest request, Model model) {
-		cf.cafeAllList(model);
+	public String test(HttpServletRequest request, Model model,
+			@RequestParam(value = "num", required = false, defaultValue = "1") int num) {
+		cf.cafeAllList(model,num);
 		return "cafe/cafeAllList";
 	}
-	
 	
 	  @PostMapping("writeSave") 
 	  public void writeSave(MultipartHttpServletRequest
@@ -86,7 +87,10 @@ public class CafeController {
 	  out.print(message);
 	  }
 	 
-	 
+	 @RequestMapping("test")
+	 public String test() {
+		 return "cafe/test";
+	 }
 
 
 	

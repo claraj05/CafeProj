@@ -23,31 +23,71 @@ public class CafeServiceImpl implements CafeService {
 	BoardFileService bfs;
 
 	@Override
-	public void getlocationList(HttpServletRequest request, String[] locationList, String kidszone, String petzone,
-			String star, Model model) {
-		// check
-		String[] locationList1 = locationList;
+	public void getlocationList(HttpServletRequest request, 
+			String [] locationList, 
+			String kidszone,
+			String petzone, 
+			String star,
+			Model model) {
+		//check
+		locationList = request.getParameterValues("location1");
 		kidszone = request.getParameter("kidszone");
 		petzone = request.getParameter("petzone");
-		List<CafeDTO> list = mapper.getlocationList(locationList, kidszone, petzone, star);
-
-		model.addAttribute("list", list);
+		List<CafeDTO> list = null;
+		if(locationList[0].contentEquals("0")) {
+			String test[] = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25"};
+			list = mapper.getlocationList(test,kidszone,petzone,star);
+		}else {
+			list = mapper.getlocationList(locationList,kidszone,petzone,star);
+		}
+		
+		model.addAttribute("list",list);
 	}
+
 
 	@Override
-	public void getlocationListA(HttpServletRequest request, int all, String kidszone, String petzone, String star,
-			Model model) {
-		all = 0;
-		List<CafeDTO> list = mapper.getlocationListA(all, kidszone, petzone, star);
-
-		model.addAttribute("list", list);
+	public void cafeAllList(Model model,int num) {
+		int pageLetter=5; //한 페이지당 글 개수
+		int allCount=mapper.selectcafeCount(); //전체 글수
+		
+		//ex 전체 글수 10 페이지당 글 개수 3개면, 페이지번호는 4번까지 나와야 함(1개를 위해)
+		int repeat = allCount/pageLetter;
+		if(allCount%pageLetter !=0) {
+			repeat +=1;
+		}
+		
+		int end = num*pageLetter;
+		int start = end+1 -pageLetter;
+		
+		model.addAttribute("repeat",repeat);
+		
+		model.addAttribute("list",mapper.cafeAllList(start,end));
+		System.out.println(mapper.cafeAllList(start,end));
+		
 	}
-
+	
+	
 	@Override
-	public void cafeAllList(Model model) {
-		model.addAttribute("list", mapper.cafeAllList());
-		System.out.println(mapper.cafeAllList());
+	public void eventView(Model model) {
+		//이벤트 테이블에서 cafe_no 가져오기
+		int arr[] = null;
+		arr = mapper.eventCafe();
+		/* 잘 들어오나 확인~
+		 * for (int i = 0; i < arr.length; i++) {
+		 * System.out.println("arr["+i+"] : "+arr[i]); }
+		 */
+		
+		//카페 이미지 테이블에서 cafe_no참조해서 img가져오기(이벤트 화면 보여주는 용으로) 
+		
+		//이벤트뷰 테이블에서 데이터 가져오기 (이벤트 데이터는 총 4개 가져올거야)
+		model.addAttribute("event1",mapper.eventView1());
+		model.addAttribute("event2",mapper.eventView2());
+		model.addAttribute("event3",mapper.eventView3());
+		model.addAttribute("event4",mapper.eventView4());
+//		model.addAttribute("eventImg",mapper.eventImageView());
+		
 	}
+
 
 	@Override
 	public CafeDTO cafeInfo(int cafe_no) {
