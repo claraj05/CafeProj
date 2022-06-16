@@ -26,6 +26,7 @@
 	<div class="write">
 		<div class="write_save"> <!-- enctype ="application/x-www-form-urlencoded"  -->
 			<form action="${contextPath }/cafe/writeSave" enctype="multipart/form-data" method="post">
+				<input type="hidden" name="cafe_no" value="1">
 				<b>카페 이름 </b><br>
 				<input type="text" name="cafe_name" size="50"><br>
 				<b>카페 위치(서울 시 내 25구 중 알맞은 코드 입력) </b><br>
@@ -53,7 +54,7 @@
 	 			<br>
 				<b>파일 첨부 </b>
 				파일 : <input type="file" name="multiFile" onchange="readURL(this)" multiple > <br>
-				파일 설명 : <input type="text" name="fileContent"><br>
+				파일 설명 : <input type="text" name="imgContent"><br>
 				<img id="preview" src="#" width="100px" height="100px">
 				<br>
 				<input type="submit" value="업로드"> &nbsp;

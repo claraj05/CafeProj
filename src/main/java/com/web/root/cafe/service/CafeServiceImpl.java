@@ -42,12 +42,19 @@ public class CafeServiceImpl implements CafeService {
 		model.addAttribute("list", mapper.cafeAllList());
 		System.out.println(mapper.cafeAllList());
 	}
+	
+	@Override
+	   public CafeDTO cafeInfo(int cafe_no) {
+	      // TODO Auto-generated method stub
+	      return mapper.cafeInfo(cafe_no);
+	   }
 
 	@Override
-	public String writeSave(HttpServletRequest request, CafeDTO dto, List<MultipartFile> multiFileList,
-							String fileContent) {
+	public int writeSave(HttpServletRequest request, CafeDTO dto,
+			List<MultipartFile> multiFileList,
+			String fileContent, String root) {
 
-
+		System.out.println("root -> "+root); //root 넘어오는 해결1
 		/* System.out.println(mul); */
 		// request.getParameter("cafe_no");
 		// 여기 문제 cafe_name
@@ -60,17 +67,79 @@ public class CafeServiceImpl implements CafeService {
 			e.printStackTrace();
 		}
 
-		String msg, url;
-		if (result == 1) {
-			msg = "새글이 등록 되었습니다..";
-			url = "/cafe/cafemanager";
-		} else {
-			msg = "문제가 발생했습니다..";
-			url = "/cafe/cafemanager";
+//		String msg, url;
+//		if (result == 1) {
+//			msg = "새글이 등록 되었습니다..";
+//			url = "/cafe/cafemanager";
+//		} else {
+//			msg = "문제가 발생했습니다..";
+//			url = "/cafe/cafemanager";
+//		}
+		for (int i = 0; i < multiFileList.size(); i++) {
+			mapper.writeSave2(dto.getCafe_no(), root, multiFileList.get(i).getOriginalFilename(), fileContent);
 		}
-
-		return bfs.getMessage(request, msg, url);
+		return result;
+		
+		
+		
 
 	}
 
+	@Override
+	public int selectno(CafeDTO dto, HttpServletRequest request, List<MultipartFile> multiFileList,String fileContent) {
+		int cafe_no = mapper.selectNo(dto); //cafe_no 넘어오는 거 해결2
+		System.out.println(cafe_no);
+		int result2 = writeSave2(cafe_no, request, multiFileList, fileContent);
+		return result2;
+	}
+
+	@Override
+	public int writeSave2(int cafe_no, HttpServletRequest request, List<MultipartFile> multiFileList,
+			String fileContent) {
+		String imgLocation=null;
+		int result = 0;
+		try {
+			for (int i = 0; i < multiFileList.size(); i++) {
+				//mapper.writeSave2로 넘길 데이터 : originFileName, root, cafe_no, fileContent
+				result+= mapper.writeSave2(cafe_no, imgLocation,multiFileList.get(i).getOriginalFilename(),  fileContent);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+//		String msg, url;
+//		if (result == 1) {
+//			msg = "새글이 등록 되었습니다..";
+//			url = "/cafe/cafemanager";
+//		} else {
+//			msg = "문제가 발생했습니다..";
+//			url = "/cafe/cafemanager";
+//		}
+		
+		return result;
+
+	}
+
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
