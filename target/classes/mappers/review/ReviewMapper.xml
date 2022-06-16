@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.root.mybatis.review.ReviewMapper">
+
+
+
+	<resultMap id="review"
+		type="com.web.root.review.dto.ReviewDTO">
+		<id property="cafe_no" column="cafe_no" />
+		<result property="review_no" column="review_no" />
+		<result property="review_content" column="review_content" />
+		<result property="id" column="id" />
+		<result property="review_savedate" column="review_savedate" />
+		<result property="imageFileName" column="imageFileName" />
+		<result property="grade" column="grade" />
+	</resultMap>
+
+	<resultMap id="findCafeReviewsByCafeNo"
+		type="com.web.root.review.dto.CafeReviewDTO">
+		<association property="cafeInfo" column="cafe_no">
+		</association>
+		<collection property="reviews" column="cafe_no"
+			resultMap="review"></collection>
+	</resultMap>
+
+
+	<select id="targetReviewLists" resultMap="review">
+		select * from review
+		where cafe_no=#{target}
+	</select>
+
+	<select id="reviewLists" resultMap="review">
+		select * from review
+	</select>
+
+	<select id="cafeReviewTotalCount" resultType="Integer">
+		select
+		count(review.cafe_no) from review where cafe_no=#{target};
+	</select>
+
+	<!-- orm test -->
+
+	<select id="ormTargetReviewLists"
+		resultMap="findCafeReviewsByCafeNo">
+		select c.* , r.* from review r
+		left join cafe c on r.cafe_no
+		=
+		c.cafe_no where c.cafe_no=#{target}
+	</select>
+
+</mapper>

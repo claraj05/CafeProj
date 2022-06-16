@@ -7,58 +7,88 @@
 <head>
 <meta charset="UTF-8">
 <title>searchView</title>
-<style>
-	.search_ctn{
-		margin : 0 auto;
-		text-align : center;
-	}
-</style>
+<link rel ="stylesheet" type ="text/css" href = "../resources/css/cafeSearch.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#tot").click(function(){
+		if(this.checked){
+			$("input#r1").prop("disabled",true);
+			$("input#r2").prop("disabled",true);
+			$("input#r3").prop("disabled",true);
+			$("input#r4").prop("disabled",true);
+			$("input#r5").prop("disabled",true);
+			$("input#r6").prop("disabled",true);
+			$("input#r7").prop("disabled",true);
+			$("input#r8").prop("disabled",true);
+			$("input#r9").prop("disabled",true);
+			$("input#r10").prop("disabled",true);
+			$("input#r11").prop("disabled",true);
+			$("input#r12").prop("disabled",true);
+			$("input#r13").prop("disabled",true);
+			$("input#r14").prop("disabled",true);
+			$("input#r15").prop("disabled",true);
+			$("input#r16").prop("disabled",true);
+			$("input#r17").prop("disabled",true);
+			$("input#r18").prop("disabled",true);
+			$("input#r19").prop("disabled",true);
+			$("input#r20").prop("disabled",true);
+			$("input#r21").prop("disabled",true);
+			$("input#r22").prop("disabled",true);
+			$("input#r23").prop("disabled",true);
+			$("input#r24").prop("disabled",true);
+			$("input#r25").prop("disabled",true);
+		}else{
+			$("input#r1").prop("disabled",false);
+			$("input#r2").prop("disabled",false);
+			$("input#r3").prop("disabled",false);
+			$("input#r4").prop("disabled",false);
+			$("input#r5").prop("disabled",false);
+			$("input#r6").prop("disabled",false);
+			$("input#r7").prop("disabled",false);
+			$("input#r8").prop("disabled",false);
+			$("input#r9").prop("disabled",false);
+			$("input#r10").prop("disabled",false);
+			$("input#r11").prop("disabled",false);
+			$("input#r12").prop("disabled",false);
+			$("input#r13").prop("disabled",false);
+			$("input#r14").prop("disabled",false);
+			$("input#r15").prop("disabled",false);
+			$("input#r16").prop("disabled",false);
+			$("input#r17").prop("disabled",false);
+			$("input#r18").prop("disabled",false);
+			$("input#r19").prop("disabled",false);
+			$("input#r20").prop("disabled",false);
+			$("input#r21").prop("disabled",false);
+			$("input#r22").prop("disabled",false);
+			$("input#r23").prop("disabled",false);
+			$("input#r24").prop("disabled",false);
+			$("input#r25").prop("disabled",false);
+		}
+	});
+});
+</script>
 </head>
 <body>
 <c:import url="../default/header.jsp"/>
 	<div class="search_area">
-		<form action="cafeAllList" method="get" id="cafeAllListForm">
-			<input type="submit" value="전체카페보기">
-		</form>
+		<a href="${contextPath}/cafe/cafeAllList">전체 카페 리스트</a>
+		<br>
 		<form action="searchResult" method="get" id="searchForm">
 			<div class="search_ctn">
 				<div class="search_loc">
 					<ul>
-						<li class="search_li">세부 지역2(서울시 25구) :</li>
+						<li class="search_title">&lt;세부 지역2(서울시 25구)&gt;</li>
 					</ul>
-				<!-- 	<ul>
-						<li><input type="radio" id="r0" name="location1" value="0" />
-							<label for="l0">전체지역</label></li>
-<script type="text/javascript" src="/Web-home/js/jquery-1.4.2.js">
-$('#r0').change(function(){
-	var st=this.checked;
-	if(st){
-		$('input#r1').attr("disabled",true);
-		$('input#r1').css("background","#ccc");
-	}else{
-		$('input#r1').attr("disabled",false);
-		$('input#r1').css("background","none");
-	}
-}); -->
-</script>
-							<!-- $(function () {
-	$("#checkme").change (function () {
-	var  st = this.checked;
-		if (st) {
-			$("input#1_date").prop("disabled", true);
-			$("input#1_date").css("background","#ccc");
-			$("select#2_date").prop("disabled",  true);
-			$("select#2_date").css("background","#ccc");
-		  } else {
-			$("input#1_date").prop("disabled",  false);
-			$("input#1_date").css("background","none");
-			$("select#2_date").prop("disabled",  false);
-			$("select#2_date").css("background","none");
-		}
-	});
-}); -->
-					</ul>
+<<<<<<< HEAD
+					
 					<ul>
+=======
+					<ul class="search_total">
+						<li><input type="checkbox" id="tot" name="location1" value="0">전체 선택</li>
+					</ul>
+					<ul class="search_l1">
+>>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
 						<li><input type="checkbox" id="r1" name="location1" value="1" />
 							<label for="l1">강남구</label></li>
 						<li><input type="checkbox" id="r2" name="location1" value="2" />
@@ -70,7 +100,7 @@ $('#r0').change(function(){
 						<li><input type="checkbox" id="r5" name="location1" value="5" />
 							<label for="l5">관악구</label></li>
 					</ul>
-					<ul>
+					<ul class="search_l2">
 						<li><input type="checkbox" id="r6" name="location1" value="6" />
 							<label for="l6">광진구</label></li>
 						<li><input type="checkbox" id="r7" name="location1" value="7" />
@@ -82,7 +112,7 @@ $('#r0').change(function(){
 						<li><input type="checkbox" id="r10" name="location1" value="10" />
 							<label for="l10">도봉구</label></li>
 					</ul>
-					<ul>
+					<ul class="search_l3">
 						<li><input type="checkbox" id="r11" name="location1" value="11" />
 							<label for="l11">동대문구</label></li>
 						<li><input type="checkbox" id="r12" name="location1" value="12" />
@@ -94,7 +124,7 @@ $('#r0').change(function(){
 						<li><input type="checkbox" id="r15" name="location1" value="15" />
 							<label for="l15">서초구</label></li>
 					</ul>
-					<ul>
+					<ul class="search_l4">
 						<li><input type="checkbox" id="r16" name="location1" value="16" />
 							<label for="l16">성동구</label></li>
 						<li><input type="checkbox" id="r17" name="location1" value="17" />
@@ -106,7 +136,7 @@ $('#r0').change(function(){
 						<li><input type="checkbox" id="r20" name="location1" value="20" />
 							<label for="l20">영등포구</label></li>
 					</ul>
-					<ul>
+					<ul class="search_l5">
 						<li><input type="checkbox" id="r21" name="location1" value="21" />
 							<label for="l21">용산구</label></li>
 						<li><input type="checkbox" id="r22" name="location1" value="22" />
@@ -120,38 +150,44 @@ $('#r0').change(function(){
 					</ul>
 				</div>
 				<div class="search_zone">
+					<div class="search_kids">
+						<ul>
+							<li class="search_title">&lt;키즈존 여부&gt;</li>
+						</ul>
+						<ul class="search_z1">
+							<li><input type="radio" id="k0" name="kidszone" value="0" checked />
+								<label for="k0">무관</label></li>
+							<li><input type="radio" id="k1" name="kidszone" value="1" />
+								<label for="k1">키즈존(전문키즈카페)</label></li>
+							<li><input type="radio" id="k2" name="kidszone" value="2" />
+								<label for="k2">노키즈존</label></li>
+							<li><input type="radio" id="k3" name="kidszone" value="3" />
+								<label for="k3">캐어키즈존</label></li>
+						</ul>
+					</div>
+					<div class="search_pet">
+						<ul>
+							<li class="search_title">&lt;펫존 여부&gt;</li>
+						</ul>
+						<ul class="search_z2">
+							<li><input type="radio" id="p0" name="petzone" value="0" checked/>
+								<label for="p0">무관</label></li>
+							<li><input type="radio" id="p1" name="petzone" value="1" />
+								<label for="p1">펫존(전문펫카페)</label></li>
+							<li><input type="radio" id="p2" name="petzone" value="2" />
+								<label for="p2">노펫존</label></li>
+							<li><input type="radio" id="p3" name="petzone" value="3" />
+								<label for="p3">펫허용(전문펫카페x)</label></li>
+						</ul>
+					</div>
+				</div>
+				<div class="search_star">
 					<ul>
-						<li class="search_li">키즈존 여부 : </li>
-					</ul>
-					<ul>
-						<li><input type="radio" id="k0" name="kidszone" value="0" checked />
-							<label for="k0">무관</label></li>
-						<li><input type="radio" id="k1" name="kidszone" value="1" />
-							<label for="k1">키즈존(전문키즈카페)</label></li>
-						<li><input type="radio" id="k2" name="kidszone" value="2" />
-							<label for="k2">노키즈존</label></li>
-						<li><input type="radio" id="k3" name="kidszone" value="3" />
-							<label for="k3">캐어키즈존</label></li>
-					</ul>
-					<ul>
-						<li class="search_li">펫존 여부 : </li>
-					</ul>
-					<ul>
-						<li><input type="radio" id="p0" name="petzone" value="0" checked/>
-							<label for="p0">무관</label></li>
-						<li><input type="radio" id="p1" name="petzone" value="1" />
-							<label for="p1">펫존(전문펫카페)</label></li>
-						<li><input type="radio" id="p2" name="petzone" value="2" />
-							<label for="p2">노펫존</label></li>
-						<li><input type="radio" id="p3" name="petzone" value="3" />
-							<label for="p3">펫허용(전문펫카페x)</label></li>
-					</ul>
-					<ul>
-						<li class="search_star">별점 높은 순 정렬</li>
+						<li class="search_title">&lt;별점 높은 순 정렬&gt;</li>
 					</ul>
 					<ul>
 						<li><input type="hidden" id="s0" name="star" value="0"></li>
-						<li><input type="radio" id="s1" name="star" value="1"></li>
+						<li><input type="radio" id="s1" name="star" value="1"> On</li>
 					</ul>
 				</div>
 			</div>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.web.root.mybatis.board;
 
 import java.lang.reflect.Array;
@@ -74,3 +75,32 @@ public interface BoardMapper {
 
 
 
+=======
+package com.web.root.mybatis.board;
+
+
+import com.web.root.cafe.dto.CafeDTO;
+
+
+
+public interface BoardMapper {
+	
+	/*
+	 * public List<BoardDTO> boardAllList(@Param("s") int start, @Param("e") int
+	 * end);
+	 */
+	public int writeSave(CafeDTO dto);
+	/*
+	 * public BoardDTO contentView(int writeNo);
+	 * 
+	 * public void upHit(int writeNo);
+	 * 
+	 * public int modify(BoardDTO dto);
+	 * 
+	 * public int delete(int writeNo);
+	 * 
+	 * public int selectBoardCount();
+	 */
+	
+}
+>>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git

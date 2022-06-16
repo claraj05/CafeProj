@@ -1,0 +1,72 @@
+@charset "UTF-8";
+* {margin : 0; padding : 0;}
+.search_area {
+	margin : 0 auto;
+	position : relative;
+	top : 50px;
+	width : 90%;
+	height : 600px;
+	border : 1px solid red;
+}
+.search_area a {
+	text-decoration: none;
+	color:black;
+	font-size : 24px;
+	font-weight:bold;
+	border : 1px solid #808080;
+	background-color : #efefef;
+}
+.search_area a:hover {
+	color: orange;
+}
+
+.search_ctn{
+	margin: 20px auto;
+}
+.search_loc, .search_zone, .search_star{
+	border: 1px solid blue;
+}
+.search_loc{
+	float: left;
+}
+.search_star{
+	position: relative;
+}
+.search_title{
+	text-align: center;
+}
+.search_l1, .search_l2, .search_l3, .search_l4, .search_l5{
+	padding : 15px;
+	display:inline-block;
+	line-height:40px;
+}
+
+.search_z1, .search_z2{
+	padding : 15px;
+	line-height:40px;
+}
+.search_kids, .search_pet, .search_star{
+	float: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
