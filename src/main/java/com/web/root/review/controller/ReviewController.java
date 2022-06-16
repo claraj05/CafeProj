@@ -31,7 +31,7 @@ import com.web.root.cafe.upload.dto.UploadDTO;
 import com.web.root.mybatis.cafe.CafeMapper;
 import com.web.root.mybatis.review.ReviewMapper;
 import com.web.root.review.controller.dto.RequestReviewDTO;
-import com.web.root.review.dto.CafeReviewDTO;
+import com.web.root.review.dto.CafeImageDTO;
 import com.web.root.review.dto.ReviewDTO;
 import com.web.root.review.service.ReviewService;
 

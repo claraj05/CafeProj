@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.web.root.mybatis.cafe.CafeMapper;
 import com.web.root.mybatis.review.ReviewMapper;
-import com.web.root.review.dto.CafeReviewDTO;
+import com.web.root.review.dto.CafeImageDTO;
 import com.web.root.review.dto.ReviewDTO;
 import com.web.root.review.dto.ReviewImageDTO;
 
