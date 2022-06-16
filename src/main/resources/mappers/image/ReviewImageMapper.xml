@@ -10,7 +10,7 @@
 		<result property="cafe_no" column="cafe_no" />
 	</resultMap>
 
-	<resultMap id="review"
+	<resultMap id="reviewImgs"
 		type="com.web.root.review.dto.ReviewImageDTO">
 		<result property="cafe_no" column="cafe_no" />
 		<result property="review_no" column="review_no" />
@@ -28,10 +28,10 @@
 		cafe_no=#{cafe_no}
 	</select>
 
-	<select id="findReviewImageByCafeNoAndMemberNo"
+	<select id="findReviewImageByCafeNoAndId"
 		resultMap="reviewImgs">
 		select * from review_img where cafe_no=#{cafe_no} and
-		review_no=${review_no}
+		id=#{id}
 	</select>
 
 	<select id="findCafeImgLocationByCafeNoAndId">

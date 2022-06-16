@@ -112,5 +112,7 @@ public class ReviewDTO {
 	public void setReviewImageDTOs(List<ReviewImageDTO> reviewImageDTOs) {
 		this.reviewImageDTOs = reviewImageDTOs;
 	}
+	
+	
 
 }

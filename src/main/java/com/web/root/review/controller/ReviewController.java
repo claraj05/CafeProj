@@ -59,12 +59,12 @@ public class ReviewController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		CafeDTO cafeInfo = cafeService.cafeInfo(Integer.valueOf(no));
 		List<ReviewDTO> reviews = reviewService.targetReviewDetail(Integer.valueOf(no));
-		List<UploadDTO> imagesLink = null;
+		//List<UploadDTO> imagesLink = null;
 
 		map.put("cafeDetail", cafeInfo);
+//		map.put("cafeImageLink", imagesLink);
 		map.put("reviewDetail", reviews);
-		map.put("cafeImageLink", imagesLink);
-		map.put("reviewImageLink", imagesLink);
+		
 
 		return new ModelAndView("cafe/review", map, HttpStatus.OK);
 	}

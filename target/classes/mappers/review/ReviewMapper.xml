@@ -12,7 +12,15 @@
 		<result property="review_savedate" column="review_savedate" />
 		<result property="imageFileName" column="imageFileName" />
 		<result property="grade" column="grade" />
-		<collection property="reviewImageDTOs" select="reviewImageLists" />
+	</resultMap>
+	
+	<resultMap id="reviewImage"
+		type="com.web.root.review.dto.ReviewImageDTO">
+		<result property="cafe_no" column="cafe_no" />
+		<result property="review_no" column="review_no" />
+		<result property="id" column="id" />
+		<result property="imageFileName" column="imageFileName" />
+		<result property="imageLocation" column="imageLocation" />
 	</resultMap>
 
 	<select id="targetReviewLists" resultMap="review">
@@ -22,6 +30,10 @@
 
 	<select id="reviewLists" resultMap="review">
 		select * from review
+	</select>
+	
+	<select id="reviewImageLists" resultMap="reviewImage">
+		select * from review_image where id=#{id} and cafe_no=#{cafe_no}
 	</select>
 
 	<select id="cafeReviewTotalCount" resultType="Integer">

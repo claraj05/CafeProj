@@ -29,12 +29,17 @@ public class ReviewService {
 	 */
 
 	public List<ReviewDTO> targetReviewDetail(int cafe_no) {
-		
-		List<ReviewDTO> reviewDTOs = reviewMapper.targetReviewLists(cafe_no);
-		//List<ReviewImageDTO> reviewImageDTOs = reviewFileService.memberReviewImage(cafe_no, reviewDTOs);
 
-		return null;
+		List<ReviewDTO> reviewDTOs = reviewMapper.targetReviewLists(cafe_no);
+		
+		for (int i = 0; i < reviewDTOs.size(); i++) {
+			reviewDTOs.get(i)
+					.setReviewImageDTOs(reviewMapper.findReviewImageByCafeNoAndId(cafe_no, reviewDTOs.get(i).getId()));
+		}
+
+		return reviewDTOs;
 	}
+
 
 	@Transactional
 	public boolean reviewWrite(String cafe_no, String id, String content, int grade, List<MultipartFile> file) {

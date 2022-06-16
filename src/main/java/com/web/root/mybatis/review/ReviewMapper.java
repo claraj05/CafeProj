@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import com.web.root.cafe.dto.CafeDTO;
 import com.web.root.review.dto.CafeImageDTO;
 import com.web.root.review.dto.ReviewDTO;
+import com.web.root.review.dto.ReviewImageDTO;
 
 public interface ReviewMapper {
 	
@@ -20,6 +21,8 @@ public interface ReviewMapper {
 	public int reivewWrite(int cafe_no, String id, String content,int grade);
 
 	public int cafeReviewTotalCount(int target);
+	
+	public List<ReviewImageDTO> findReviewImageByCafeNoAndId(int cafe_no,String id);
 
 	/* public CafeReviewDTO ormTest(int target); */
 
