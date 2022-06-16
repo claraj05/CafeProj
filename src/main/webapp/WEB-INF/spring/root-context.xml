@@ -9,7 +9,7 @@
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-		<property name="username" value="dbtest"/>
+		<property name="username" value="dbtestA"/>
 		<property name="password" value="a1234"/>
 	</bean>
 	<!-- 히카리 데이터소스 빈 등록 -->

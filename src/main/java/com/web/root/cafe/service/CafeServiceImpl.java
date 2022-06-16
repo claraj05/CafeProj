@@ -38,12 +38,35 @@ public class CafeServiceImpl implements CafeService {
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public void getlocationListA(HttpServletRequest request, int all, String kidszone, String petzone, String star,
+			Model model) {
+		all = 0;
+		List<CafeDTO> list = mapper.getlocationListA(all, kidszone, petzone, star);
+
+		model.addAttribute("list", list);
+	}
+
+	@Override
+>>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
 	public void cafeAllList(Model model) {
 		model.addAttribute("list", mapper.cafeAllList());
 		System.out.println(mapper.cafeAllList());
 	}
+<<<<<<< HEAD
 	
+=======
+
 	@Override
+	public CafeDTO cafeInfo(int cafe_no) {
+		// TODO Auto-generated method stub
+		return mapper.cafeInfo(cafe_no);
+	}
+
+>>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
+	@Override
+<<<<<<< HEAD
 	   public CafeDTO cafeInfo(int cafe_no) {
 	      // TODO Auto-generated method stub
 	      return mapper.cafeInfo(cafe_no);
@@ -53,13 +76,19 @@ public class CafeServiceImpl implements CafeService {
 	public int writeSave(HttpServletRequest request, CafeDTO dto,
 			List<MultipartFile> multiFileList,
 			String fileContent, String root) {
+=======
+	public String writeSave(MultipartHttpServletRequest mul, HttpServletRequest request, CafeDTO dto) {
+>>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
 
 		System.out.println("root -> "+root); //root 넘어오는 해결1
 		/* System.out.println(mul); */
 		// request.getParameter("cafe_no");
 		// 여기 문제 cafe_name
 
+<<<<<<< HEAD
  
+=======
+>>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
 		int result = 0;
 		try {
 			result = mapper.writeSave(dto);
@@ -85,6 +114,7 @@ public class CafeServiceImpl implements CafeService {
 
 	}
 
+<<<<<<< HEAD
 	@Override
 	public int selectno(CafeDTO dto, HttpServletRequest request, List<MultipartFile> multiFileList,String fileContent) {
 		int cafe_no = mapper.selectNo(dto); //cafe_no 넘어오는 거 해결2
@@ -123,6 +153,8 @@ public class CafeServiceImpl implements CafeService {
 	
 	
 	
+=======
+>>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
 }
 
 

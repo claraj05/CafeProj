@@ -13,12 +13,24 @@ import com.web.root.cafe.dto.CafeDTO;
 
 public interface CafeService {
 
+<<<<<<< HEAD
 	public void getlocationList(HttpServletRequest request, 
 			@RequestParam("locationList") String [] locationList,@RequestParam("kidszone")String kidszone,
 			@RequestParam("petzone")String petzone,
 			@RequestParam("star")String star,Model model);
 	
+=======
+	public void getlocationList(HttpServletRequest request, @RequestParam("locationList") String[] locationList,
+			@RequestParam("kidszone") String kidszone, @RequestParam("petzone") String petzone,
+			@RequestParam("star") String star, Model model);
+
+	public void getlocationListA(HttpServletRequest request, @RequestParam("all") int all,
+			@RequestParam("kidszone") String kidszone, @RequestParam("petzone") String petzone,
+			@RequestParam("star") String star, Model model);
+
+>>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
 	public void cafeAllList(Model model);
+<<<<<<< HEAD
 	
 	/*
 	 * public String writeSave(HttpServletResponse response, CafeDTO dto,
@@ -28,7 +40,11 @@ public interface CafeService {
 	 * @RequestParam String fileContent, HttpServletRequest request);
 	 */
 	
+=======
+
+>>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
 	public CafeDTO cafeInfo(int cafe_no);
+<<<<<<< HEAD
 	
 	
 	public int writeSave(HttpServletRequest request, CafeDTO dto,List<MultipartFile> multiFileList,
@@ -40,6 +56,11 @@ public interface CafeService {
 	int selectno(CafeDTO dto, HttpServletRequest request, List<MultipartFile> multiFileList, String fileContent);
 	
 	
+=======
+
+	public String writeSave(MultipartHttpServletRequest mul, HttpServletRequest request, CafeDTO dto);
+
+>>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
 }
 
 
