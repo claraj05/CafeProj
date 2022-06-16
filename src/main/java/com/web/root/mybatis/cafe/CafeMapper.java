@@ -24,4 +24,8 @@ public interface CafeMapper {
 	
 	public CafeDTO cafeInfo(int cafe_no);
 	public int writeSave(CafeDTO dto);
+	
+	public int selectNo(CafeDTO dto);
+	
+	public int writeSave2(int cafe_no, String imgLoaction, String imgName, String fileContent);
 }

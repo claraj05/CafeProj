@@ -1,12 +1,12 @@
 package com.web.root.cafe.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
-import com.web.root.cafe.dto.CafeDTO;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.web.root.cafe.dto.CafeDTO;
 
@@ -25,6 +25,12 @@ public interface CafeService {
 	public CafeDTO cafeInfo(int cafe_no);
 	
 	
-	public String writeSave(MultipartHttpServletRequest mul, HttpServletRequest request, CafeDTO dto);
+	public int writeSave(HttpServletRequest request, CafeDTO dto,List<MultipartFile> multiFileList,
+			String fileContent, String root);
+	
+	public int writeSave2(int cafe_no, HttpServletRequest request, List<MultipartFile> multiFileList,
+			String fileContent);
+
+	int selectno(CafeDTO dto, HttpServletRequest request, List<MultipartFile> multiFileList, String fileContent);
 
 }
