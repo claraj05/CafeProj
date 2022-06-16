@@ -92,6 +92,7 @@
 	<insert id="writeSave2">
 		insert into cafe_image values(#{imgName}, #{imgLocation}, #{imgContent}, #{cafe_no})
 	</insert>
+	
 	<select id="cafeInfo" resultMap="cafe">
 		select * from cafe where cafe_no=#{cafe_no}
 	</select>
