@@ -25,12 +25,13 @@ public interface CafeService {
 	public CafeDTO cafeInfo(int cafe_no);
 	
 	
-	public int writeSave(HttpServletRequest request, CafeDTO dto,List<MultipartFile> multiFileList,
-			String fileContent, String root);
-	
-	public int writeSave2(int cafe_no, HttpServletRequest request, List<MultipartFile> multiFileList,
-			String fileContent);
+	 public int writeSave(HttpServletRequest request, CafeDTO dto,List<MultipartFile> multiFileList,
+	         String fileContent, String root);
+	   
+	   public int writeSave2(int cafe_no, HttpServletRequest request, List<MultipartFile> multiFileList,
+	         String fileContent);
 
-	int selectno(CafeDTO dto, HttpServletRequest request, List<MultipartFile> multiFileList, String fileContent);
+	   int selectno(CafeDTO dto, HttpServletRequest request, List<MultipartFile> multiFileList, String fileContent);
+
 
 }

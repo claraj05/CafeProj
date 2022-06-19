@@ -79,7 +79,7 @@ function checkpw() {
 </head>
 <body>
 	<form name="writeForm" action="joinForm" method="post">
- 		<input type="hidden" name="code" value="0">  
+ 		<input type="hidden" name="code" value="1">  
 	<%-- 	<c:if test="${code == 0 }"> 
 		<a href="#">카페 추가하기 </a>
 		</c:if>  --%>
@@ -143,12 +143,10 @@ function checkpw() {
 					<input type="text" name="email" id="email" width="20">@
 					<select id = "domain" name = "domain" size = "1">
 						<option value = "none">----선택----</option>
-<<<<<<< HEAD
 						<option value = "naver">naver.com</option>
 						<option value = "daum">kakao.com</option>
 						<option value = "gmail">gmail.com</option>
 					</select>
-=======
 						<option value = "naver.com">naver.com</option>
 						<option value = "daum.net">kakao.com</option>
 						<option value = "gmail.com">gmail.com</option>
@@ -159,7 +157,6 @@ function checkpw() {
 				<td colspan="2" align="center">
 					<!-- <input type="submit" value="회원가입"> -->
 					<input type="button"  onclick="joinform_check()" value="회원가입">
->>>>>>> branch 'master' of https://github.com/claraj05/CafeProj.git
 				</td>
 			</tr>
 		</table>

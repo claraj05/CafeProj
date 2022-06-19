@@ -29,6 +29,10 @@
 	<select id="id_check" resultMap="member">
 		select * from member where id=#{id}
 	</select>
+	
+	<select id="getCode" resultType="Integer">
+		select code from member where id=#{id}
+	</select>
 </mapper>
 
 

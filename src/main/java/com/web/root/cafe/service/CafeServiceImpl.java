@@ -96,61 +96,65 @@ public class CafeServiceImpl implements CafeService {
 	}
 
 	@Override
-	public int writeSave(HttpServletRequest request, CafeDTO dto,
-			List<MultipartFile> multiFileList,
-			String fileContent, String root) {
+	   public int writeSave(HttpServletRequest request, CafeDTO dto,
+	         List<MultipartFile> multiFileList,
+	         String imgContent, String root) {
 
-		System.out.println("root -> "+root); //root 넘어오는 해결1
-		/* System.out.println(mul); */
-		// request.getParameter("cafe_no");
-		// 여기 문제 cafe_name
+	      System.out.println("root -> "+root); //root 넘어오는 해결1
+	      /* System.out.println(mul); */
+	      // request.getParameter("cafe_no");
+	      // 여기 문제 cafe_name
 
- 
-		int result = 0;
-		try {
-			result = mapper.writeSave(dto);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	 
+	      int result = 0;
+	      try {
+	         result = mapper.writeSave(dto);
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	         System.out.println("아오");
+	      }
 
-//		String msg, url;
-//		if (result == 1) {
-//			msg = "새글이 등록 되었습니다..";
-//			url = "/cafe/cafemanager";
-//		} else {
-//			msg = "문제가 발생했습니다..";
-//			url = "/cafe/cafemanager";
-//		}
-		for (int i = 0; i < multiFileList.size(); i++) {
-//			mapper.writeSave2(dto.getCafe_no(), root, multiFileList.get(i).getOriginalFilename(), fileContent);
-		}
-		return result;
+//	      String msg, url;
+//	      if (result == 1) {
+//	         msg = "새글이 등록 되었습니다..";
+//	         url = "/cafe/cafemanager";
+//	      } else {
+//	         msg = "문제가 발생했습니다..";
+//	         url = "/cafe/cafemanager";
+//	      }
+	      for (int i = 0; i < multiFileList.size(); i++) {
+	         mapper.writeSave2(dto.getCafe_no(), root, multiFileList.get(i).getOriginalFilename(), imgContent);
+	      }
+	      return result;
 
-	}
+	   }
+	   
+	   @Override
+	   public int selectno(CafeDTO dto, HttpServletRequest request, List<MultipartFile> multiFileList,String imgContent) {
+	      int cafe_no = mapper.selectNo(dto); //cafe_no 넘어오는 거 해결2
+	      System.out.println(cafe_no);
+	      int result2 = writeSave2(cafe_no, request, multiFileList, imgContent);
+	      return result2;
+	   }
+
+	   @Override
+	   public int writeSave2(int cafe_no, HttpServletRequest request, List<MultipartFile> multiFileList,
+	         String imgContent) {
+	      String imgLocation=null;
+	      int result = 0;
+	      try {
+	         for (int i = 0; i < multiFileList.size(); i++) {
+	            //mapper.writeSave2로 넘길 데이터 : originFileName, root, cafe_no, fileContent
+//	            result+= mapper.writeSave2(cafe_no, imgLocation,multiFileList.get(i).getOriginalFilename(),  fileContent);
+	         }
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }
+	      return result;
+
+	      }
+
 	
-	@Override
-	public int selectno(CafeDTO dto, HttpServletRequest request, List<MultipartFile> multiFileList,String fileContent) {
-		int cafe_no = mapper.selectNo(dto); //cafe_no 넘어오는 거 해결2
-		System.out.println(cafe_no);
-		int result2 = writeSave2(cafe_no, request, multiFileList, fileContent);
-		return result2;
-	}
 
-	@Override
-	public int writeSave2(int cafe_no, HttpServletRequest request, List<MultipartFile> multiFileList,
-			String fileContent) {
-		String imgLocation=null;
-		int result = 0;
-		try {
-			for (int i = 0; i < multiFileList.size(); i++) {
-				//mapper.writeSave2로 넘길 데이터 : originFileName, root, cafe_no, fileContent
-//				result+= mapper.writeSave2(cafe_no, imgLocation,multiFileList.get(i).getOriginalFilename(),  fileContent);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-
-		}
 
 }

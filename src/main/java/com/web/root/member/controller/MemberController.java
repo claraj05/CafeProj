@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,18 +29,22 @@ public class MemberController implements MemberSession {
 	}
 	
 	@PostMapping("user_check")
-	public String userCheck(HttpServletRequest request, RedirectAttributes rs) {
-		int result = ms.user_check(request);
+	public String userCheck(HttpServletRequest request, RedirectAttributes rs, Model model) {
+		int result = ms.user_check(request, model);
 		if(result == 0) {
 			rs.addAttribute("id", request.getParameter("id"));
+			int code = ms.getCode(request,model);
+			System.out.println(code);
+			rs.addAttribute("code", code);
 			return "redirect:successLogin";
 		}
 		return "redirect:login";
 	}
 	
 	@RequestMapping("successLogin")
-	public String successLogin(@RequestParam("id") String id, HttpSession session) {
+	public String successLogin(@RequestParam("id") String id, @RequestParam("code") int code, HttpSession session, Model model) {
 		session.setAttribute(LOGIN, id); //session 값 저장 
+		session.setAttribute(CODE, "1");
 		return "redirect:/index";
 	}
 	

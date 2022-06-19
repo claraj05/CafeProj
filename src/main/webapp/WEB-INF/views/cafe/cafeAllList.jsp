@@ -24,7 +24,7 @@
 			</tr>
 			<c:forEach var="loc" items="${list}">
 			<tr>		
-				<td><a href="">${loc.cafe_name}</a></td>
+				<td><a href="http://localhost:8080/${contextPath}/review/cafe?no=${loc.cafe_no}">${loc.cafe_name}</a></td>
 				<td><img src="" width="200px" height="200px"></td>
 				<td>${loc.avg_star}</td>
 				<td>${loc.location2}</td>

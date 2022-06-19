@@ -53,7 +53,10 @@
 				<p>close<input type="time" name="endtime"></p> -->
 	 			<br>
 				<b>파일 첨부 </b>
-				파일 : <input type="file" name="multiFile" onchange="readURL(this)" multiple > <br>
+				파일 : 
+				<c:forEach var="i" items="5">
+				<input type="file" name="multiFile" onchange="readURL(this)" multiple > <br>
+				</c:forEach>
 				파일 설명 : <input type="text" name="imgContent"><br>
 				<img id="preview" src="#" width="100px" height="100px">
 				<br>

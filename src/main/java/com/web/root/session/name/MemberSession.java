@@ -4,4 +4,6 @@ public interface MemberSession {
 	
 	public String LOGIN = "loginUser";
 	
+	public String CODE= "code";
+	
 }
