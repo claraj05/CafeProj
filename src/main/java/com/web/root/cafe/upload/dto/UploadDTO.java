@@ -5,7 +5,16 @@ public class UploadDTO {
 	private String imgName;
 	private String imgLocation;
 	private int cafe_no;
+	private String imgContent;
 	
+	public String getImgContent() {
+		return imgContent;
+	}
+
+	public void setImgContent(String imgContent) {
+		this.imgContent = imgContent;
+	}
+
 	public UploadDTO () {}
 	
 	public String getImgName() {

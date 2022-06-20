@@ -50,7 +50,9 @@
 	
 	color:#fff;
 }
-
+#buttonS{
+	color : black;
+}
 
 
 .searchArea > form > span {
@@ -92,9 +94,9 @@
 		<div class="intro_bg">
 			<div class="header">
 				<div class="searchArea">
-					<form action="#">
-						<input type="search" placeholder="cafe search">
-						<span>검색</span>
+					<form action="cafe/searchEng" method="get">
+						<input type="search" name="searchKW">
+						<input id="buttonS" type="submit" value="검색">
 					</form>
 				</div>
 				<ul class="nav">
@@ -110,10 +112,9 @@
 		 			<c:if test="${loginUser != null }">
 						<li><a href="${contextPath }/member/logout">로그아웃</a></li>
 						<li><a href="${contextPath }/cafe/cafemanager">카페 관리</a></li>
-					</c:if>	 
-				<%-- 	<c:if test=""> 관리자 계정 로그인 시 보이는 메뉴
-						<li><a href="${contextPath }/cafe/cafemanager">카페 관리</a></li>
-					</c:if> --%>
+						<c:if test="${code==0 }">
+						</c:if>
+					</c:if>
 				</ul>			
 			</div>
 		</div>

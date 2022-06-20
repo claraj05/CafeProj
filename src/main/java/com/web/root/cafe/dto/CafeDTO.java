@@ -31,8 +31,27 @@ public class CafeDTO {
 	private String use_time;
 	private double avg_star;
 	private String logtime;
+	private int like_cnt;
+	
 	
 	public CafeDTO() {}
+
+	
+	
+	
+	public int getLike_cnt() {
+		return like_cnt;
+	}
+
+
+
+
+	public void setLike_cnt(int like_cnt) {
+		this.like_cnt = like_cnt;
+	}
+
+
+
 
 	public int getCafe_no() {
 		return cafe_no;

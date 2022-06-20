@@ -21,11 +21,14 @@
 				<th width="200px">키즈존 여부</th>
 				<th width="200px">펫존 여부</th>
 				<th width="200px">이용 가능 시간</th>
+				<th width="150px">My Favorites</th>
 			</tr>
 			<c:forEach var="loc" items="${list}">
 			<tr>		
 				<td><a href="">${loc.cafe_name}</a></td>
-				<td><img src="" width="200px" height="200px"></td>
+				<td><img src="${contextPath }/cafe/download?cafe_no=${loc.cafe_no}" 
+									width="200px" height="200px">
+				</td>
 				<td>${loc.avg_star}</td>
 				<td>${loc.location2}</td>
 				<c:if test="${loc.kidszone==0}">
@@ -53,11 +56,12 @@
 				<td>펫허용존</td>
 				</c:if>
 				<td>${loc.use_time}</td>
+				<td><input type="button" value="즐찾버튼" onclick="location.href='${contextPath}/cafe/addFavorite?cafe_no=${loc.cafe_no}&id=${loginUser }'"></td>
 			</tr>
 			</c:forEach>
 			
 			<tr>
-				<td colspan="7" align="center">
+				<td colspan="8" align="center">
 					<c:forEach var="num" begin="1" end="${repeat }">
 						<a href="cafeAllList?num=${num }">[${num }]</a>
 					</c:forEach>

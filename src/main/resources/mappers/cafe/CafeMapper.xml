@@ -18,6 +18,7 @@
 		<result property="use_time" column="use_time"/>
 		<result property="avg_star" column="avg_star"/>
 		<result property="logtime" column="logtime"/>
+		<result property="like_cnt" column="like_cnt"/>
 	</resultMap>
 	
 	<resultMap type="com.web.root.cafe.dto.EventViewDTO" id="event">
@@ -29,20 +30,25 @@
 		<result property="event_time" column="event_time"/>
 	</resultMap>
 	
-	<resultMap type="com.web.root.cafe.upload.dto.UploadDTO" id="up">
+	<resultMap type="com.web.root.cafe.upload.dto.UploadDTO" id="cafe_img">
 		<id property="cafe_no" column="cafe_no"/>
 		<result property="imgName" column="imgName"/>
 		<result property="imgLocation" column="imgLocation"/>
 		<result property="imgContent" column="imgContent"/>
 	</resultMap>
 	
+	<select id="searchEng(searchKW)" resultMap="cafe">
+		select * from cafe where cafe_name LIKE '% #{searchKW} %'
+	</select>
 	<select id="cafeAllList" resultMap="cafe">
 	 	select B.* from 
 	 	(select rownum rn, A.* from
 	 	(select * from cafe order by cafe_no asc)A )B
 	 	where rn between #{s} and #{e}
 	 </select>
-	 
+	 <select id="cafeImageLoad" resultMap="cafe_img">
+	 	select * from cafe_image
+	 </select>
 	<select id="selectcafeCount" resultType="Integer">
 		select count(*) from cafe
 	</select>
@@ -66,6 +72,14 @@
 			<if test="star==1">order by avg_star desc</if>
 			</where>
 	</select>
+	
+	<select id="getImgRoot">
+		select imgLocation from cafe_image where cafe_no=#{cafe_no}
+	</select>
+	<select id="getImage">
+		select imgName from cafe_image where cafe_no=#{cafe_no}
+	</select>
+	
 	<select id="eventView1" resultMap="event">
 		select * from event_view where event_no=1
 	</select>
@@ -82,19 +96,42 @@
 	
 	<insert id="writeSave">
 		insert into cafe values(cafe_seq.nextval, #{cafe_name}, #{location1}, #{location2}, #{cafe_tel}, #{menu},
-				#{kidszone}, #{petzone}, #{use_time}, #{avg_star}, sysdate)
+				#{kidszone}, #{petzone}, #{use_time}, #{avg_star}, sysdate, 0)
 	</insert>
 
-	<select id="selectNo">
+	<select id="selectNo" resultType="Integer">
 		select cafe_no from cafe where cafe_name = #{cafe_name}
 	</select>
 	
+	
 	<insert id="writeSave2">
-		insert into cafe_image values(#{imgName}, #{imgLocation}, #{imgContent}, #{cafe_no})
+		insert into cafe_image values(#{imgName}, #{imgLocation}, #{imgContent}, cafe_seq.currval)
 	</insert>
 
-
+	<select id="checkLike" resultType="Integer">
+		select count(*) from cafe_like where cafe_no=#{cafe_no} and id=#{id}
+	</select>
 	
+	<insert id="plusLike">
+		insert into cafe_like
+		values(#{cafe_no}, #{id})
+	</insert>
+	<delete id="minusLike">
+		delete from cafe_like
+		where cafe_no=#{cafe_no} and id=#{id}
+	</delete>
+	
+	<update id="countplus">
+		update cafe
+		set like_cnt=like_cnt+1
+		where cafe_no=#{cafe_no}
+	</update>
+	<update id="countminus">
+		update cafe
+		set like_cnt=like_cnt-1
+		where cafe_no=#{cafe_no}
+	</update>
+
 
 </mapper>
 

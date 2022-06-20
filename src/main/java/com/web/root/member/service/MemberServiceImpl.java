@@ -41,6 +41,13 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return 1;
 	}
+	
+	@Override
+	public int getCode(HttpServletRequest request) {
+		MemberDTO dto = mapper.user_check(request.getParameter("id"));
+
+		return dto.getCode();
+	}
 
 
 	@Override
@@ -53,9 +60,6 @@ public class MemberServiceImpl implements MemberService {
 			}
 		return 1;
 	}
-
-
-	
 }
 
 

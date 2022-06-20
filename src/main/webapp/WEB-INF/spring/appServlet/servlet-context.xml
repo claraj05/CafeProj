@@ -20,12 +20,19 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
 	<context:component-scan base-package="com.web.root" />
 	
 	<!-- 파일 업로드 객체 설정 --> <!-- 아래 id값 바꾸면 안댐 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">	
 		<beans:property name="maxUploadSize" value="52428800"/> <!--  50MB --> 
 	</beans:bean>	
+	
+	<beans:bean id="loginChk" class="com.web.root.member.interceptor.MemberInterceptor"/>
+	<interceptors>
+		<interceptor>
+			<mapping path="/cafe/addFavorite"/>
+			<beans:ref bean="loginChk"/>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>

@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>searchView</title>
-<link rel ="stylesheet" type ="text/css" href = "../resources/css/cafe/cafeSearch.css">
+<link rel ="stylesheet" type ="text/css" href = "../resources/css/cafe/cafeSearch.css?v=11">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -39,6 +39,31 @@ $(document).ready(function(){
 			$("input#r24").prop("disabled",true);
 			$("input#r25").prop("disabled",true);
 			
+			$("input#r1").prop("checked",true);
+			$("input#r2").prop("checked",true);
+			$("input#r3").prop("checked",true);
+			$("input#r4").prop("checked",true);
+			$("input#r5").prop("checked",true);
+			$("input#r6").prop("checked",true);
+			$("input#r7").prop("checked",true);
+			$("input#r8").prop("checked",true);
+			$("input#r9").prop("checked",true);
+			$("input#r10").prop("checked",true);
+			$("input#r11").prop("checked",true);
+			$("input#r12").prop("checked",true);
+			$("input#r13").prop("checked",true);
+			$("input#r14").prop("checked",true);
+			$("input#r15").prop("checked",true);
+			$("input#r16").prop("checked",true);
+			$("input#r17").prop("checked",true);
+			$("input#r18").prop("checked",true);
+			$("input#r19").prop("checked",true);
+			$("input#r20").prop("checked",true);
+			$("input#r21").prop("checked",true);
+			$("input#r22").prop("checked",true);
+			$("input#r23").prop("checked",true);
+			$("input#r24").prop("checked",true);
+			$("input#r25").prop("checked",true);
 			
 		}else{
 			$("input#r1").prop("disabled",false);
@@ -66,6 +91,32 @@ $(document).ready(function(){
 			$("input#r23").prop("disabled",false);
 			$("input#r24").prop("disabled",false);
 			$("input#r25").prop("disabled",false);
+			
+			$("input#r1").prop("checked",false);
+			$("input#r2").prop("checked",false);
+			$("input#r3").prop("checked",false);
+			$("input#r4").prop("checked",false);
+			$("input#r5").prop("checked",false);
+			$("input#r6").prop("checked",false);
+			$("input#r7").prop("checked",false);
+			$("input#r8").prop("checked",false);
+			$("input#r9").prop("checked",false);
+			$("input#r10").prop("checked",false);
+			$("input#r11").prop("checked",false);
+			$("input#r12").prop("checked",false);
+			$("input#r13").prop("checked",false);
+			$("input#r14").prop("checked",false);
+			$("input#r15").prop("checked",false);
+			$("input#r16").prop("checked",false);
+			$("input#r17").prop("checked",false);
+			$("input#r18").prop("checked",false);
+			$("input#r19").prop("checked",false);
+			$("input#r20").prop("checked",false);
+			$("input#r21").prop("checked",false);
+			$("input#r22").prop("checked",false);
+			$("input#r23").prop("checked",false);
+			$("input#r24").prop("checked",false);
+			$("input#r25").prop("checked",false);
 		}
 	});
 });
@@ -74,19 +125,24 @@ $(document).ready(function(){
 </head>
 <body>
 <c:import url="../default/header.jsp"/>
-	<div class="search_area">
-		<a href="${contextPath}/cafe/cafeAllList">전체 카페 리스트</a>
+		<div class="cafeAll">
+			<a href="${contextPath}/cafe/cafeAllList">전체 카페 리스트</a>
+		</div>
 		<br>
+	<div class="search_area">
 		<form action="searchResult" method="get" id="searchForm">
 			<div class="search_ctn">
 				<div class="search_loc">
-					<ul>
-						<li class="search_title">&lt;세부 지역2(서울시 25구)&gt;</li>
-					</ul>
-					
+					<div class="search_title">
+						<ul>
+							<li>&lt;서울 세부지역 선택&gt;</li>
+						</ul>
+					</div>
 					<ul class="search_total">
-						<li><input type="checkbox" id="tot" name="location1" value="0">전체 선택</li>
+						<li><input type="checkbox" id="tot" name="location1" value="0">&nbsp;전체 선택</li>
 					</ul>
+							<br>
+					
 					<ul class="search_l1">
 						<li><input type="checkbox" id="r1" name="location1" value="1" />
 							<label for="l1">강남구</label></li>
@@ -150,9 +206,11 @@ $(document).ready(function(){
 				</div>
 				<div class="search_zone">
 					<div class="search_kids">
-						<ul>
-							<li class="search_title">&lt;키즈존 여부&gt;</li>
-						</ul>
+						<div class="search_title">
+							<ul>
+								<li>&lt;키즈존 여부&gt;</li>
+							</ul>
+						</div>
 						<ul class="search_z1">
 							<li><input type="radio" id="k0" name="kidszone" value="0" checked />
 								<label for="k0">무관</label></li>
@@ -165,9 +223,11 @@ $(document).ready(function(){
 						</ul>
 					</div>
 					<div class="search_pet">
-						<ul>
-							<li class="search_title">&lt;펫존 여부&gt;</li>
-						</ul>
+						<div class="search_title">
+							<ul>
+								<li>&lt;펫존 여부&gt;</li>
+							</ul>
+						</div>
 						<ul class="search_z2">
 							<li><input type="radio" id="p0" name="petzone" value="0" checked/>
 								<label for="p0">무관</label></li>
@@ -184,14 +244,14 @@ $(document).ready(function(){
 					<ul>
 						<li class="search_title">&lt;별점 높은 순 정렬&gt;</li>
 					</ul>
-					<ul>
+					<ul class="search_s">
 						<li><input type="checkbox" id="s1" name="star" value="1"> On</li>
 						<li><input type="hidden" id="s0" name="star" value="0"></li>
 					</ul>
 				</div>
 			</div>
 					 <br>
-					 <input type="submit" value="전송">
+					 <input class="fbutton" type="submit" value="전송">
 		</form>
 	</div>
 <c:import url="../default/footer.jsp"/>

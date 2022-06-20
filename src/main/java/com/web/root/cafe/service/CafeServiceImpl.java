@@ -3,6 +3,7 @@ package com.web.root.cafe.service;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.web.root.cafe.dto.CafeDTO;
-import com.web.root.cafe.file.service.BoardFileService;
+import com.web.root.cafe.file.service.CafeFileService;
+import com.web.root.cafe.upload.dto.UploadDTO;
+import com.web.root.member.dto.MemberDTO;
 import com.web.root.mybatis.cafe.CafeMapper;
 
 @Service
@@ -20,8 +23,16 @@ public class CafeServiceImpl implements CafeService {
 	private CafeMapper mapper;
 
 	@Autowired
-	BoardFileService bfs;
+	CafeFileService bfs;
 
+	
+	@Override
+	public void searchEng(String searchKW, Model model) {
+		model.addAttribute("kwResult",mapper.searchEng(searchKW));
+		
+	}
+
+	//검색필터로 검색하기 기능
 	@Override
 	public void getlocationList(HttpServletRequest request, 
 			String [] locationList, 
@@ -44,13 +55,12 @@ public class CafeServiceImpl implements CafeService {
 		model.addAttribute("list",list);
 	}
 
-
+	//전체 카페 리스트 보여주기 기능
 	@Override
 	public void cafeAllList(Model model,int num) {
 		int pageLetter=5; //한 페이지당 글 개수
 		int allCount=mapper.selectcafeCount(); //전체 글수
 		
-		//ex 전체 글수 10 페이지당 글 개수 3개면, 페이지번호는 4번까지 나와야 함(1개를 위해)
 		int repeat = allCount/pageLetter;
 		if(allCount%pageLetter !=0) {
 			repeat +=1;
@@ -63,10 +73,36 @@ public class CafeServiceImpl implements CafeService {
 		
 		model.addAttribute("list",mapper.cafeAllList(start,end));
 		System.out.println(mapper.cafeAllList(start,end));
-		
 	}
 	
 	
+	@Override
+	public void uploadImage(Model model) {
+		model.addAttribute("img",mapper.cafeImageLoad());
+	}
+
+	@Override
+	public String getImgRoot(int cafe_no) {
+		String root = mapper.getImgRoot(cafe_no);
+		System.out.println("root : "+root);
+		return root;
+	}
+
+	@Override
+	public String getImgFirstName(int cafe_no) {
+		String [] images = mapper.getImage(cafe_no);
+		String firstImage = null;
+		try {
+			if(images!=null) {
+				firstImage = images[0];
+			}
+			return firstImage;
+		} catch (Exception e) {
+			return "실패";
+		}
+	}
+
+	//이벤트 db 불러오기 기능
 	@Override
 	public void eventView(Model model) {
 		//이벤트 테이블에서 cafe_no 가져오기
@@ -88,17 +124,18 @@ public class CafeServiceImpl implements CafeService {
 		
 	}
 
-
+	//카페 정보 불러오기
 	@Override
 	public CafeDTO cafeInfo(int cafe_no) {
 		// TODO Auto-generated method stub
 		return mapper.cafeInfo(cafe_no);
 	}
-
+	
+	//카페 정보 저장하기
 	@Override
 	public int writeSave(HttpServletRequest request, CafeDTO dto,
 			List<MultipartFile> multiFileList,
-			String fileContent, String root) {
+			String imgContent, String root) {
 
 		System.out.println("root -> "+root); //root 넘어오는 해결1
 		/* System.out.println(mul); */
@@ -121,36 +158,70 @@ public class CafeServiceImpl implements CafeService {
 //			msg = "문제가 발생했습니다..";
 //			url = "/cafe/cafemanager";
 //		}
+		
+		
 		for (int i = 0; i < multiFileList.size(); i++) {
-//			mapper.writeSave2(dto.getCafe_no(), root, multiFileList.get(i).getOriginalFilename(), fileContent);
+			Integer cafe_no = mapper.selectNo(dto);
+			System.out.println("cafe_no : "+ cafe_no);
+			mapper.writeSave2(root, multiFileList.get(i).getOriginalFilename(), imgContent);
 		}
 		return result;
 
 	}
+
 	
+	//카페 좋아요 기능 
 	@Override
-	public int selectno(CafeDTO dto, HttpServletRequest request, List<MultipartFile> multiFileList,String fileContent) {
-		int cafe_no = mapper.selectNo(dto); //cafe_no 넘어오는 거 해결2
-		System.out.println(cafe_no);
-		int result2 = writeSave2(cafe_no, request, multiFileList, fileContent);
-		return result2;
+	public int checkLike(String id, int cafe_no) {
+		int result = mapper.checkLike(id,cafe_no);
+//		System.out.println("check result"+result);
+		return result;
 	}
 
 	@Override
-	public int writeSave2(int cafe_no, HttpServletRequest request, List<MultipartFile> multiFileList,
-			String fileContent) {
-		String imgLocation=null;
-		int result = 0;
-		try {
-			for (int i = 0; i < multiFileList.size(); i++) {
-				//mapper.writeSave2로 넘길 데이터 : originFileName, root, cafe_no, fileContent
-//				result+= mapper.writeSave2(cafe_no, imgLocation,multiFileList.get(i).getOriginalFilename(),  fileContent);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public int plusLike(String id, int cafe_no) {
+		int result = mapper.plusLike(id, cafe_no);
+		System.out.println("result(+) = "+result);
+		// TODO Auto-generated method stub
 		return result;
+	}
 
-		}
+	@Override
+	public int minusLike(String id, int cafe_no) {
+		int result = mapper.minusLike(id, cafe_no);
+		System.out.println("result(-) = "+result);
+		// TODO Auto-generated method stub
+		return result;
+	}
+
+	@Override
+	public int countplus(int cafe_no) {
+		int result = mapper.countplus(cafe_no);
+		return result;
+	}
+
+
+	@Override
+	public int countminus(int cafe_no) {
+		int result = mapper.countminus(cafe_no);
+		return result;
+	}
+
+	
+	
+	
+	
+	
+	/*
+	 * @Override public int writeSave2(HttpServletRequest request,
+	 * List<MultipartFile> multiFileList, String imgContent) { String
+	 * imgLocation=null; int result = 0; try { for (int i = 0; i <
+	 * multiFileList.size(); i++) { //mapper.writeSave2로 넘길 데이터 : originFileName,
+	 * root, cafe_no, fileContent result+= mapper.writeSave2(cafe_no,
+	 * imgLocation,multiFileList.get(i).getOriginalFilename(), fileContent); } }
+	 * catch (Exception e) { e.printStackTrace(); } return result;
+	 * 
+	 * }
+	 */
 
 }

@@ -16,7 +16,7 @@ import com.web.root.mybatis.cafe.CafeMapper;
 import com.web.root.mybatis.img.ImageMapper;
 
 @Service
-public class BoardFileServiceImpl implements BoardFileService {
+public class CafeFileServiceImpl implements CafeFileService {
 	
 	
 	@Autowired

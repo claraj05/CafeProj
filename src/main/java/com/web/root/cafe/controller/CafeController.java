@@ -1,6 +1,7 @@
 package com.web.root.cafe.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,15 +26,31 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.web.root.cafe.dto.CafeDTO;
 import com.web.root.cafe.service.CafeService;
+import com.web.root.session.name.MemberSession;
 
 @Controller
 @RequestMapping("cafe")
-public class CafeController {
+public class CafeController implements MemberSession{
 	
 	@Autowired
 	CafeService cf;
 	
-	
+	@RequestMapping("searchEng")
+	public String searchEng(HttpServletRequest request, Model model,HttpServletResponse response) throws IOException {
+		String searchKW = request.getParameter("searchKW");
+		try {
+			if(searchKW!=null) {
+				cf.searchEng(searchKW, model);
+			}
+			return "cafe/searchKWResult";
+		} catch (Exception e) {
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('검색어를 입력하세요');"+
+						"location.href='" + request.getContextPath() + "/index'</script>");
+				return "index";
+		}
+	}
 	
 	@GetMapping("searchView")
 	public String searchView() {
@@ -71,26 +89,31 @@ public class CafeController {
 	}
 	
 	@GetMapping("cafeAllList")
-	public String test(HttpServletRequest request, Model model,
-			@RequestParam(value = "num", required = false, defaultValue = "1") int num) {
+	public String test(HttpServletRequest request, Model model,HttpServletResponse response,
+			@RequestParam(value = "num", required = false, defaultValue = "1") int num) throws Exception  {
 		cf.cafeAllList(model,num);
+		cf.uploadImage(model);
 		return "cafe/cafeAllList";
 	}
-	
+	@GetMapping("download")//사진 불러오기
+	public void download(int cafe_no,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		cafe_no = Integer.parseInt(request.getParameter("cafe_no"));
+		String root = cf.getImgRoot(cafe_no);
+		String firstImageFileName = cf.getImgFirstName(cafe_no); //
+		System.out.println("경로 : "+root);
+		System.out.println("첫번째 파일 이름 : "+firstImageFileName);
+		
+		response.addHeader("Content-disposition", "attachment;fileName=" + firstImageFileName);
+		
+		File file = new File(root + "/" + firstImageFileName);
+		FileInputStream in = new FileInputStream(file);
+		FileCopyUtils.copy(in, response.getOutputStream());
+		in.close();
+	}
 	 @PostMapping("writeSave") 
 	  public String writeSave(HttpServletResponse response,
 			  				CafeDTO dto, @RequestParam("multiFile") List<MultipartFile> multiFileList, @RequestParam String imgContent, HttpServletRequest request
 			  				,Model model) throws IOException {
-		 // multiFileList 안에 들어있는게 : changeFile
-		  /*
-		   		response.addHeader("Content-disposition", "attachment;fileName=" + imageFileName);
-
-		File file = new File(BoardFileService.IMAGE_REPO + "/" + imageFileName);
-		FileInputStream in = new FileInputStream(file);
-		FileCopyUtils.copy(in, response.getOutputStream());
-		in.close();
-		    
-		   */
 	 
 		  PrintWriter out = response.getWriter();
 		  response.setContentType("text/html; charset=utf-8");
@@ -98,11 +121,10 @@ public class CafeController {
 		// 받아온것 출력 확인
 		  System.out.println("multiFileList : " + multiFileList);
 		  System.out.println("fileContent : " + imgContent);
-		  
 				  
 		// path 가져오기
 		  String path = request.getSession().getServletContext().getRealPath("resources");
-		  String root = path + "\\" + "uploadFiles"+"\\"+dto.getCafe_no();
+		  String root = path + "\\" + "uploadFiles"+"\\";
 		
 		
 		  File fileCheck = new File(root);
@@ -134,9 +156,7 @@ public class CafeController {
 				for(int i = 0; i < multiFileList.size(); i++) {
 					File uploadFile = new File(root + "\\" + fileList.get(i).get("changeFile"));
 					multiFileList.get(i).transferTo(uploadFile);
-					
 				}
-				
 				
 				System.out.println("다중 파일 업로드 성공!");
 				System.out.println("path : " + path);
@@ -147,13 +167,10 @@ public class CafeController {
 				for(int i = 0; i < multiFileList.size(); i++) {
 					new File(root + "\\" + fileList.get(i).get("changeFile")).delete();
 				}
-				
-				
 				e.printStackTrace();
 			}
 			int result = 0;
 			
-			 
 			result = cf.writeSave(request, dto, multiFileList, imgContent, root); //카페정보
 			if(result!=0) {
 				return "result";
@@ -167,11 +184,27 @@ public class CafeController {
 		  return "cafe/cafemanager";
 	  }
 	  
-	/* @RequestMapping("test")
-	 public String test() {
-		 return "cafe/test";
-	 }*/
-
+	  @RequestMapping("addFavorite")
+	  public String addFavorite(HttpServletRequest request) {
+		  
+		  String id = request.getParameter("id");
+		  System.out.println("id : "+id);
+		  int cafe_no =Integer.parseInt(request.getParameter("cafe_no"));
+		  int check = cf.checkLike(id,cafe_no); //이미 있는지 확인
+		  try {
+			  if(check==0) {
+				  cf.plusLike(id, cafe_no);
+				  cf.countplus(cafe_no);
+			  }else {
+				  cf.minusLike(id, cafe_no);
+				  cf.countminus(cafe_no);
+			  }
+			  System.out.println("좋아요 성공");
+		} catch (Exception e) {
+			System.out.println("좋아요기능 실패...");
+		}
+		  return "cafe/addFavorite";
+	  }
 
 	
 }

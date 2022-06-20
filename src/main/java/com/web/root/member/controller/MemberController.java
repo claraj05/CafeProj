@@ -30,16 +30,19 @@ public class MemberController implements MemberSession {
 	@PostMapping("user_check")
 	public String userCheck(HttpServletRequest request, RedirectAttributes rs) {
 		int result = ms.user_check(request);
+		int code = ms.getCode(request);
 		if(result == 0) {
 			rs.addAttribute("id", request.getParameter("id"));
+			rs.addAttribute("code", code);
 			return "redirect:successLogin";
 		}
 		return "redirect:login";
 	}
 	
 	@RequestMapping("successLogin")
-	public String successLogin(@RequestParam("id") String id, HttpSession session) {
+	public String successLogin(@RequestParam("id") String id, @RequestParam("code") int code, HttpSession session) {
 		session.setAttribute(LOGIN, id); //session 값 저장 
+		session.setAttribute(CODE, code); //session 값 저장 
 		return "redirect:/index";
 	}
 	
@@ -74,8 +77,6 @@ public class MemberController implements MemberSession {
 		}
 		return "redirect:/index";
 	}
-	
-
 	 
 	
 	@GetMapping("myInfo")

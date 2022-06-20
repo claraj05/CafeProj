@@ -12,5 +12,5 @@ public interface MemberService {
 	
 	public int id_check(HttpServletRequest request);
 	
-	
+	public int getCode(HttpServletRequest request);
 }

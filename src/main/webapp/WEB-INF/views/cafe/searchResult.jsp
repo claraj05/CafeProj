@@ -40,6 +40,7 @@ logtime date default sysdate --등록일 -->
 				<th width="200px">kidszone</th>
 				<th width="200px">petzone</th>
 				<th width="200px">use_time</th>
+				<th width="150px">My Favorites</th>
 				<!-- <th width="100px">imageFileName</th>-->
 			</tr>
 			<c:if test="${list.size()==0}">
@@ -81,6 +82,7 @@ logtime date default sysdate --등록일 -->
 				</c:if>
 				<td>${loc.use_time}</td>
 				<!--  <td>${imageFileName}</td>-->
+				<td><input type="button" value="즐찾버튼" onclick="location.href='${contextPath}/cafe/addFavorite?cafe_no=${loc.cafe_no}'"></td>
 			</tr>
 			</c:forEach>
 		</table>
