@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${contextPath}/resource/css/review.css" rel="stylesheet"
+<link href="${pageContext.request.contextPath}/resources/css/review.css" rel="stylesheet"
 	type="text/css">
 <!-- icon -->
 <script
@@ -24,23 +25,14 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="header-area">
-					<div class="col-md-12">
-						<!-- 이곳은 jsp로 만들어진 부분을 사용함 -->
-						헤더 영역
-					</div>
 				</div>
 				<!-- picture area -->
 				<div class="picture-area">
 					<div class="picture-lists">
-						<div class="btn-area">
-							<button id="prev">앞으로</button>
-							<button id="next">뒤로</button>
-						</div>
-
 						<ul class="picture-title" id="picture-container">
 							<c:if test="${cafeImage != null}">
 								<c:forEach var="imgLink" items="${cafeImage}" varStatus="status">
-									<!-- <li><img src="url(imgLink)"></li> -->
+									<li><img src="url(imgLink)"></li>
 								</c:forEach>
 							</c:if>
 						</ul>
@@ -56,21 +48,17 @@
 										<h2 class="restaurant-title" value="${cafeDetail.cafe_name}">${cafeDetail.cafe_name}</h2>
 										<h2 class="restaurant-avg" value="${cafeDetail.avg_star}">${cafeDetail.avg_star}</h2>
 										<div class="btn-area">
-											<button>write-review</button>
+											<button><a href="http://localhost:8080/root/review/writePage/${cafeDetail.cafe_no}">리뷰쓰기</a></button>
 										</div>
 									</div>
-
-
 									<div class="restaurant-status">스테이스 영역~</div>
-
 								</div>
-
 								<div class="section-restaurant-detail"
 									value="${cafeDetail.cafe_no }">
-									<table border="1">
+									<table>
 										<tr>
 											<td class="detail-col-size">주소</td>
-											<td>${cafeDetail.location1 } ${cafeDetail.location2 }</td>
+											<td>${cafeDetail.location1 }${cafeDetail.location2 }</td>
 										</tr>
 										<tr>
 											<td class="detail-col-size">전화번호</td>
@@ -88,15 +76,17 @@
 										</tr>
 										<tr>
 											<td class="detail-col-size">키드존 여부</td>
-											<td><c:if test="${cafeDetail.kidzone == 0}">
+											<td>
+												<c:if test="${cafeDetail.kidszone == 0}">
 													<c:out value="정보 없음" />
-												</c:if> <c:if test="${cafeDetail.kidzone == 1}">
+												</c:if> <c:if test="${cafeDetail.kidszone == 1}">
 													<c:out value="키즈존(전문)" />
-												</c:if> <c:if test="${cafeDetail.kidzone == 2}">
+												</c:if> <c:if test="${cafeDetail.kidszone == 2}">
 													<c:out value="노키즈존" />
-												</c:if> <c:if test="${cafeDetail.kidzone == 3}">
+												</c:if> <c:if test="${cafeDetail.kidszone == 3}">
 													<c:out value="캐어키즈존" />
-												</c:if></td>
+												</c:if>
+											</td>
 										</tr>
 										<tr>
 											<td class="detail-col-size">펫존 여부</td>
@@ -108,7 +98,8 @@
 													<c:out value="노펫존" />
 												</c:if> <c:if test="${cafeDetail.petzone == 3}">
 													<c:out value="펫허용(애견카페x)" />
-												</c:if></td>
+												</c:if>
+											</td>
 										</tr>
 										<tr>
 											<td class="detail-col-size">영업시간</td>
@@ -120,9 +111,10 @@
 										</tr>
 										<tr>
 											<td class="detail-col-size">메뉴</td>
-											<td>${cafeDetail.menu }</td>
+											<td>${cafeDetail.menu}</td>
 										</tr>
 									</table>
+									<p class="update_date">${cafeDetail.logtime }</p>
 								</div>
 							</div>
 							<div class="section-restaurant-reviews">
@@ -130,42 +122,57 @@
 									<h3 class="rivew-count">
 										리뷰(
 										<c:choose>
-											<c:when test="${reviewDetail.size != 0 }"><c:out value="${reviewDetail.size}"/></c:when>
-											<c:otherwise><c:out value="0"/></c:otherwise>
+											<c:when test="${fn:length(reviewDetail) != 0 }">
+												<c:out value="${fn:length(reviewDetail)}" />
+											</c:when>
+											<c:otherwise>
+												<c:out value="0" />
+											</c:otherwise>
 										</c:choose>
 										)
 									</h3>
 								</div>
-								<c:if test="${reviewDetail.size > 0 && reviewDetail.size <= 5}">
-									<div class="review-container">
-										<ul class="review-lists">
+
+								<div class="review-container">
+									<ul class="review-lists">
+										<c:forEach var="review" items="${reviewDetail}" begin="0" end="${fn:length(reviewDetail)}" varStatus="status">
 											<li class="review-info">
-												<div class="review-title" value="${reviewDetail.review_no }">
-													<span>${reviewDetail.review_content }</span>
+												<div class="review-title" value="${review.review_no}">
+													<span>${review.id}</span>
 												</div>
 												<div class="review-content">
-													<div class="review-text">${reviewDetail.review_content }~</div>
+													<div class="review-text">${review.review_content}~</div>
 													<div class="review-image">
 														<ul class="image">
-															<c:if test="${imgLink != null}">
-																<li><img src="resource/${imgLink.imgLocation}/${imgLink.imgName}"></li>
+															<c:if test="${fn:length(review.reviewImageDTOs) != 0}">
+																<c:forEach var="imgs" items="${review.reviewImageDTOs}">
+																	<li><img src="/resources/${imgs.imageLocation}/${imgs.imageFileName}"/></li>
+																</c:forEach>
 															</c:if>
 														</ul>
 													</div>
 												</div>
 												<div class="review-grade">
-													<span>${reviewDetail.grade}</span>
+													<span>평점 :</span>
+													<span>${review.grade}</span>
+												</div>
+												<div class="update">
+													<a>수정</a>
+												</div>
+												<div class="delete">
+													<a>삭제</a>
 												</div>
 											</li>
-										</ul>
-									</div>
-								</c:if>
-								<c:if test="${reviewDetail.size > 5 }">
+										</c:forEach>
+									</ul>
+								</div>
+
+								<c:if test="${fn:length(reviewDetail) > 5 }">
 									<div class="more-review-area">
 										<button>더보기</button>
 									</div>
 								</c:if>
-								<c:if test="${reviewDetail.size == 0 }">
+								<c:if test="${fn:length(reviewDetail) == 0 }">
 									<div class="non-review">리뷰 없음</div>
 								</c:if>
 							</div>

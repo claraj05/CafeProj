@@ -37,8 +37,8 @@
 		<result property="imgContent" column="imgContent"/>
 	</resultMap>
 	
-	<select id="searchEng(searchKW)" resultMap="cafe">
-		select * from cafe where cafe_name LIKE '% #{searchKW} %'
+	<select id="searchEng" resultMap="cafe">
+		select * from cafe where cafe_name LIKE concat(concat('%',#{searchKW}),'%')
 	</select>
 	<select id="cafeAllList" resultMap="cafe">
 	 	select B.* from 

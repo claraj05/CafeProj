@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,28 +9,38 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="write-container">
-				<form action="/writeReview" method="POST">
-					<div>
-						<div class="text-editor-area">
-							<textarea name="" id="" cols="30" rows="10"></textarea>
-							<span></span> / <span></span>
-						</div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="header-container">
+                ${id} Ïóê ÎåÄÌïú ÏÜîÏßÅÌïú Î¶¨Î∑∞Î•º Ïç®Ï£ºÏÑ∏Ïöî.
+            </div>
 
-						<div class="fileImage-add-area">
-							<input type="file" name="files">
-						</div>
-					</div>
+            <div class="write-container">
+                <form action="http://localhost:8080/root/review/writeReview" method="POST"
+                    enctype="multipart/form-data">
+                    <input name="cafeNo" value="2" style="display:none">
+                    <input name="id" value="donghyeon" style="display:none">
+                    <div class="fileImage-add-area">
+                        <input type="text" name="grade">
+                    </div>
+                    <div>
+                        <div class="text-editor-area">
+                            <textarea name="content" id="" cols="30" rows="10"></textarea>
+                            <span></span> / <span></span>
+                        </div>
 
-					<div class="btn-area">
-						<button id="cancle">√Îº“</button>
-						<button id="save">∏Æ∫‰ ø√∏Æ±‚</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+                        <div class="fileImage-add-area">
+                            <input type="file" name="files">
+                        </div>
+                    </div>
+
+                    <div class="btn-area">
+                        <button id="cancle">Ï∑®ÏÜå</button>
+                        <button id="save">Î¶¨Î∑∞ Ïò¨Î¶¨Í∏∞</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -44,7 +44,7 @@ logtime date default sysdate --등록일 -->
 				<!-- <th width="100px">imageFileName</th>-->
 			</tr>
 			<c:if test="${list.size()==0}">
-			<td colspan="7" width="200" height="200">
+			<td colspan="8" width="200" height="200">
 				검색된 카페가 없습니다.<br>
 				<a href="${contextPath}/cafe/cafeAllList">전체 카페 리스트</a>
 			</td>
@@ -52,7 +52,7 @@ logtime date default sysdate --등록일 -->
 			<c:forEach var="loc" items="${list}">
 			<tr>		
 				<%-- <td>${loc.cafe_no}</td> --%>
-				<td><a href="">${loc.cafe_name}</a></td>
+				<td><a href="http://localhost:8080/root/review/cafe?no=${loc.cafe_no}">${loc.cafe_name}</a></td>
 				<td><img src="" width="200px" height="200px"></td>
 				<td>${loc.avg_star}</td>
 				<td>${loc.location2}</td>

@@ -3,8 +3,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.web.root.mybatis.review.ReviewMapper">
 
-
-
 	<resultMap id="review"
 		type="com.web.root.review.dto.ReviewDTO">
 		<id property="cafe_no" column="cafe_no" />
@@ -16,37 +14,75 @@
 		<result property="grade" column="grade" />
 	</resultMap>
 
-	<resultMap id="findCafeReviewsByCafeNo"
-		type="com.web.root.review.dto.CafeReviewDTO">
-		<association property="cafeInfo" column="cafe_no">
-		</association>
-		<collection property="reviews" column="cafe_no"
-			resultMap="review"></collection>
+	<resultMap type="com.web.root.cafe.dto.CafeDTO" id="cafe">
+		<id property="cafe_no" column="cafe_no" />
+		<result property="cafe_name" column="cafe_name" />
+		<result property="location1" column="location1" />
+		<result property="location2" column="location2" />
+		<result property="cafe_tel" column="cafe_tel" />
+		<result property="menu" column="menu" />
+		<result property="kidszone" column="kidszone" />
+		<result property="petzone" column="petzone" />
+		<result property="use_time" column="use_time" />
+		<result property="avg_star" column="avg_star" />
+		<result property="logtime" column="logtime" />
 	</resultMap>
 
+	<resultMap id="reviewImage"
+		type="com.web.root.review.dto.ReviewImageDTO">
+		<result property="cafe_no" column="cafe_no" />
+		<result property="review_no" column="review_no" />
+		<result property="id" column="id" />
+		<result property="imageFileName" column="imageFileName" />
+		<result property="imageLocation" column="imageLocation" />
+	</resultMap>
+	
+	<select id="cafeInfo" resultMap="cafe">
+		select * from cafe where cafe_no=#{cafe_no}
+	</select>
 
-	<select id="targetReviewLists" resultMap="review">
-		select * from review
-		where cafe_no=#{target}
+	<select id="findReviewsByCafeNo" resultMap="review">
+		select * from review where cafe_no=#{cafe_no}
 	</select>
 
 	<select id="reviewLists" resultMap="review">
 		select * from review
 	</select>
 
+	<select id="reviewImageLists" resultMap="reviewImage">
+		select * from
+		review_image where id=#{id} and cafe_no=#{cafe_no}
+	</select>
+
 	<select id="cafeReviewTotalCount" resultType="Integer">
 		select
 		count(review.cafe_no) from review where cafe_no=#{target};
 	</select>
-
-	<!-- orm test -->
-
-	<select id="ormTargetReviewLists"
-		resultMap="findCafeReviewsByCafeNo">
-		select c.* , r.* from review r
-		left join cafe c on r.cafe_no
-		=
-		c.cafe_no where c.cafe_no=#{target}
+	
+	<select id="findReviewImageByCafeNoAndId" resultMap="reviewImage">
+		select * from review_img where cafe_no=#{cafe_no} and id=#{id}
 	</select>
+	<select id="findReviewNo" resultType="Integer">
+		select review_no from review where cafe_no=#{cafe_no} and id=#{id} and review_content=#{content}
+	</select>
+	
+	<delete id="deleteReviewById">
+		delete from review where review_id=#{id} and review_no = #{review_no} and cafe_no=#{cafe_no}
+	</delete>
+	
+	<update id="updateReivew">
+		update review set review_content=#{review_content}, grade=#{grade} where id=#{id} and cafe_no=#{cafe_no} and review_no=#{review_no}
+	</update>
+
+	<insert id="reivewWrite">
+		insert into review
+		values(#{cafe_no},REVIEW_SEQ.NEXTVAL,#{content},#{id},sysdate,#{grade})
+	</insert>
+	<!-- <resultMap id="findCafeReviewsByCafeNo" type="com.web.root.review.dto.CafeReviewDTO"> 
+		<association property="cafeInfo" column="cafe_no"> </association> <collection 
+		property="reviews" column="cafe_no" resultMap="review"></collection> </resultMap> 
+		<select id="ormTargetReviewLists" resultMap="findCafeReviewsByCafeNo"> select 
+		c.* , r.* from review r left join cafe c on r.cafe_no = c.cafe_no where c.cafe_no=#{target} 
+		</select> -->
 
 </mapper>

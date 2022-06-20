@@ -7,21 +7,19 @@
 <head>
 <meta charset="UTF-8">
 <title>header</title>
-<style type="text/css">
-
+<link rel ="stylesheet" type ="text/css" href = "../resources/css/cafe/cafeSearchENG.css?v=2">
+<style>
 * {
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
 	border-collapse: collapse;
 }
-
 .intro_bg {
 	/* background-image:url(""); */
 	width:100%;
 	height:200px;
 	border : 1px solid black;
-	
 }
 
 .header {
@@ -29,32 +27,29 @@
 	margin: auto;
 	display: flex;
 	height: 86px;
-	
 }
-
 .searchArea {
 	width: 300px;
 	height: 40px;
 	background:rgba(0,0,0,0.5);
 	border-radius: 5px;
 	margin-top: 24px;
-
 }
-
 .searchArea > form > input {
 	border:none;
 	background:rgba(0,0,0,0.0);
-	width:250px;
+	width:230px;
 	height:40px;
 	padding-left:20px;
-	
 	color:#fff;
 }
 #buttonS{
-	color : black;
+	width:50px;
+	color:white;
+	font-weight:bold;
+	cursor:pointer;
+	font-size: 15px;
 }
-
-
 .searchArea > form > span {
 	width:50px;
 	color:#fff;
@@ -94,8 +89,8 @@
 		<div class="intro_bg">
 			<div class="header">
 				<div class="searchArea">
-					<form action="cafe/searchEng" method="get">
-						<input type="search" name="searchKW">
+					<form action="searchEng">
+						<input id = search" type="search" name="searchKW">
 						<input id="buttonS" type="submit" value="검색">
 					</form>
 				</div>

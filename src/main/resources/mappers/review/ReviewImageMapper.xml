@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.root.mybatis.img.ReviewImageMapper">
+
+	<resultMap type="com.web.root.cafe.upload.dto.UploadDTO"
+		id="imgs">
+		<result property="imgName" column="imgName" />
+		<result property="imgLocation" column="imgLocation" />
+		<result property="cafe_no" column="cafe_no" />
+	</resultMap>
+
+	<resultMap id="reviewImgs"
+		type="com.web.root.review.dto.ReviewImageDTO">
+		<result property="cafe_no" column="cafe_no" />
+		<result property="review_no" column="review_no" />
+		<result property="id" column="id" />
+		<result property="imageFileName" column="imageFileName" />
+		<result property="imageLocation" column="imageLocation" />
+	</resultMap>
+
+	<select id="cafeImageLists" resultMap="imgs">
+		select * from cafe_Image
+	</select>
+
+	<select id="cafeImages" resultMap="imgs">
+		select * from cafe_Image where
+		cafe_no=#{cafe_no}
+	</select>
+	
+	<select id="findCafeImgByCafeNo" resultMap="imgs">
+		select * from cafe_Image where
+		cafe_no=#{cafe_no}
+	</select>
+
+	<select id="findReviewImageByCafeNoAndReviewNoAndId" resultMap="reviewImgs">
+		select * from review_img where cafe_no=#{cafe_no} and review_no=#{review_no} and id=#{id}
+	</select>
+
+	<select id="findCafeImgLocationByCafeNoAndId">
+		select * from cafe_Image where
+		imageLocation=#{imageLocation}
+		and id=#{id}
+	</select>
+
+	<insert id="saveReviewImage">	
+		insert into review_img values(#{cafe_no},#{review_no},#{id},#{imageFileName},#{imageLocation})
+	</insert>
+	
+	<delete id="deleteReviewImage">
+		delete review_img where id=#{id} and cafe_no=#{cafe_no} and review_no=#{review_no}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

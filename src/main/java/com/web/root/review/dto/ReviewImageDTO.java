@@ -3,20 +3,28 @@ package com.web.root.review.dto;
 public class ReviewImageDTO {
 
 	private int cafe_no;
-	private String memberName;
-	private String imgLocation;
-	private String imgName;
+	private int review_no;
+	private String id;
+	private String imageFileName;
+	private String imageLocation;
 
 	public ReviewImageDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ReviewImageDTO(int cafe_no, String memberName, String imgLocation, String imgName) {
+	public ReviewImageDTO(int cafe_no, int review_no, String id, String imageFileName, String imageLocation) {
 		super();
 		this.cafe_no = cafe_no;
-		this.memberName = memberName;
-		this.imgLocation = imgLocation;
-		this.imgName = imgName;
+		this.review_no = review_no;
+		this.id = id;
+		this.imageFileName = imageFileName;
+		this.imageLocation = imageLocation;
+	}
+
+	@Override
+	public String toString() {
+		return "ReviewImageDTO [cafe_no=" + cafe_no + ", review_no=" + review_no + ", id=" + id + ", imageFileName="
+				+ imageFileName + ", imageLocation=" + imageLocation + "]";
 	}
 
 	public int getCafe_no() {
@@ -27,28 +35,36 @@ public class ReviewImageDTO {
 		this.cafe_no = cafe_no;
 	}
 
-	public String getMemberName() {
-		return memberName;
+	public int getReview_no() {
+		return review_no;
 	}
 
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
+	public void setReview_no(int review_no) {
+		this.review_no = review_no;
 	}
 
-	public String getImgLocation() {
-		return imgLocation;
+	public String getId() {
+		return id;
 	}
 
-	public void setImgLocation(String imgLocation) {
-		this.imgLocation = imgLocation;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getImgName() {
-		return imgName;
+	public String getImageFileName() {
+		return imageFileName;
 	}
 
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
+	public void setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
+	}
+
+	public String getImageLocation() {
+		return imageLocation;
+	}
+
+	public void setImageLocation(String imageLocation) {
+		this.imageLocation = imageLocation;
 	}
 
 }

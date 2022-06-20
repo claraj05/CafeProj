@@ -28,7 +28,13 @@ public class CafeServiceImpl implements CafeService {
 	
 	@Override
 	public void searchEng(String searchKW, Model model) {
-		model.addAttribute("kwResult",mapper.searchEng(searchKW));
+		try {
+			model.addAttribute("kwResult",mapper.searchEng(searchKW));
+			System.out.println("값 model에 추가 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("mapper.searchEng실패");
+		}
 		
 	}
 

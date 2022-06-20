@@ -35,28 +35,16 @@ public class CafeController implements MemberSession{
 	@Autowired
 	CafeService cf;
 	
-	@RequestMapping("searchEng")
-	public String searchEng(HttpServletRequest request, Model model,HttpServletResponse response) throws IOException {
-		String searchKW = request.getParameter("searchKW");
-		try {
-			if(searchKW!=null) {
-				cf.searchEng(searchKW, model);
-			}
-			return "cafe/searchKWResult";
-		} catch (Exception e) {
-				response.setContentType("text/html; charset=utf-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('검색어를 입력하세요');"+
-						"location.href='" + request.getContextPath() + "/index'</script>");
-				return "index";
-		}
-	}
 	
 	@GetMapping("searchView")
 	public String searchView() {
 		return "cafe/searchView";
 	}
 	
+	@RequestMapping("review")
+	public String review(HttpServletRequest request) {
+		return "cafe/review";
+	}
 	@GetMapping("eventView")
 	public String eventView(HttpServletRequest request, Model model) {
 		cf.eventView(model);
