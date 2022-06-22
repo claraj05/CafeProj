@@ -15,26 +15,31 @@ import com.web.root.review.service.ReviewService;
 @Service
 public class RecommandService {
 
-	
 	@Autowired
 	private CafeMapper cafeMapper;
-	
+
 	@Autowired
 	private ReviewMapper reviewMapper;
-	
-	
+
 	public List<CafeDTO> recommandCafe() {
-		
+
 		List<CafeDTO> list = cafeMapper.recommandCafe();
 		List<CafeDTO> recommand = new ArrayList<CafeDTO>();
-		
+
 		for (int i = 0; i < list.size(); i++) {
 			int cafe_no = list.get(i).getCafe_no();
 			int reviewCount = reviewMapper.countReview(cafe_no);
 			if (reviewCount > 1)
 				recommand.add(list.get(i));
 		}
-		
+		if (list.size() != 6) {
+			int offset = 6 - list.size();
+
+			for (int i = 0; i < offset; i++) {
+				
+			}
+		}
+
 		return recommand;
 	}
 }

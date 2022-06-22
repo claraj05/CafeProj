@@ -13,66 +13,37 @@
 <body>
 	<c:import url="default/header.jsp" />
 	<div class="board_text">
-        <div class="main-container">
-            <div class="recommand-cafe-list">
-                <div class="sector-one">
-                    <figure class="recommend">
-                        <img src="">
-                        <figcaption>
-                            <div class="recommand-info">
-                                <div class="info-title">
-
-                                </div>
-                            </div>
-                        </figcaption>
-                    </figure>
-                    <figure class="recommend">
-                        <img src="">
-                        <figcaption>
-                            <div class="recommand-info">
-                               hi2
-                            </div>
-                        </figcaption>
-                    </figure>
-                    <figure class="recommend">
-                        <img src="">
-                        <figcaption>
-                            <div class="recommand-info">
-                                hi3
-                            </div>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="sector-two">
-                    <figure class="recommend">
-                        <img src="">
-                        <figcaption>
-                            <div class="recommand-info">
-                                hi4
-                            </div>
-                        </figcaption>
-                    </figure>
-                    <figure class="recommend">
-                        <img src="">
-                        <figcaption>
-                            <div class="recommand-info">
-                                hi5
-                            </div>
-                        </figcaption>
-                    </figure>
-                    <figure class="recommend">
-                        <img src="">
-                        <figcaption>
-                            <div class="recommand-info">
-                                hi6
-                            </div>
-                        </figcaption>
-                    </figure>
-                </div>
-            </div>
-        </div>
-    </div>
-	<script src="${pageContext.request.contextPath}/resources/script/index.js"></script>
+		<div class="main-container">
+			<div class="recommand-cafe-list">
+				<div class="sector-one">
+					<c:forEach var="item" items="${sectionOne}">
+						<figure class="recommend">
+							<img src="/img/${item.cafe_no}">
+							<figcaption>
+								<div class="recommand-info">
+									<div class="info-title">${item.cafe_name}</div>
+								</div>
+							</figcaption>
+						</figure>
+					</c:forEach>
+				</div>
+				<div class="sector-two">
+					<c:forEach var="item" items="${sectionTwo}">
+						<figure class="recommend">
+							<img src="/img/${item.cafe_no}">
+							<figcaption>
+								<div class="recommand-info">
+									<div class="info-title">${item.cafe_name}</div>
+								</div>
+							</figcaption>
+						</figure>
+					</c:forEach>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script
+		src="${pageContext.request.contextPath}/resources/script/index.js"></script>
 
 	<c:import url="default/footer.jsp" />
 
