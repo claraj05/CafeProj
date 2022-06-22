@@ -73,11 +73,19 @@
 	<update id="updateReivew">
 		update review set review_content=#{review_content}, grade=#{grade} where id=#{id} and cafe_no=#{cafe_no} and review_no=#{review_no}
 	</update>
+	
+	<select id="findGradeByCafeNo" resultType="Double">
+		select avg(grade) from review where cafe_no=#{cafe_no}
+	</select>
 
 	<insert id="reivewWrite">
 		insert into review
 		values(#{cafe_no},REVIEW_SEQ.NEXTVAL,#{content},#{id},sysdate,#{grade})
 	</insert>
+	
+	<select id="countReview">
+		select count(#{cafe_no}) from review
+	</select>
 	<!-- <resultMap id="findCafeReviewsByCafeNo" type="com.web.root.review.dto.CafeReviewDTO"> 
 		<association property="cafeInfo" column="cafe_no"> </association> <collection 
 		property="reviews" column="cafe_no" resultMap="review"></collection> </resultMap> 

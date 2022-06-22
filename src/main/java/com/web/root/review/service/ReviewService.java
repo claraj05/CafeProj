@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.web.root.cafe.dto.CafeDTO;
 import com.web.root.cafe.upload.dto.UploadDTO;
+import com.web.root.mybatis.cafe.CafeMapper;
 import com.web.root.mybatis.review.ReviewMapper;
 import com.web.root.review.dto.ReviewDTO;
 import com.web.root.review.dto.ReviewImageDTO;
@@ -19,6 +20,9 @@ public class ReviewService {
 
 	@Autowired
 	private ReviewMapper reviewMapper;
+
+	@Autowired
+	private CafeMapper cafeMapper;
 
 	@Autowired
 	private ReviewFileService reviewFileService;
@@ -44,11 +48,16 @@ public class ReviewService {
 
 	@Transactional
 	public boolean reviewWrite(String cafe_no, String id, String content, String grade, List<MultipartFile> file) {
-		int resultSave = reviewMapper.reivewWrite(Integer.valueOf(cafe_no), id, content, Integer.valueOf(grade));
+		int cafeNo = Integer.valueOf(cafe_no);
+		int resultSave = reviewMapper.reivewWrite(cafeNo, id, content, Integer.valueOf(grade));
 		try {
-			int review_no = reviewMapper.findReviewNo(Integer.valueOf(cafe_no), id, content);
-			reviewFileService.reviewImgSave(Integer.valueOf(cafe_no), review_no, id, file);
-		} catch (NumberFormatException | IllegalStateException | IOException e) {
+			int review_no = reviewMapper.findReviewNo(cafeNo, id, content);
+			reviewFileService.reviewImgSave(cafeNo, review_no, id, file);
+
+			double avg = reviewMapper.findGradeByCafeNo(cafe_no);
+			cafeMapper.updateAvgStar(avg, cafeNo);
+
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -73,7 +82,7 @@ public class ReviewService {
 	@Transactional
 	public void updateReview(String id, int cafe_no, int review_no, String content, int grade,
 			List<MultipartFile> files) {
-		
+
 		reviewMapper.updateReivew(id, review_no, cafe_no, grade, content);
 		reviewFileService.deleteReviewImage(id, cafe_no, review_no);
 		try {

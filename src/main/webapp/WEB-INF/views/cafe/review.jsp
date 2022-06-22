@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/resources/css/review.css" rel="stylesheet"
+<link href="${pageContext.request.contextPath}/resources/css/review.css?after" rel="stylesheet"
 	type="text/css">
 <!-- icon -->
 <script
@@ -30,9 +30,9 @@
 				<div class="picture-area">
 					<div class="picture-lists">
 						<ul class="picture-title" id="picture-container">
-							<c:if test="${cafeImage != null}">
-								<c:forEach var="imgLink" items="${cafeImage}" varStatus="status">
-									<li><img src="url(imgLink)"></li>
+							<c:if test="${cafeImageLink != null}">
+								<c:forEach var="imgLink" items="${cafeImageLink}" varStatus="status">
+									<li><img src="${contextPath }/img/${imgLink.cafe_no}/${imgLink.imgName}" ></li>
 								</c:forEach>
 							</c:if>
 						</ul>
@@ -48,10 +48,9 @@
 										<h2 class="restaurant-title" value="${cafeDetail.cafe_name}">${cafeDetail.cafe_name}</h2>
 										<h2 class="restaurant-avg" value="${cafeDetail.avg_star}">${cafeDetail.avg_star}</h2>
 										<div class="btn-area">
-											<button><a href="http://localhost:8080/root/review/writePage/${cafeDetail.cafe_no}">리뷰쓰기</a></button>
+												<button><a href="http://localhost:8080/root/review/writePage/${cafeDetail.cafe_no}">리뷰쓰기</a></button>
 										</div>
 									</div>
-									<div class="restaurant-status">스테이스 영역~</div>
 								</div>
 								<div class="section-restaurant-detail"
 									value="${cafeDetail.cafe_no }">
@@ -110,11 +109,11 @@
 											<td>${cafeDetail.use_time}</td>
 										</tr>
 										<tr>
-											<td class="detail-col-size">메뉴</td>
+											<td class="detail-col-size">대표 메뉴</td>
 											<td>${cafeDetail.menu}</td>
 										</tr>
 									</table>
-									<p class="update_date">${cafeDetail.logtime }</p>
+									<p class="update_date">${cafeDetail.logtime}</p>
 								</div>
 							</div>
 							<div class="section-restaurant-reviews">
@@ -146,7 +145,7 @@
 														<ul class="image">
 															<c:if test="${fn:length(review.reviewImageDTOs) != 0}">
 																<c:forEach var="imgs" items="${review.reviewImageDTOs}">
-																	<li><img src="/resources/${imgs.imageLocation}/${imgs.imageFileName}"/></li>
+																	<li><img src="${contextPath}/reviewImg/${cafeDetail.cafe_no}/${review.id}/${imgs.imageFileName}" /></li>
 																</c:forEach>
 															</c:if>
 														</ul>
@@ -166,12 +165,6 @@
 										</c:forEach>
 									</ul>
 								</div>
-
-								<c:if test="${fn:length(reviewDetail) > 5 }">
-									<div class="more-review-area">
-										<button>더보기</button>
-									</div>
-								</c:if>
 								<c:if test="${fn:length(reviewDetail) == 0 }">
 									<div class="non-review">리뷰 없음</div>
 								</c:if>

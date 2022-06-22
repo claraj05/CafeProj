@@ -92,16 +92,23 @@ function loginConfirm(id){
 			<th width="10%">조회수</th>		
 			<th width="10%">좋아요</th>		
 		</tr>
+		<c:if test="${totalPage!=0 }">
 		<c:forEach var="dto" items="${list }">
 			<tr>
 				<td>${dto.write_no }</td>
-				<td class="title"><a href="${contextPath }/board/boardView?write_no=${dto.write_no}&id=poikh7">${dto.title }</a></td>
+				<td class="title"><a href="${contextPath }/board/boardView?write_no=${dto.write_no}&id=${loginUser}">${dto.title }</a></td>
 				<td>${dto.id }</td>
 				<td>${dto.savedate }</td>
 				<td>${dto.hit }</td>
 				<td>${dto.like_count }</td>
 			</tr>
 		</c:forEach>
+		</c:if>
+		<c:if test="${totalPage==0 }">
+			<tr>
+				<td colspan="6">검색 결과가 없습니다</td>
+			</tr>
+		</c:if>
 	</table>
 	
 	<div align="center">
@@ -121,8 +128,7 @@ function loginConfirm(id){
 		</c:if>
 	</div>
 	<br>
-	
-	<input type="button" class="writeBu" value="글쓰기" onclick="loginConfirm('poikh')">
+	<input type="button" class="writeBu" value="글쓰기" onclick="loginConfirm('${loginUser}')">
 	
 	<c:import url="../default/footer.jsp" />
 </body>

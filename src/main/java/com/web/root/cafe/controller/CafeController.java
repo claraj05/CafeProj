@@ -1,219 +1,158 @@
 package com.web.root.cafe.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.root.cafe.dto.CafeDTO;
 import com.web.root.cafe.service.CafeService;
+import com.web.root.cafe.upload.dto.UploadDTO;
 import com.web.root.session.name.MemberSession;
 
 @Controller
 @RequestMapping("cafe")
-public class CafeController implements MemberSession{
-	
+public class CafeController implements MemberSession {
+
+	private static final Logger logger2 = LoggerFactory.getLogger(CafeController.class);
 	@Autowired
 	CafeService cf;
-	
-	
+
 	@GetMapping("searchView")
 	public String searchView() {
 		return "cafe/searchView";
 	}
-	
+
 	@RequestMapping("review")
 	public String review(HttpServletRequest request) {
 		return "cafe/review";
 	}
+
 	@GetMapping("eventView")
 	public String eventView(HttpServletRequest request, Model model) {
 		cf.eventView(model);
 		return "cafe/eventView";
 	}
-	
-	@GetMapping("mycafe")
-	public String mycafe() {
-		return "cafe/mycafe";
-	}
-	
+
+
 	@GetMapping("searchResult")
-	public String searchResult(HttpServletRequest request, 
-			@RequestParam("location1") String location1, 
-			@RequestParam("kidszone") String kidszone, 
-			@RequestParam("petzone") String petzone,
-			@RequestParam("star")String star,Model model) throws ServletException, IOException {
+	public String searchResult(HttpServletRequest request, @RequestParam("location1") String location1,
+			@RequestParam("kidszone") String kidszone, @RequestParam("petzone") String petzone,
+			@RequestParam("star") String star, Model model) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String [] locationList = request.getParameterValues("location1");
+		String[] locationList = request.getParameterValues("location1");
 		kidszone = request.getParameter("kidszone");
 		petzone = request.getParameter("petzone");
 		star = request.getParameter("star");
-		if(locationList[0].contentEquals("0")) {
-			String test[] = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25"};
-			cf.getlocationList(request,test, kidszone, petzone, star, model);
-		}else {
-			cf.getlocationList(request,locationList, kidszone, petzone, star, model);
+		if (locationList[0].contentEquals("0")) {
+			String test[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16",
+					"17", "18", "19", "20", "21", "22", "23", "24", "25" };
+			cf.getlocationList(request, test, kidszone, petzone, star, model);
+		} else {
+			cf.getlocationList(request, locationList, kidszone, petzone, star, model);
 		}
+		model.addAttribute("location1", location1);
+		model.addAttribute("kidszone", kidszone);
+		model.addAttribute("petzone", petzone);
+		model.addAttribute("star", star);
 		return "cafe/searchResult";
 	}
-	
+
 	@GetMapping("cafeAllList")
-	public String test(HttpServletRequest request, Model model,HttpServletResponse response,
-			@RequestParam(value = "num", required = false, defaultValue = "1") int num) throws Exception  {
-		cf.cafeAllList(model,num);
-		cf.uploadImage(model);
+	public String test(HttpServletRequest request, Model model, HttpServletResponse response,
+			@RequestParam(value = "num", required = false, defaultValue = "1") int num) throws Exception {
+		cf.cafeAllList(model, num);
 		return "cafe/cafeAllList";
 	}
-	@GetMapping("download")//사진 불러오기
-	public void download(int cafe_no,HttpServletRequest request, HttpServletResponse response) throws Exception {
-		cafe_no = Integer.parseInt(request.getParameter("cafe_no"));
-		String root = cf.getImgRoot(cafe_no);
-		String firstImageFileName = cf.getImgFirstName(cafe_no); //
-		System.out.println("경로 : "+root);
-		System.out.println("첫번째 파일 이름 : "+firstImageFileName);
-		
-		response.addHeader("Content-disposition", "attachment;fileName=" + firstImageFileName);
-		
-		File file = new File(root + "/" + firstImageFileName);
-		FileInputStream in = new FileInputStream(file);
-		FileCopyUtils.copy(in, response.getOutputStream());
-		in.close();
+
+
+	@GetMapping("cafemanager")
+	public String cafemanager() {
+		return "cafe/cafemanager";
 	}
-	 @PostMapping("writeSave") 
-	  public String writeSave(HttpServletResponse response,
-			  				CafeDTO dto, @RequestParam("multiFile") List<MultipartFile> multiFileList, @RequestParam String imgContent, HttpServletRequest request
-			  				,Model model) throws IOException {
-	 
-		  PrintWriter out = response.getWriter();
-		  response.setContentType("text/html; charset=utf-8");
+	
+	@RequestMapping(value = "/writeSave", method = RequestMethod.POST)
+	public String writeSave(CafeDTO dto, @RequestParam("imgContent") String imgContent,
+			HttpServletRequest request, Model model,MultipartHttpServletRequest httpServletRequest) throws IOException {
 		
-		// 받아온것 출력 확인
-		  System.out.println("multiFileList : " + multiFileList);
-		  System.out.println("fileContent : " + imgContent);
-				  
-		// path 가져오기
-		  String path = request.getSession().getServletContext().getRealPath("resources");
-		  String root = path + "\\" + "uploadFiles"+"\\";
-		
-		
-		  File fileCheck = new File(root);
-		
-		  if(!fileCheck.exists()) fileCheck.mkdirs();
-		
-		
-			List<Map<String, String>> fileList = new ArrayList<>();
-			
-			for(int i = 0; i < multiFileList.size(); i++) {
-				String originFile = multiFileList.get(i).getOriginalFilename();
-				String ext = originFile.substring(originFile.lastIndexOf("."));
-				String changeFile = UUID.randomUUID().toString() + ext;
-				
-				
-				Map<String, String> map = new HashMap<>();
-				map.put("originFile", originFile);
-				map.put("changeFile", changeFile);
-				
-				fileList.add(map);
+		List<MultipartFile> multiFiles = httpServletRequest.getMultiFileMap().get("multiFiles");
+		cf.cafeWrite(dto, imgContent, multiFiles);
 
-			}
-			
-			
-			 System.out.println(fileList);
-			
-			// 파일업로드
-			try {
-				for(int i = 0; i < multiFileList.size(); i++) {
-					File uploadFile = new File(root + "\\" + fileList.get(i).get("changeFile"));
-					multiFileList.get(i).transferTo(uploadFile);
-				}
-				
-				System.out.println("다중 파일 업로드 성공!");
-				System.out.println("path : " + path);
-				
-			} catch (IllegalStateException | IOException e) {
-				System.out.println("다중 파일 업로드 실패 ㅠㅠ");
-				// 만약 업로드 실패하면 파일 삭제
-				for(int i = 0; i < multiFileList.size(); i++) {
-					new File(root + "\\" + fileList.get(i).get("changeFile")).delete();
-				}
-				e.printStackTrace();
-			}
-			int result = 0;
-			
-			result = cf.writeSave(request, dto, multiFileList, imgContent, root); //카페정보
-			if(result!=0) {
-				return "result";
-			}else {
-				return "fail";
-			}
-	  }
-	 
-	  @GetMapping("cafemanager")
-	  public String cafemanager() {
-		  return "cafe/cafemanager";
-	  }
-	  
-	  @RequestMapping("addFavorite")
-	  public String addFavorite(HttpServletRequest request) {
-		  
-		  String id = request.getParameter("id");
-		  System.out.println("id : "+id);
-		  int cafe_no =Integer.parseInt(request.getParameter("cafe_no"));
-		  int check = cf.checkLike(id,cafe_no); //이미 있는지 확인
-		  try {
-			  if(check==0) {
-				  cf.plusLike(id, cafe_no);
-				  cf.countplus(cafe_no);
-			  }else {
-				  cf.minusLike(id, cafe_no);
-				  cf.countminus(cafe_no);
-			  }
-			  System.out.println("좋아요 성공");
-		} catch (Exception e) {
-			System.out.println("좋아요기능 실패...");
+		return "redirect:/cafe/cafeAllList";
+
+	}
+
+
+	@GetMapping("cafeSelect")
+	public String cafeSelect(HttpServletRequest request, RedirectAttributes ra) {
+
+		int check = cf.cafeSelect(request); // 1:데이터o, 0:데이터x
+
+		if (check == 1) {// 데이터o->데이터 삭제(좋아요 체크 해제)
+			cf.selectMinus(request);
+			cf.selectCountMinus(request);
+			check = 0;
+		} else {// 데이터x->데이터 추가(좋아요 체크)
+			cf.selectPlus(request);
+			cf.selectCountPlus(request);
+			check = 1;
 		}
-		  return "cafe/addFavorite";
-	  }
-
+		ra.addAttribute("cafe_no", request.getParameter("cafe_no"));
+		ra.addAttribute("location1", request.getParameter("location1"));
+		ra.addAttribute("kidszone", request.getParameter("kidszone"));
+		ra.addAttribute("petzone", request.getParameter("petzone"));
+		ra.addAttribute("star", request.getParameter("star"));
+		ra.addAttribute("check", check);
+		if (request.getHeader("Referer") != null) {
+		    return "redirect:" + request.getHeader("Referer");
+		  } else {
+		    return "cafe/searchView";
+		  }
+	}
+	
+	@GetMapping("mycafe")
+	public String mycafe(Model model, @RequestParam("id") String id) {
+		
+		System.out.println(id);
+		cf.getSelectList(model, id);
+		
+		return "cafe/mycafe";
+	}
+	
+	@GetMapping("cafeSelect2")
+	   public String cafeSelect2(HttpServletRequest request, RedirectAttributes ra) {
+	      
+	      int check=cf.cafeSelect(request); //1:데이터o, 0:데이터x
+	      if(check==1) {//데이터o->데이터 삭제(좋아요 체크 해제)
+	         cf.selectMinus(request);
+	         cf.selectCountMinus(request);
+	         check=0;
+	      }else {//데이터x->데이터 추가(좋아요 체크)
+	         cf.selectPlus(request);
+	         cf.selectCountPlus(request);
+	         check=1;
+	      }
+	      
+	      String id=request.getParameter("id");
+	      ra.addAttribute("id", id);
+	      
+	      return "redirect:mycafe";
+	   }
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

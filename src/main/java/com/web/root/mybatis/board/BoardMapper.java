@@ -24,6 +24,8 @@ public interface BoardMapper {
 	public BoardImageDTO boardImageView(int write_no);
 
 	public void boardModify(BoardDTO dto);
+	
+	public void boardModifyImage(String imageFileName1, String imageFileName2, String imageFileName3, int write_no);
 
 	public void boardDelete(int write_no);
 

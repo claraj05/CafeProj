@@ -7,34 +7,65 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<link href="${pageContext.request.contextPath}/resources/css/writePage.css?after" rel="stylesheet"
+	type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
             <div class="header-container">
-                ${id} 에 대한 솔직한 리뷰를 써주세요.
+                ${cafe_name} 에 대한 솔직한 리뷰를 써주세요.
             </div>
 
             <div class="write-container">
                 <form action="http://localhost:8080/root/review/writeReview" method="POST"
                     enctype="multipart/form-data">
-                    <input name="cafeNo" value="2" style="display:none">
-                    <input name="id" value="donghyeon" style="display:none">
-                    <div class="fileImage-add-area">
-                        <input type="text" name="grade">
-                    </div>
-                    <div>
+                    
+                    
+                    <div class="text-container">
+                        <div class="grade-area">
+                            <h3>평점 : <input type="text" name="grade" id="grade" value="" hidden></h3>
+                            <button type="button" value="1" class="grade-btn">
+                                <span class="material-symbols-outlined">
+                                    sentiment_extremely_dissatisfied
+                                </span>
+                            </button>
+                            <button type="button" value="2" class="grade-btn">
+                                <span class="material-symbols-outlined">
+                                    sentiment_dissatisfied
+                                </span>
+                            </button>
+                            <button type="button" value="3" class="grade-btn">
+                                <span class="material-symbols-outlined">
+                                    sentiment_neutral
+                                </span>
+                            </button>
+                            <button type="button" value="4" class="grade-btn">
+                                <span class="material-symbols-outlined">
+                                    mood
+                                 </span>
+                            </button>
+                            <button type="button" value="5" class="grade-btn">
+                                <span class="material-symbols-outlined">
+                                    sentiment_very_satisfied
+                                </span>
+                            </button>
+                        </div>
                         <div class="text-editor-area">
-                            <textarea name="content" id="" cols="30" rows="10"></textarea>
-                            <span></span> / <span></span>
-                        </div>
-
-                        <div class="fileImage-add-area">
-                            <input type="file" name="files">
+                            <textarea name="content" id="" cols="30" rows="10" placeholder="${loginUser} 님의 리뷰를 써주세요!"></textarea>
+                            <!-- <span></span> / <span></span> -->
                         </div>
                     </div>
-
-                    <div class="btn-area">
+                    
+                    <input name="cafeNo" value="${cafe_no}" style="display:none">
+                    <input name="id" value="${loginUser}" style="display:none">
+					<div class="fileImage-container">
+						<div class="fileImage-area">
+							<input multiple="multiple" type="file" name="files">
+						</div>
+					</div>
+					<div class="btn-area">
                         <button id="cancle">취소</button>
                         <button id="save">리뷰 올리기</button>
                     </div>
@@ -42,5 +73,7 @@
             </div>
         </div>
     </div>
+    <script src="${pageContext.request.contextPath}/resources/script/grade.js"></script>
+    <script src="img.js"></script>
 </body>
 </html>

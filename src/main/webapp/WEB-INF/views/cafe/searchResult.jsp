@@ -8,6 +8,21 @@
 <meta charset="UTF-8">
 <title>SearchResult</title>
 <link rel ="stylesheet" type ="text/css" href = "../resources/css/cafeSearchResult.css">
+<script>
+function loginConfirm(cafe_no, location1, kidszone, petzone, star, id){
+	if(id==""){ //로그인x
+		alert("로그인해주세요")
+		location.href="${contextPath}/member/login"
+	}else { //로그인o
+		location.href="${contextPath}/cafe/cafeSelect?cafe_no="+cafe_no+"&location1="+location1+"&kidszone="+kidszone+"&petzone="+petzone+"&star="+star+"&id="+id
+	}
+}
+/* function selectCheck(){
+	if(${check }==1){
+		document.getElementById("selectBu").value="♥"
+	}	
+}  */
+</script>
 </head>
 <body>
 <!-- cafe_no number(30) primary key,
@@ -53,7 +68,8 @@ logtime date default sysdate --등록일 -->
 			<tr>		
 				<%-- <td>${loc.cafe_no}</td> --%>
 				<td><a href="http://localhost:8080/root/review/cafe?no=${loc.cafe_no}">${loc.cafe_name}</a></td>
-				<td><img src="" width="200px" height="200px"></td>
+				<td><img src="${contextPath }/img/${loc.cafe_no}/${loc.imgName}" 
+									width="200px" height="200px" width="200px" height="200px" width="200px" height="200px"></td>
 				<td>${loc.avg_star}</td>
 				<td>${loc.location2}</td>
 				<c:if test="${loc.kidszone==0}">
@@ -82,7 +98,10 @@ logtime date default sysdate --등록일 -->
 				</c:if>
 				<td>${loc.use_time}</td>
 				<!--  <td>${imageFileName}</td>-->
-				<td><input type="button" value="즐찾버튼" onclick="location.href='${contextPath}/cafe/addFavorite?cafe_no=${loc.cafe_no}'"></td>
+				<td>
+					<input type="button" value="♡"  id="selectBu" onclick="location.href='${contextPath}/cafe/cafeSelect?cafe_no=${loc.cafe_no}&id=${loginUser}'">
+					${loc.select_count }
+				</td>
 			</tr>
 			</c:forEach>
 		</table>

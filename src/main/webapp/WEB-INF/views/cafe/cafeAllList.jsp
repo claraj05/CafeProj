@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel ="stylesheet" type ="text/css" href = "../resources/css/cafe/cafeSearchResult.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<c:import url="../default/header.jsp"/>
@@ -26,7 +27,7 @@
 			<c:forEach var="loc" items="${list}">
 			<tr>		
 				<td><a href="http://localhost:8080/root/review/cafe?no=${loc.cafe_no}">${loc.cafe_name}</a></td>
-				<td><img src="${contextPath }/cafe/download?cafe_no=${loc.cafe_no}" 
+				<td><img src="${contextPath }/img/${loc.cafe_no}/${loc.imgName}" 
 									width="200px" height="200px">
 				</td>
 				<td>${loc.avg_star}</td>
@@ -56,7 +57,10 @@
 				<td>펫허용존</td>
 				</c:if>
 				<td>${loc.use_time}</td>
-				<td><input type="button" value="즐찾버튼" onclick="location.href='${contextPath}/cafe/addFavorite?cafe_no=${loc.cafe_no}&id=${loginUser }'"></td>
+				<td>
+					<input type="button" value="♡"  id="selectBu" onclick="location.href='${contextPath}/cafe/cafeSelect?cafe_no=${loc.cafe_no}&id=${loginUser}'">
+					${loc.select_count }
+				</td>
 			</tr>
 			</c:forEach>
 			
@@ -70,5 +74,6 @@
 		</table>
 			</div>
 <c:import url="../default/footer.jsp"/>
+
 </body>
 </html>

@@ -31,11 +31,12 @@
 				<a href="${contextPath}/cafe/cafeAllList">전체 카페 리스트</a>
 			</td>
 			</c:if>
-			<c:forEach var="loc" items="${kwResult}">
+			<c:forEach var="loc" items="${list}">
 			<tr>		
 				<%-- <td>${loc.cafe_no}</td> --%>
 				<td><a href="http://localhost:8080/root/review/cafe?no=${loc.cafe_no}">${loc.cafe_name}</a></td>
-				<td><img src="" width="200px" height="200px"></td>
+				<td><img src="${contextPath }/img/${loc.cafe_no}/${loc.imgName}" 
+									width="200px" height="200px" width="200px" height="200px"></td>
 				<td>${loc.avg_star}</td>
 				<td>${loc.location2}</td>
 				<c:if test="${loc.kidszone==0}">
@@ -64,7 +65,10 @@
 				</c:if>
 				<td>${loc.use_time}</td>
 				<!--  <td>${imageFileName}</td>-->
-				<td><input type="button" value="즐찾버튼" onclick="location.href='${contextPath}/cafe/addFavorite?cafe_no=${loc.cafe_no}'"></td>
+				<td>
+					<input type="button" value="♡"  id="selectBu" onclick="location.href='${contextPath}/cafe/cafeSelect?cafe_no=${loc.cafe_no}&id=${loginUser}'">
+					${loc.select_count }
+				</td>
 			</tr>
 			</c:forEach>
 		</table>

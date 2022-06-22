@@ -13,6 +13,7 @@ import com.web.root.cafe.upload.dto.UploadDTO;
 
 public interface CafeService {
 	
+	
 	public void searchEng(String searchKW, Model model);
 	public void getlocationList(HttpServletRequest request, 
 			@RequestParam("locationList") String [] locationList,@RequestParam("kidszone")String kidszone,
@@ -20,28 +21,19 @@ public interface CafeService {
 			@RequestParam("star")String star,Model model);
 	
 	public void cafeAllList(Model model, int num);
-	public String getImgRoot(int cafe_no);
-	public String getImgFirstName(int cafe_no);
-	public void uploadImage(Model model);
 	
 	public void eventView(Model model);
 	
 	public CafeDTO cafeInfo(int cafe_no);
 	
-	
-	public int writeSave(HttpServletRequest request, CafeDTO dto, List<MultipartFile> multiFileList,
-			String fileContent, String root);
-	
+	public boolean cafeWrite(CafeDTO dto,String imgContent,List<MultipartFile> multiFiles);
 
-	public int checkLike(String id,int cafe_no);
-	public int plusLike(String id,int cafe_no);
-	public int minusLike(String id,int cafe_no);
-	public int countplus(int cafe_no);
-	public int countminus(int cafe_no);
-	/*
-	 * public int writeSave2(HttpServletRequest request, List<MultipartFile>
-	 * multiFileList, String fileContent);
-	 */
-
+	public int cafeSelect(HttpServletRequest request);
+	
+	public void selectMinus(HttpServletRequest request);
+	public void selectPlus(HttpServletRequest request);
+	public void selectCountMinus(HttpServletRequest request);
+	public void selectCountPlus(HttpServletRequest request);
+	public void getSelectList(Model model, String id);
 
 }

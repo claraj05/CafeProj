@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.web.root.cafe.dto.CafeDTO;
+import com.web.root.cafe.service.CafeService;
 import com.web.root.cafe.upload.dto.UploadDTO;
 import com.web.root.mybatis.review.ReviewMapper;
 import com.web.root.review.dto.ReviewDTO;
@@ -36,12 +37,15 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewService reviewService;
+	
 
-	@RequestMapping(value = "/writePage/{id}", method = RequestMethod.GET)
-	public ModelAndView reviewPage(@PathVariable String id, Model model) {
+	@RequestMapping(value = "/writePage/{cafe_no}", method = RequestMethod.GET)
+	public ModelAndView reviewPage(@PathVariable String cafe_no) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("id", id);
+		CafeDTO cafeDTO= reviewService.cafeInfo(Integer.valueOf(cafe_no));
+		map.put("cafe_no", cafeDTO.getCafe_no());
+		map.put("cafe_name", cafeDTO.getCafe_name());
 		return new ModelAndView("cafe/writeReview", map, HttpStatus.OK);
 
 	}

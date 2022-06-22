@@ -17,7 +17,7 @@ body {
 .picture-area {
     width: 100%;
     height: 410px;
-    background-color: aquamarine;
+   /*  background-color: aquamarine; */
 }
 
 .review-area {
@@ -44,7 +44,7 @@ body {
 .section-restaurant .restaurant-header,
                     .section-restaurant-detail,
                     .section-restaurant-reviews  {
-    background-color: blanchedalmond;    
+    /* background-color: blanchedalmond;  */   
 }
 
 .restaurant-title-wrap {
@@ -104,14 +104,14 @@ body {
 
 /* restaurant-review-area */
 .section-restaurant-reviews {
-    background-color: rebeccapurple;
+    /* background-color: rebeccapurple; */
     margin-top: 30px;
     margin-left: 34%;
     margin-right: 20%;
     width: 800px;
 }
 .map {
-    background-color: aqua;
+   /*  background-color: aqua; */
     width: 15%;
 }
 .review-header {
@@ -154,4 +154,9 @@ body {
 .image li img{
     width: 120px;
     height: 120px;
+}
+
+.non-review {
+    font-size: 20px;
+    text-align: center;
 }

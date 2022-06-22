@@ -63,7 +63,6 @@ public class boardController {
 		if(check==-1) {
 			check=bs.boardLike(request);//1:데이터o, 0:데이터x
 		}
-		System.out.println(check);
 		
 		model.addAttribute("check", check);
 		
@@ -79,9 +78,9 @@ public class boardController {
 	}
 	
 	@PostMapping("boardModify")
-	public String boardModify(MultipartHttpServletRequest mul, @RequestParam int write_no) {
+	public String boardModify(MultipartHttpServletRequest mul) {
 		
-		bs.boardModify(mul, write_no);
+		bs.boardModify(mul);
 		
 		return "redirect:boardList";
 	}
@@ -161,9 +160,6 @@ public class boardController {
 		
 		ra.addAttribute("write_no", request.getParameter("write_no"));
 		ra.addAttribute("check", check);
-		
-		System.out.println(request.getParameter("write_no"));
-		System.out.println(request.getParameter("id"));
 		
 		return "redirect:boardView";
 	}

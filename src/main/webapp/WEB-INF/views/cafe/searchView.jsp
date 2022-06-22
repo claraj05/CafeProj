@@ -130,7 +130,7 @@ $(document).ready(function(){
 		</div>
 		<br>
 	<div class="search_area">
-		<form action="searchResult" method="get" id="searchForm">
+		<form action="searchResult" method="get" id="searchForm" name="searchForm">
 			<div class="search_ctn">
 				<div class="search_loc">
 					<div class="search_title">
@@ -251,10 +251,18 @@ $(document).ready(function(){
 				</div>
 			</div>
 					 <br>
-					 <input class="fbutton" type="submit" value="전송">
+					 <input class="fbutton" type="button" value="전송" onclick="locationChk()">
 		</form>
 	</div>
 <c:import url="../default/footer.jsp"/>
-
+<script>
+function locationChk(){
+	   if($("input:checkbox[name='location1']").is(":checked")==false){
+	      alert("검색을 원하는 지역을 선택하세요(최소 1개의 지역 선택 필요")
+	   }else{
+	      document.searchForm.submit()
+	   }
+	}
+</script>
 </body>
 </html>

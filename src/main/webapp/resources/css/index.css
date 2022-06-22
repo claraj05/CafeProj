@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.board_text {
+    text-align: center;
+    margin: 0 auto;
+}
+.main-container {
+    display: flex;
+}
+.recommand-cafe-list {
+    /* float: left; */
+    margin-top: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    width: 100%;
+    height: 55%;
+}
+.sector-one, .sector-two {
+    display: flex;
+}
+.sector-one .recommend, .sector-two .recommend{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.sector-one .recommend {
+    width: 100%;
+    margin-bottom: 10px;
+    height: 225px;
+    background-color: aqua;
+}
+
+.sector-two .recommend {
+    width: 100%;
+    height: 225px;
+    background-color: blueviolet;
+}

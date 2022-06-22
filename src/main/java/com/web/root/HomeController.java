@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.root.cafe.service.CafeService;
 
@@ -30,7 +31,6 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		
 		return "index";
 	}
 	
@@ -42,7 +42,8 @@ public class HomeController {
 	
 	
 	@RequestMapping("/searchEng")
-	public String searchEng(HttpServletRequest request, Model model,HttpServletResponse response) throws IOException {
+	public String searchEng(HttpServletRequest request, Model model,HttpServletResponse response
+			) throws IOException {
 		String searchKW = request.getParameter("searchKW");
 		System.out.println("실행");
 		System.out.println("searchKW : "+searchKW);
@@ -55,10 +56,6 @@ public class HomeController {
 		} catch (Exception e) {
 			System.out.println("실패");
 			e.printStackTrace();
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('검색어를 입력하세요');"+
-					"location.href='" + request.getContextPath() + "/index'</script>");
 		}	
 		return "cafe/searchKWResult";
 	}

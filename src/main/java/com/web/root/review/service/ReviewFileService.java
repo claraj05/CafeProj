@@ -23,7 +23,7 @@ public class ReviewFileService {
 	@Autowired
 	private ReviewImageMapper reviewImageMapper;
 
-	private static String DEFAULT_PATH = "F:\\" + "img" + File.separator;
+	private static String DEFAULT_PATH = "C:\\" + "reviewImg" + File.separator;
 
 	/* 이미지 저장 경로 및 저장 정책 결정 필요 */
 

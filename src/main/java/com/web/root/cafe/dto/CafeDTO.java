@@ -18,6 +18,9 @@ logtime date default sysdate --등록일
 );
 */
 
+import java.util.List;
+
+import com.web.root.cafe.upload.dto.UploadDTO;
 
 public class CafeDTO {
 	private int cafe_no;
@@ -31,27 +34,35 @@ public class CafeDTO {
 	private String use_time;
 	private double avg_star;
 	private String logtime;
-	private int like_cnt;
-	
-	
-	public CafeDTO() {}
+	private int select_count;
+	private List<UploadDTO> cafeImageDTO;
 
-	
-	
-	
-	public int getLike_cnt() {
-		return like_cnt;
+	@Override
+	public String toString() {
+		return "CafeDTO [cafe_no=" + cafe_no + ", cafe_name=" + cafe_name + ", location1=" + location1 + ", location2="
+				+ location2 + ", cafe_tel=" + cafe_tel + ", menu=" + menu + ", kidszone=" + kidszone + ", petzone="
+				+ petzone + ", use_time=" + use_time + ", avg_star=" + avg_star + ", logtime=" + logtime
+				+ ", select_count=" + select_count + ", cafeImageDTO=" + cafeImageDTO + "]";
 	}
 
-
-
-
-	public void setLike_cnt(int like_cnt) {
-		this.like_cnt = like_cnt;
+	public List<UploadDTO> getCafeImageDTO() {
+		return cafeImageDTO;
 	}
 
+	public void setCafeImageDTO(List<UploadDTO> cafeImageDTO) {
+		this.cafeImageDTO = cafeImageDTO;
+	}
 
+	public CafeDTO() {
+	}
 
+	public int getSelect_count() {
+		return select_count;
+	}
+
+	public void setSelect_count(int select_count) {
+		this.select_count = select_count;
+	}
 
 	public int getCafe_no() {
 		return cafe_no;
@@ -141,7 +152,4 @@ public class CafeDTO {
 		this.logtime = logtime;
 	}
 
-
-
-	
 }

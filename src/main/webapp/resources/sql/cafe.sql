@@ -9,15 +9,25 @@ kidszone number(10), --0: 정보없음/ 1 : 키즈존(전문) /2: 노키즈존 /
 petzone number(10), --0:정보없음/ 1: 펫존(애견카페o) / 2:노펫존 / 3:펫허용(애견카페x)
 use_time varchar2(30), --오전 ~~:~~ ~ 오후 ~~:~~ 까지 포맷으로
 avg_star number(10,2), --평균 별점
-logtime date default sysdate --등록일
+logtime date default sysdate, --등록일
+like_cnt number(10)
 );
-					-- no,   name,  location1, location2, 			 tel,				menu,		   kid, pet, use_time,	avg_star, logtime
-insert into cafe values(1, '강남구카페', 1, 'test 강남구 마들로 11길 25', '0507-1400-0809', '케익 30,000원', 0, 0, '09:00~20:00', 3.2,sysdate); 
-insert into cafe values(2, '강동구카페',2, 'test 강동구 마들로 11길 25', '0507-1400-0809', '케익 30,000원', 0, 0, '09:00~20:00', 3.3,sysdate);
-insert into cafe values(3, '강동구카페',3, 'test 강동구 마들로 11길 25', '0507-1400-0809', '케익 30,000원', 1, 2, '07:00~20:00', 5.0,sysdate);
-insert into cafe values(4, '강동구카페',6, 'test 강동구 마들로 11길 25', '0507-1400-0809', '케익 30,000원', 0, 3, '07:00~20:00', 4.1,sysdate);
 
+create table cafe_like(
+cafe_no number(10),
+constraint cafe_like_fk foreign key(cafe_no) references cafe(cafe_no) on delete cascade,
+id varchar2(20) not null
+);
 
+create sequence cafe_seq nocache nocycle;
+
+create table cafe_image(
+imgName varchar2(100) not null,
+imgLocation varchar2(200) not null,
+imgContent varchar2(300),
+cafe_no number(30),
+constraint cf_id foreign key(cafe_no) references cafe(cafe_no) on delete cascade
+);
 
 /*location1 참고용 테이블
 drop table cafesearch;

@@ -38,6 +38,10 @@
 	</resultMap>
 	
 	<select id="searchEng" resultMap="cafe">
+		<!-- select B.* from 
+	 	(select rownum rn, A.* from
+	 	(select * from cafe where cafe_name LIKE concat(concat('%',#{searchKW}),'%') order by cafe_no asc)A )B
+	 	where ()rn between #{s} and #{e})  -->
 		select * from cafe where cafe_name LIKE concat(concat('%',#{searchKW}),'%')
 	</select>
 	<select id="cafeAllList" resultMap="cafe">
@@ -45,6 +49,16 @@
 	 	(select rownum rn, A.* from
 	 	(select * from cafe order by cafe_no asc)A )B
 	 	where rn between #{s} and #{e}
+	 </select>
+	 <select id="findCafeImageA" resultMap="cafe_img">
+	 	select B.* from 
+	 	(select rownum rn, A.* from
+	 	(select * from (select * from cafe_image where cafe_no=#{cafe_no}) order by cafe_no asc)A )B
+	 	where rn between #{s} and #{e}
+	 </select>
+	 <!-- allList에서 이미지 가져오기 -->
+	 <select id="findCafeImage" resultMap="cafe_img">
+	 	select * from cafe_image where cafe_no=#{cafe_no}
 	 </select>
 	 <select id="cafeImageLoad" resultMap="cafe_img">
 	 	select * from cafe_image
@@ -93,46 +107,57 @@
 		select * from event_view where event_no=4
 	</select>
 	
-	
-	<insert id="writeSave">
+	<!-- cafeTable저장 -->
+	<insert id="cafeWrite">
 		insert into cafe values(cafe_seq.nextval, #{cafe_name}, #{location1}, #{location2}, #{cafe_tel}, #{menu},
-				#{kidszone}, #{petzone}, #{use_time}, #{avg_star}, sysdate, 0)
+				#{kidszone}, #{petzone}, #{use_time}, #{avg_star}, sysdate, 0)	
+	</insert>
+	<!--  cafeImage Table 저장 -->
+	<insert id="cafeImgSave">
+		insert into cafe_image values(#{imgName},#{imgLocation},#{imgContent},#{cafe_no})
 	</insert>
 
 	<select id="selectNo" resultType="Integer">
 		select cafe_no from cafe where cafe_name = #{cafe_name}
 	</select>
 	
-	
-	<insert id="writeSave2">
-		insert into cafe_image values(#{imgName}, #{imgLocation}, #{imgContent}, cafe_seq.currval)
-	</insert>
-
-	<select id="checkLike" resultType="Integer">
-		select count(*) from cafe_like where cafe_no=#{cafe_no} and id=#{id}
+	<select id="selectCheck" resultType="Integer">
+		select count(*) from cafe_select
+		where cafe_no=#{cafe_no} and id=#{id}
 	</select>
 	
-	<insert id="plusLike">
-		insert into cafe_like
-		values(#{cafe_no}, #{id})
-	</insert>
-	<delete id="minusLike">
-		delete from cafe_like
+	<delete id="selectMinus">
+		delete from cafe_select
 		where cafe_no=#{cafe_no} and id=#{id}
 	</delete>
 	
-	<update id="countplus">
+	<insert id="selectPlus">
+		insert into cafe_select
+		values(#{cafe_no}, #{id})
+	</insert>
+	
+	<update id="selectCountMinus">
 		update cafe
-		set like_cnt=like_cnt+1
+		set select_count=select_count-1
 		where cafe_no=#{cafe_no}
 	</update>
-	<update id="countminus">
+	
+	<update id="selectCountPlus">
 		update cafe
-		set like_cnt=like_cnt-1
+		set select_count=select_count+1
 		where cafe_no=#{cafe_no}
 	</update>
-
-
+	
+	<select id="getSelectList" resultMap="cafe">
+      select * from cafe a, cafe_select b where a.cafe_no=b.cafe_no and b.id=#{id}
+    </select>
+	
+	<update id="updateAvgStar">
+		update cafe set avg_star=#{avg} where cafe_no=#{cafe_no}
+	</update>
+	<select id="recommandCafe">
+		select * from cafe where avg_star>= avg(avg_star)
+	</select>
 </mapper>
 
 

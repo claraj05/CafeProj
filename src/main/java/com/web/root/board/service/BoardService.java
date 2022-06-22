@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface BoardService {
 	
-	public String path="D:/Device_Java/project/image";
+	public String path="C:\\Boardimg";
 	
 	public void boardWrite(MultipartHttpServletRequest mul);
 	
@@ -15,7 +15,7 @@ public interface BoardService {
 	
 	public void boardView(Model model, int write_no);
 	
-	public void boardModify(MultipartHttpServletRequest mul, int write_no);
+	public void boardModify(MultipartHttpServletRequest mul);
 	
 	public void boardDelete(int write_no);
 	

@@ -24,8 +24,11 @@ public interface ReviewMapper {
 
 	public void deleteReviewById(String id, int review_no, int cafe_no);
 
-	public void updateReivew(String id, int review_no, int cafe_no,int grade ,String review_content);
+	public void updateReivew(String id, int review_no, int cafe_no, int grade, String review_content);
 
+	public double findGradeByCafeNo(String cafe_no);
+	
+	public int countReview(int cafe_no);
 	/* public CafeReviewDTO ormTest(int target); */
 
 	/* 카페 이미지 테이블 필요 */
