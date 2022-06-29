@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mappers/board/BoardMapper.xml -->
+
+<mapper namespace="com.web.root.mybatis.cafe.CafeMapper">
+
+	<resultMap type="com.web.root.cafe.dto.CafeDTO" id="cafe">
+		<id property="cafe_no" column="cafe_no"/>
+		<result property="cafe_name" column="cafe_name"/>
+		<result property="location1" column="location1"/>
+		<result property="location2" column="location2"/>
+		<result property="cafe_tel" column="cafe_tel"/>
+		<result property="menu" column="menu"/>
+		<result property="kidszone" column="kidszone"/>
+		<result property="petzone" column="petzone"/>
+		<result property="use_time" column="use_time"/>
+		<result property="avg_star" column="avg_star"/>
+		<result property="logtime" column="logtime"/>
+		<result property="like_cnt" column="like_cnt"/>
+	</resultMap>
+	
+	<resultMap type="com.web.root.cafe.dto.EventViewDTO" id="event">
+		<id property="cafe_no" column="cafe_no"/>
+		<result property="cafe_name" column="cafe_name"/>
+		<result property="event_no" column="event_no"/>
+		<result property="event_type" column="event_type"/>
+		<result property="event_content" column="event_content"/>
+		<result property="event_time" column="event_time"/>
+	</resultMap>
+	
+	<resultMap type="com.web.root.cafe.upload.dto.UploadDTO" id="cafe_img">
+		<id property="cafe_no" column="cafe_no"/>
+		<result property="imgName" column="imgName"/>
+		<result property="imgLocation" column="imgLocation"/>
+		<result property="imgContent" column="imgContent"/>
+	</resultMap>
+	<select id="searchEng" resultMap="cafe">
+		select B.* from 
+	 	(select rownum rn, A.* from
+	 	(select * from (select * from cafe where cafe_name LIKE concat(concat('%',#{searchKW}),'%')) order by cafe_no desc)A )B
+	 	where rn between #{s} and #{e}
+	</select>
+	<select id="searchEngS" resultMap="cafe">
+		select B.* from 
+	 	(select rownum rn, A.* from
+	 	(select * from (select * from cafe where cafe_name LIKE concat(concat('%',#{searchKW}),'%')) order by avg_star desc)A )B
+	 	where rn between #{s} and #{e}
+	</select>
+	<select id="searchEngCount" resultType="Integer">
+		select count(*) from cafe where cafe_name LIKE concat(concat('%',#{searchKW}),'%')
+	</select>
+	<select id="cafeAllList" resultMap="cafe">
+	 	select B.* from 
+	 	(select rownum rn, A.* from
+	 	(select * from cafe order by cafe_no desc)A )B
+	 	where rn between #{s} and #{e}
+	 </select>
+	<select id="cafeAllListS" resultMap="cafe">
+	 	select B.* from 
+	 	(select rownum rn, A.* from
+	 	(select * from cafe order by avg_star desc)A )B
+	 	where rn between #{s} and #{e}
+	 </select>
+	 <select id="findCafeImage" resultMap="cafe_img">
+	 	select * from cafe_image where cafe_no=#{cafe_no}
+	 </select>
+	 <!-- allList에서 이미지 가져오기 
+	 <select id="findCafeImage" resultMap="cafe_img">
+	 	select * from cafe_image where cafe_no=#{cafe_no}
+	 </select>
+	 -->
+	 <select id="cafeImageLoad" resultMap="cafe_img">
+	 	select * from cafe_image
+	 </select>
+	<select id="selectcafeCount" resultType="Integer">
+		select count(*) from cafe
+	</select>
+
+	<select id="eventCafe" resultType="Integer">
+		select cafe_no from event_view
+	</select>
+	<select id="searchCafeCount" resultType="Integer">
+		select count(*) from cafe 
+			<where>
+			 <if test="locationList != null">
+					location1 in <foreach item="location1" collection="locationList" open="(" close=")" separator="," >
+						#{location1}
+					</foreach>
+			</if>
+			<if test="kidszone !=0">	and kidszone = #{kidszone}</if>
+			<if test="petzone !=0">	and petzone = #{petzone}</if>
+			<if test="star==0">order by cafe_no desc</if>
+			<if test="star==1">order by avg_star desc</if>
+			</where>
+	</select>
+	<select id="getlocationList" resultMap="cafe">
+		select B.* from 
+	 	(select rownum rn, A.* from
+	 	(select * from (select * from cafe 
+			<where>
+			 <if test="locationList != null">
+					location1 in <foreach item="location1" collection="locationList" open="(" close=")" separator="," >
+						#{location1}
+					</foreach>
+			</if>
+			<if test="kidszone !=0">	and kidszone = #{kidszone}</if>
+			<if test="petzone !=0">	and petzone = #{petzone}</if>
+			<if test="star==0">order by cafe_no desc</if>
+			<if test="star==1">order by avg_star desc</if>
+			</where>))A )B
+	 	where rn between #{s} and #{e}
+	</select>
+	
+	
+	<select id="getImgRoot">
+		select imgLocation from cafe_image where cafe_no=#{cafe_no}
+	</select>
+	<select id="getImage">
+		select imgName from cafe_image where cafe_no=#{cafe_no}
+	</select>
+	
+	<select id="eventView1" resultMap="event">
+		select * from event_view where event_no=1
+	</select>
+	<select id="eventView2" resultMap="event">
+		select * from event_view where event_no=2
+	</select>
+	<select id="eventView3" resultMap="event">
+		select * from event_view where event_no=3
+	</select>
+	<select id="eventView4" resultMap="event">
+		select * from event_view where event_no=4
+	</select>
+	
+	<!-- cafeTable저장 -->
+	<insert id="cafeWrite">
+		insert into cafe values(cafe_seq.nextval, #{cafe_name}, #{location1}, #{location2}, #{cafe_tel}, #{menu},
+				#{kidszone}, #{petzone}, #{use_time}, #{avg_star}, sysdate, 0)	
+	</insert>
+	<!--  cafeImage Table 저장 -->
+	<insert id="cafeImgSave">
+		insert into cafe_image values(#{imgName},#{imgLocation},#{imgContent},#{cafe_no})
+	</insert>
+
+	<select id="selectNo" resultType="Integer">
+		select cafe_no from cafe where cafe_name = #{cafe_name}
+	</select>
+	
+	<select id="selectCheck" resultType="Integer">
+		select count(*) from cafe_select
+		where cafe_no=#{cafe_no} and id=#{id}
+	</select>
+	
+	<delete id="selectMinus">
+		delete from cafe_select
+		where cafe_no=#{cafe_no} and id=#{id}
+	</delete>
+	
+	<insert id="selectPlus">
+		insert into cafe_select
+		values(#{cafe_no}, #{id})
+	</insert>
+	
+	<update id="selectCountMinus">
+		update cafe
+		set select_count=select_count-1
+		where cafe_no=#{cafe_no}
+	</update>
+	
+	<update id="selectCountPlus">
+		update cafe
+		set select_count=select_count+1
+		where cafe_no=#{cafe_no}
+	</update>
+	<select id="getSelectList" resultMap="cafe">
+		select B.* from 
+	 	(select rownum rn, A.* from
+	 	(select c.* from cafe c, cafe_select d where c.cafe_no=d.cafe_no and d.id=#{id} order by c.cafe_no desc )A )B
+	 	where rn between #{s} and #{e}
+	
+      <!-- (select * from cafe c, cafe_select d where c.cafe_no=d.cafe_no and d.id=#{id}) -->
+    </select>
+    <select id="selectLikeCount" resultType="Integer">
+    	select count(*) from cafe_select where id=#{id}
+    </select>
+	<update id="updateAvgStar">
+		update cafe set avg_star=#{avg} where cafe_no=#{cafe_no}
+	</update>
+	<select id="recommandCafe" resultMap="cafe">
+		select * from cafe where avg_star >= (select avg(avg_star) from cafe) order by avg_star desc
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

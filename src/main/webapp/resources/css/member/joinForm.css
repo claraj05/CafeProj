@@ -1,0 +1,167 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+* {
+   margin:0;
+   padding:0;
+   box-sizing: border-box;
+   text-decoration: none;
+}
+
+body {
+   font-family: 'Noto Sans KR', sans-serif;
+   display : flex;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+   background-color: #dfd4cb;
+   background-size: 100%;
+}
+body::before {
+   content:"";
+   position:absolute; 
+   z-index:1;
+   top:0; right:0; bottom:0; left:0;
+   background-color:rgba(0,0,0,.7);
+   background-size: cover;
+   height:1200px;
+}
+
+.writeForm {
+   position:relative; 
+   z-index:2;
+}
+.writeForm h1 {
+   /* padding-bottom: 50px; */
+   font-size: 32px; 
+   color:#fff;
+   text-align: center;
+   margin-bottom: 60px;
+}
+
+.int-area {
+   width: 400px;
+   position:relative;
+   margin-top: 20px;
+}
+
+
+.int-area:first-child {
+   margin-top: -30px;
+}
+
+.int-area input  {
+   width: 100%;
+   padding : 20px 10px 10px;
+   background-color:transparent;
+   border:none;
+   border-bottom: 1px solid #999;
+   font-size:18px; 
+   color: #fff;
+   outline: none;
+}
+
+.int-area label {
+   position: absolute;
+   left:10px;
+   top:15px;
+   font-size: 18px;
+   color: #999;
+   transition: all .5s ease;
+}
+
+.int-area label.warning {
+   color: red !important;
+   animation: warning .3s ease;
+   animation-iteration-count: 3; /*세번 움직여라 */
+}
+
+@keyframes warning {
+   0% {transform: translateX(-8px);}
+   25% {transform: translateX(8px);}
+   50% {transform: translateX(-8px);}
+   75% {transform: translateX(8px);}
+}
+
+.int-area input:focus + label,
+.int-area input:valid + label {
+   top: -2px;
+   font-size:13px;
+   color: skyblue;
+}
+
+#domain {
+   position: relative;
+   bottom: 36px;
+   left: 160px;
+}
+
+#Duplication {
+   width: 90px;
+   height: 25px;
+   position: relative;
+   top: -28px;
+   left: 310px;
+   background-color:skyblue;
+   color: black;
+   border:none;
+   border-radius: 10px;
+   cursor:pointer;
+}
+ 
+#repwbutton {
+   width: 90px;
+   height: 25px;
+   position: relative;
+   top: -28px;
+   left: 313px;
+   color: black;
+   background-color:skyblue;
+   border:none;
+   border-radius: 10px;
+   cursor:pointer;
+}
+   
+#daumPost2 {
+   width: 90px;
+   position: relative;
+   height: 25px;
+   top: -130px;
+   left: 313px;
+   cursor: pointer; 
+   color: black;
+   background-color:skyblue;
+   border:none;
+   border-radius: 10px;
+   
+}
+
+.btn-area input {
+   font-size: 20px;
+   border: none;
+   cursor: pointer; 
+   background-color:transparent;
+   color: skyblue
+}
+
+.btn-area a {
+   font-size: 20px;
+   border: none;
+   cursor: pointer; 
+   color: skyblue;
+}
+
+.gender {
+   margin-top: 20px;
+   color: #999;
+}
+
+
+
+
+
+
+
+
+
+

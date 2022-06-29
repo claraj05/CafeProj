@@ -1,0 +1,224 @@
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+
+
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+}
+.container-fluid {
+    width: 100%;
+    height: 100%;
+}
+.row {
+    width: 100%;
+    height: 100%;
+}
+
+.picture-area {
+    width: 100%;
+    height: 410px;
+   /*  background-color: aquamarine; */
+}
+
+.review-area {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.section-restaurant {
+    background-color: #FAFAFA;
+    width: 100%;
+}
+.restaurant-header {
+    padding-top: 20px;
+    margin-left: 34%;
+    margin-right: 20%;
+    width: 800px;
+}
+.inner {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color : #dfd4cb;
+	background-size: cover;
+	z-index:1;
+}
+
+
+/* header-area  */
+.section-restaurant .restaurant-header,
+                    .section-restaurant-detail,
+                    .section-restaurant-reviews  {
+    /* background-color: blanchedalmond;  */   
+}
+
+.restaurant-title-wrap {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #4f4f4f;
+}
+.restaurant-title-wrap .section-tilte {
+    display: flex;
+}
+.section-tilte {
+    width: 100%;
+     background-color : #ffebb5;
+}
+.restaurant-header .restaurant-status {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+/* picture area */
+.picture-lists {
+    /* position: absolute; */
+}
+.picture-lists .btn-area{
+    position: absolute;
+    z-index: 1;
+}
+.picture-lists ul{
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.picture-lists ul li {
+    /* position: absolute; */
+}
+.picture-lists ul li img{
+    margin: 5px;
+    width: 480px;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* restaurant-detail-area */
+.section-restaurant-detail {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color : #ffebb5;
+}
+.section-tilte .btn-area {
+    margin-left: 70%;
+}
+.section-restaurant-detail table {
+    width: 100%;
+    border-spacing : 5px;
+}
+
+.detail-col-size {
+    width: 100px;
+    padding-right: 10px;
+    padding-left: 5px;
+    text-align : left;
+/*     padding-bottom: 10px; */
+}
+.detail-col-size th, td{
+	padding-bottom : 5px; 
+}
+
+
+/* restaurant-review-area */
+.section-restaurant-reviews {
+    /* background-color: rebeccapurple; */
+    margin-top: 30px;
+    margin-left: 34%;
+    margin-right: 20%;
+    padding-top:5px;
+    width: 800px;
+    background-color : #ffebb5;
+}
+.map {
+   /*  background-color: aqua; */
+    width: 15%;
+}
+.review-header {
+    width: 100%;
+    height: 50px;
+    margin-top : 10px; 
+    border-bottom : 1px solid #49494999;
+}
+.review-container ul{
+    margin: 0;
+    padding: 0;
+}
+
+.review-info {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.review-info .review-title {
+    margin-left: 10px;
+    margin-right: 35px;
+}
+
+.review-content {
+    width: 800px;
+}
+
+.review-grade {
+
+    width: 100px;
+    margin-left: 18px;
+}
+
+.review-image {
+    margin-top: 20px;
+}
+.review-image ul li{
+    display: inline;
+    list-style: none;
+}
+
+.image li img{
+    width: 120px;
+    height: 120px;
+}
+
+.non-review {
+    font-size: 20px;
+    text-align: center;
+}
+
+.btn-area a {
+	font-size: 16px;
+	border: none;
+	color: black;
+	font-weight: bold;
+	text-decoration: none;
+	background: orange;  
+	cursor: pointer;
+	border-radius: 20px;
+	margin-right: 40px;
+}
+.picture-title {
+	background-color:#c4a77c;
+}
+
+.restaurant-title {
+	margin-right: 10px;	
+	margin-bottom: 20px;
+}
+
+.restaurant-avg {
+	position: relative;
+	bottom: 27px;
+	left: 20px;
+}
+.update_date {
+	margin-top: 20px;
+	margin-right: 10px;
+	text-align: right;
+}
+	
+
+
+

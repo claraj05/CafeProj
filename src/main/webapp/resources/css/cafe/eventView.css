@@ -1,0 +1,115 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    color: #E4E1E1;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+a {
+	text-decoration: none;
+	
+}
+
+body {
+	background-color: #dfd4cb;
+	background-size: cover;
+}
+
+body::before {
+	content:"";
+	position:absolute; 
+	z-index:-1;
+	top:0; right:0; bottom:0; left:0;
+	background-color:rgba(0,0,0,.4);
+	height: 1460px;
+}
+
+.event-header {
+    width: 100%;
+}
+
+h1 {
+	margin-left: 19%;
+    margin-right: 19%;
+    border-bottom: 1px solid #FFDA5B;
+    padding-bottom: 30px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+h2 {
+	margin-top: 30px;
+}
+
+.top,
+.bottom {
+    display: flex;
+    margin-left: 23%;
+    margin-right: 22%;
+    width: 1000px;
+    height: 500px;
+}
+
+.top,
+.bottom {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.left,
+.right {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 50%;
+}
+
+.event1,
+.event2,
+.event3,
+.event4 {
+    padding: 30px 20px 30px;
+    margin-left: 50px;
+    margin-right: 20px;
+    margin-top: -30px;
+}
+
+
+.left :hover,
+.right :hover{
+}
+
+.ev img{
+    width: 100%;
+    height: 300px;
+}
+
+.ev img:hover {
+	 box-shadow: 2px 3px 10px orange;
+}
+
+.eventPage {
+	 position:relative; 
+	 z-index: 2;	
+	 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
